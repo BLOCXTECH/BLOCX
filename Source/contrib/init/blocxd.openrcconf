@@ -1,0 +1,33 @@
+# /etc/conf.d/blocxd: config file for /etc/init.d/blocxd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/blocx/blocx.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/blocxd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/blocxd.pid"
+
+# Where to write blocxd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/blocxd"
+
+# User and group to own blocxd process
+#BITCOIND_USER="blocx"
+#BITCOIND_GROUP="blocx"
+
+# Path to blocxd executable
+#BITCOIND_BIN="/usr/bin/blocxd"
+
+# Nice value to run blocxd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for blocxd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60
