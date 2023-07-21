@@ -28,3 +28,7 @@ https://github.com/tpruvot/ccminer/releases - GPU Miner NVIDIA
 https://github.com/nicehash/sgminer/releases - GPU Miner AMD
 
 https://github.com/tpruvot/cpuminer-multi/releases  - CPU Miner
+
+# MASTERNODES ?
+
+Documentation: https://blocx.gitbook.io/blocx.-documentation/
