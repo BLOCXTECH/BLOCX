@@ -1,6 +1,0 @@
-usr/local/bin/blocx-qt usr/bin
-share/pixmaps/blocx32.xpm usr/share/pixmaps
-share/pixmaps/blocx16.xpm usr/share/pixmaps
-share/pixmaps/blocx128.png usr/share/pixmaps
-debian/blocx-qt.desktop usr/share/applications
-debian/blocx-qt.protocol usr/share/kde4/services/
