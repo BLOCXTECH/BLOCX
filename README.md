@@ -8,7 +8,7 @@ BLOCX is is a comprehensive all-in-one computer manager designed to meet diverse
 
 GPU/CPU/ASIC mining
 Block generation: 3 minutes
-Est. 3M Coins at launch and 91M Max Supply.
+Est. 3M Coins at launch and 91M Total in year 2028.
 
 License
 BLOCX. is released under the terms of the MIT license.
