@@ -193,9 +193,6 @@ private:
       * state updated assuming given transactions are inBlock. Returns number
       * of updated descendants. */
     int UpdatePackagesForAdded(const CTxMemPool::setEntries& alreadyAdded, indexed_modified_transaction_set &mapModifiedTx) EXCLUSIVE_LOCKS_REQUIRED(mempool.cs);
-
-    /** Halal: fill in founders' reward and znode payout outputs */
-    void FillFoundersReward(CMutableTransaction& coinbaseTx, int nHeight);
 };
 
 /** Modify the extranonce in a block */

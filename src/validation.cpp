@@ -1190,25 +1190,13 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         nSubsidy *= consensusParams.nHighSubsidyFactor;
     }
 
-    CAmount nSuperblockPart; 
-    if (nPrevHeight < 16700) {
-        nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.05 : 0;    
-    } else {
-        nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.07 : 0;      
-    }
+    CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.05 : 0;
 
     return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
 }
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue, int nReallocActivationHeight)
 {
-    if (nHeight > 16700) {
-        if (nHeight < 24000) {
-            return static_cast<CAmount>(blockValue * 0.30);
-        } else {
-            return static_cast<CAmount>(blockValue * 0.45);
-        }
-    }
     CAmount ret = blockValue * 0.5;
 
     if (nHeight < nReallocActivationHeight) {
@@ -3779,19 +3767,6 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
             return false;
         }
         nSigOps += GetLegacySigOpCount(*tx);
-    }
-
-    if (nHeight > 120) {
-        // "stage 2" interval between first and second halvings
-        CScript devPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.DevelopmentFundAddress));
-        CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
-        bool found = false;
-        for (const CTxOut& txout : block.vtx[0]->vout) {
-            if ((found = txout.scriptPubKey == devPayoutScript && txout.nValue == devPayoutValue) == true)
-                break;
-        }
-        if (!found)
-            return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(), "Developer reward check failed");
     }
 
     // Check sigops

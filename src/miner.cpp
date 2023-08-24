@@ -15,7 +15,6 @@
 #include <consensus/merkle.h>
 #include <consensus/validation.h>
 #include <hash.h>
-#include <base58.h>
 #include <net.h>
 #include <policy/feerate.h>
 #include <policy/policy.h>
@@ -62,26 +61,6 @@ int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParam
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, consensusParams);
 
     return nNewTime - nOldTime;
-}
-
-void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHeight)
-{
-    const auto& params = chainparams.GetConsensus();
-    // Stage 2
-    CScript devPayoutScript = GetScriptForDestination(DecodeDestination(params.DevelopmentFundAddress));
-    CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
-
-    coinbaseTx.vout[0].nValue -= devPayoutValue;
-    coinbaseTx.vout.push_back(CTxOut(devPayoutValue, devPayoutScript));
-
-    if (nHeight > 16700 && nHeight <= 24000) {
-    // Add 10% to Temporary Masternode Reward Adjustment
-        CScript tmpPayoutScript = GetScriptForDestination(DecodeDestination("BCkGmkwuiiJoMpdRiAEivJd9AendntmSE3"));
-    CAmount tmpPayoutValue = (GetBlockSubsidy(0, nHeight, params) * 15) / 100;
-
-    coinbaseTx.vout[0].nValue -= tmpPayoutValue;
-    coinbaseTx.vout.push_back(CTxOut(tmpPayoutValue, tmpPayoutScript));
-    }
 }
 
 BlockAssembler::Options::Options() {
@@ -202,9 +181,6 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
 
     // Compute regular coinbase transaction.
     coinbaseTx.vout[0].nValue = blockReward;
-
-    if (nHeight > 16700)
-        FillFoundersReward(coinbaseTx, nHeight);
 
     if (!fDIP0003Active_context) {
         coinbaseTx.vin[0].scriptSig = CScript() << nHeight << OP_0;

@@ -361,8 +361,6 @@ public:
         consensus.nPowDGWHeight = 1;
         consensus.nRuleChangeActivationThreshold = 3; // 95% of 3
         consensus.nMinerConfirmationWindow = 3; // nPowTargetTimespan / nPowTargetSpacing
-        consensus.DevelopementFundShare = 3;
-        consensus.DevelopmentFundAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -513,11 +511,6 @@ public:
         checkpointData = {
             {
                 {0, uint256S("0x000000fd77883d82808c84b94839f98aaf7f8abae61afb8d5b771f982f19fe74")},
-                {1259, uint256S("0x0000000000001a2503b3554b600e9662ea49d84525b26ed43bb870aafb6a6802")},
-                {4475, uint256S("0x00000000000000fb0561802ea9acc46b70fe78e405024d8f08b013f37b177799")},
-                {10825, uint256S("0x00000000000000196faa0cdf00e25c9c7220bfcdc9e2873367526ed8476d7a88")},
-                {14426, uint256S("0x000000000000000b05cb80e138a7c9c3fc2faa640e9c67c3ae1a4e31e394cf09")},
-                {16154, uint256S("0x000000000000016fb125e52e9e667f05a3f9a61a21b49e5b65ef084fc3be1bab")},
             }
         };
 
