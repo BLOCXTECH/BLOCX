@@ -1203,10 +1203,12 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue, int nReallocActivationHeight)
 {
     if (nHeight > 16700) {
-        if (nHeight < 24000) {
+        if (nHeight <= 18000) {
             return static_cast<CAmount>(blockValue * 0.30);
+        }else if (nHeight <= 24000) {
+            return static_cast<CAmount>(blockValue * 0.335);
         } else {
-            return static_cast<CAmount>(blockValue * 0.45);
+            return static_cast<CAmount>(blockValue * 0.485);
         }
     }
     CAmount ret = blockValue * 0.5;
@@ -3784,7 +3786,14 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     if (nHeight > 16700) {
         // "stage 2" interval between first and second halvings
         CScript devPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.DevelopmentFundAddress));
-        CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
+        CAmount devPayoutValue;
+
+        if (nHeight > 18000 && nHeight <= 24000) {
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * 18) / 100;
+        } else {
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
+        }
+
         bool found = false;
         for (const CTxOut& txout : block.vtx[0]->vout) {
             if ((found = txout.scriptPubKey == devPayoutScript && txout.nValue == devPayoutValue) == true)

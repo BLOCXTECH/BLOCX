@@ -69,19 +69,25 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
     const auto& params = chainparams.GetConsensus();
     // Stage 2
     CScript devPayoutScript = GetScriptForDestination(DecodeDestination(params.DevelopmentFundAddress));
-    CAmount devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
+    CAmount devPayoutValue;
+
+    if(nHeight > 18000 && nHeight <= 24000) {
+        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * 18) / 100;
+    } else {
+        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;     
+    }
 
     coinbaseTx.vout[0].nValue -= devPayoutValue;
     coinbaseTx.vout.push_back(CTxOut(devPayoutValue, devPayoutScript));
 
-    if (nHeight > 16700 && nHeight <= 24000) {
-    // Add 10% to Temporary Masternode Reward Adjustment
-        CScript tmpPayoutScript = GetScriptForDestination(DecodeDestination("BCkGmkwuiiJoMpdRiAEivJd9AendntmSE3"));
-    CAmount tmpPayoutValue = (GetBlockSubsidy(0, nHeight, params) * 15) / 100;
+    //if (nHeight > 16700 && nHeight < 18000) {
+    //// Add 10% to Temporary Masternode Reward Adjustment
+    //CScript tmpPayoutScript = GetScriptForDestination(DecodeDestination("BCkGmkwuiiJoMpdRiAEivJd9AendntmSE3"));
+    //CAmount tmpPayoutValue = (GetBlockSubsidy(0, nHeight, params) * 15) / 100;
 
-    coinbaseTx.vout[0].nValue -= tmpPayoutValue;
-    coinbaseTx.vout.push_back(CTxOut(tmpPayoutValue, tmpPayoutScript));
-    }
+    //coinbaseTx.vout[0].nValue -= tmpPayoutValue;
+    //coinbaseTx.vout.push_back(CTxOut(tmpPayoutValue, tmpPayoutScript));
+    //}
 }
 
 BlockAssembler::Options::Options() {
