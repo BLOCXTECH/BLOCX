@@ -27,6 +27,7 @@ QT_TS = \
   qt/locale/blocx_th.ts \
   qt/locale/blocx_tr.ts \
   qt/locale/blocx_vi.ts \
+  qt/locale/blocx_id.ts \
   qt/locale/blocx_zh_CN.ts \
   qt/locale/blocx_zh_TW.ts
 
