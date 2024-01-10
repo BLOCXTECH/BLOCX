@@ -175,6 +175,7 @@ struct Params {
     /** Block height at which MNTier fork becomes enforced*/
     int MNTierForkHeight;
     int RegularNodePercentage;
+    int V3ForkHeight;
     /**
      * Minimum blocks including miner confirmation of the total of nMinerConfirmationWindow blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
