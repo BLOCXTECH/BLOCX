@@ -30,6 +30,7 @@ public:
     CBLSLazyPublicKey pubKeyOperator;
     CKeyID keyIDVoting;
     bool isValid;
+    MnType nType{MnType::Standard_Masternode};
 
 public:
     CSimplifiedMNListEntry() = default;

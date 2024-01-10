@@ -3,6 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <evo/deterministicmns.h>
+#include <evo/dmn_types.h>
 #include <evo/providertx.h>
 #include <evo/specialtx.h>
 
@@ -94,6 +95,9 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, CValid
     if (ptx.nVersion == 0 || ptx.nVersion > CProRegTx::CURRENT_VERSION) {
         return state.DoS(100, false, REJECT_INVALID, "bad-protx-version");
     }
+    if (ptx.nType != MnType::Standard_Masternode && ptx.nType != MnType::Lite) {
+        return state.DoS(100, false, REJECT_INVALID, "bad-protx-type");
+    }
     if (ptx.nType != 0) {
         return state.DoS(100, false, REJECT_INVALID, "bad-protx-type");
     }
@@ -133,9 +137,10 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, CValid
     const CKeyID *keyForPayloadSig = nullptr;
     COutPoint collateralOutpoint;
 
+    CAmount expectedCollateral = GetMnType(ptx.nType).collat_amount;
     if (!ptx.collateralOutpoint.hash.IsNull()) {
         Coin coin;
-        if (!view.GetCoin(ptx.collateralOutpoint, coin) || coin.IsSpent() || coin.out.nValue != 100000 * COIN) {
+        if (!view.GetCoin(ptx.collateralOutpoint, coin) || coin.IsSpent() || coin.out.nValue != expectedCollateral) {
             return state.DoS(10, false, REJECT_INVALID, "bad-protx-collateral");
         }
 
@@ -155,7 +160,7 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, CValid
         if (ptx.collateralOutpoint.n >= tx.vout.size()) {
             return state.DoS(10, false, REJECT_INVALID, "bad-protx-collateral-index");
         }
-        if (tx.vout[ptx.collateralOutpoint.n].nValue != 100000 * COIN) {
+        if (tx.vout[ptx.collateralOutpoint.n].nValue != expectedCollateral) {
             return state.DoS(10, false, REJECT_INVALID, "bad-protx-collateral");
         }
 

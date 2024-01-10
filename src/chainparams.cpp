@@ -383,6 +383,7 @@ public:
         consensus.DevelopementFundShare = 3;
         consensus.DevRewardStartHeight = 16700;
         consensus.DevelopmentFundAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
+        consensus.RegularNodePercentage = 10;
         consensus.PayoutHeight[0] = 99999995;
         consensus.PayoutHeight[1] = 99999996;
         consensus.PayoutHeight[2] = 99999997;
@@ -604,6 +605,8 @@ public:
         consensus.PayoutHeight[4] = 99999999;
         consensus.PayoutHeight[5] = 99999999;
         consensus.ExtraPayoutAddress = "XU8FVYfcWAeKdZfdLk3taPjhzDhhu55LFS";
+        consensus.MNTierForkHeight = 99999999; 
+        consensus.RegularNodePercentage = 10;
         consensus.nPowKGWHeight = 1; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
         consensus.nPowDGWHeight = 1; // TODO: make sure to drop all spork6 related code on next testnet reset
         consensus.nRuleChangeActivationThreshold = 2; // 75% for testchains

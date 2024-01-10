@@ -172,6 +172,9 @@ struct Params {
     std::string ExtraPayoutAddress;
     // Extra payout height
     int PayoutHeight[6];
+    /** Block height at which MNTier fork becomes enforced*/
+    int MNTierForkHeight;
+    int RegularNodePercentage;
     /**
      * Minimum blocks including miner confirmation of the total of nMinerConfirmationWindow blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
