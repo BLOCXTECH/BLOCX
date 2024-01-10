@@ -1166,50 +1166,68 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     double dDiff;
     CAmount nSubsidyBase;
 
-    if (nPrevHeight == 0) {
-        nSubsidyBase = 3000000;
-    } else if (nPrevHeight <= 6000 ) {
-        nSubsidyBase = 2000;
-    } else if (nPrevHeight <= 14000) {
-        nSubsidyBase = 1000;
-    } else if (nPrevHeight <= 24000) {
-        nSubsidyBase = 800;
-    } else if (nPrevHeight <= 44000) {
-        nSubsidyBase = 600;
-    } else if (nPrevHeight <= 74000) {
-        nSubsidyBase = 400;
-    } else if (nPrevHeight <= 109000) {
-        nSubsidyBase = 300;
-    } else if (nPrevHeight <= 144000) {
-        nSubsidyBase = 200;
-    } else if (nPrevHeight <= 179000) {
-        nSubsidyBase = 150;
-    } else if (nPrevHeight <= 214000) {
-        nSubsidyBase = 110;
-    } else if (nPrevHeight <= 249000) {
-        nSubsidyBase = 80;
-    } else if (nPrevHeight <= 284000) {
-        nSubsidyBase = 60;
-    } else if (nPrevHeight <= 319000) {
-        nSubsidyBase = 40;
-    } else if (nPrevHeight <= 354000) {
-        nSubsidyBase = 30;
-    } else if (nPrevHeight <= 389000) {
-        nSubsidyBase = 20;
-    } else if (nPrevHeight <= 424000) {
-        nSubsidyBase = 15;
-    } else if (nPrevHeight <= 459000) {
-        nSubsidyBase = 10;
-    } else if (nPrevHeight <= 494000) {
-        nSubsidyBase = 7;
-    } else if (nPrevHeight <= 529000) {
-        nSubsidyBase = 4;
-    } else if (nPrevHeight <= 559000) {
-        nSubsidyBase = 2;
-    } else if (nPrevHeight <= 589000) {
-        nSubsidyBase = 1;
-    }  else {
-	    nSubsidyBase = 0;
+    if(Params().NetworkIDString() == CBaseChainParams::MAIN) {
+        if (nPrevHeight == 0) {
+            nSubsidyBase = 3000000;
+        } else if (nPrevHeight <= 6000 ) {
+            nSubsidyBase = 2000;
+        } else if (nPrevHeight <= 14000) {
+            nSubsidyBase = 1000;
+        } else if (nPrevHeight <= 24000) {
+            nSubsidyBase = 800;
+        } else if (nPrevHeight <= 44000) {
+            nSubsidyBase = 600;
+        } else if (nPrevHeight <= 74000) {
+            nSubsidyBase = 400;
+        } else if (nPrevHeight <= 109000) {
+            nSubsidyBase = 300;
+        } else if (nPrevHeight <= 144000) {
+            nSubsidyBase = 200;
+        } else if (nPrevHeight <= 179000) {
+            nSubsidyBase = 150;
+        } else if (nPrevHeight <= 214000) {
+            nSubsidyBase = 110;
+        } else if (nPrevHeight <= 249000) {
+            nSubsidyBase = 80;
+        } else if (nPrevHeight <= 284000) {
+            nSubsidyBase = 60;
+        } else if (nPrevHeight <= 319000) {
+            nSubsidyBase = 40;
+        } else if (nPrevHeight <= 354000) {
+            nSubsidyBase = 30;
+        } else if (nPrevHeight <= 389000) {
+            nSubsidyBase = 20;
+        } else if (nPrevHeight <= 424000) {
+            nSubsidyBase = 15;
+        } else if (nPrevHeight <= 459000) {
+            nSubsidyBase = 10;
+        } else if (nPrevHeight <= 494000) {
+            nSubsidyBase = 7;
+        } else if (nPrevHeight <= 529000) {
+            nSubsidyBase = 4;
+        } else if (nPrevHeight <= 559000) {
+            nSubsidyBase = 2;
+        } else if (nPrevHeight <= 589000) {
+            nSubsidyBase = 1;
+        }  else {
+            nSubsidyBase = 0;
+        }
+    } else {
+        if (nPrevHeight == 0) {
+            nSubsidyBase = 3000000;
+        } else if (nPrevHeight <= 6000 ) {
+            nSubsidyBase = 2000;
+        } else if (nPrevHeight <= 14000) {
+            nSubsidyBase = 1000;
+        } else if (nPrevHeight <= 24000) {
+            nSubsidyBase = 800;
+        } else if (nPrevHeight <= 44000) {
+            nSubsidyBase = 600;
+        } else if (nPrevHeight <= 99999999) {
+            nSubsidyBase = 400;
+        } else {
+            nSubsidyBase = 0;
+        }
     }
 
     CAmount nSubsidy = nSubsidyBase * COIN;
