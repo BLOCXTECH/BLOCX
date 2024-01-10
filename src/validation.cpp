@@ -3783,7 +3783,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         nSigOps += GetLegacySigOpCount(*tx);
     }
 
-    if (nHeight > 16700) {
+    if (nHeight > Params().GetConsensus().DevRewardStartHeight) {
         // "stage 2" interval between first and second halvings
         CScript devPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.DevelopmentFundAddress));
         CAmount devPayoutValue;

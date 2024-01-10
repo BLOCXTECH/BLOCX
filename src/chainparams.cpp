@@ -381,6 +381,7 @@ public:
         consensus.nRuleChangeActivationThreshold = 3; // 95% of 3
         consensus.nMinerConfirmationWindow = 3; // nPowTargetTimespan / nPowTargetSpacing
         consensus.DevelopementFundShare = 3;
+        consensus.DevRewardStartHeight = 16700;
         consensus.DevelopmentFundAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
@@ -586,6 +587,9 @@ public:
         consensus.nPowTargetSpacing = 3 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
+        consensus.DevelopementFundShare = 3;
+        consensus.DevelopmentFundAddress = "XXvKJZd3rBzi2kR59Fzhy7ANnXGraSCCfi";
+        consensus.DevRewardStartHeight = 64155;
         consensus.nPowKGWHeight = 1; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
         consensus.nPowDGWHeight = 1; // TODO: make sure to drop all spork6 related code on next testnet reset
         consensus.nRuleChangeActivationThreshold = 2; // 75% for testchains

@@ -209,7 +209,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // Compute regular coinbase transaction.
     coinbaseTx.vout[0].nValue = blockReward;
 
-    if (nHeight > 16700)
+    if (nHeight > Params().GetConsensus().DevRewardStartHeight)
         FillFoundersReward(coinbaseTx, nHeight);
 
     if (!fDIP0003Active_context) {
