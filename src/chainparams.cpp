@@ -383,6 +383,13 @@ public:
         consensus.DevelopementFundShare = 3;
         consensus.DevRewardStartHeight = 16700;
         consensus.DevelopmentFundAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
+        consensus.PayoutHeight[0] = 99999995;
+        consensus.PayoutHeight[1] = 99999996;
+        consensus.PayoutHeight[2] = 99999997;
+        consensus.PayoutHeight[3] = 99999998;
+        consensus.PayoutHeight[4] = 99999999;
+        consensus.PayoutHeight[5] = 99999994;
+        consensus.ExtraPayoutAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -590,6 +597,13 @@ public:
         consensus.DevelopementFundShare = 3;
         consensus.DevelopmentFundAddress = "XXvKJZd3rBzi2kR59Fzhy7ANnXGraSCCfi";
         consensus.DevRewardStartHeight = 64155;
+        consensus.PayoutHeight[0] = 5;
+        consensus.PayoutHeight[1] = 10;
+        consensus.PayoutHeight[2] = 15;
+        consensus.PayoutHeight[3] = 20;
+        consensus.PayoutHeight[4] = 25;
+        consensus.PayoutHeight[5] = 30;
+        consensus.ExtraPayoutAddress = "XU8FVYfcWAeKdZfdLk3taPjhzDhhu55LFS";
         consensus.nPowKGWHeight = 1; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
         consensus.nPowDGWHeight = 1; // TODO: make sure to drop all spork6 related code on next testnet reset
         consensus.nRuleChangeActivationThreshold = 2; // 75% for testchains

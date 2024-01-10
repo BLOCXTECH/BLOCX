@@ -80,6 +80,11 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
     coinbaseTx.vout[0].nValue -= devPayoutValue;
     coinbaseTx.vout.push_back(CTxOut(devPayoutValue, devPayoutScript));
 
+    if (isExtraFundAllocationHeight(nHeight)) {
+        CAmount amount = GetExtraPayOutAmount(nHeight);
+        coinbaseTx.vout.push_back(CTxOut(amount, GetScriptForDestination(DecodeDestination(params.ExtraPayoutAddress))));
+    }
+
     //if (nHeight > 16700 && nHeight < 18000) {
     //// Add 10% to Temporary Masternode Reward Adjustment
     //CScript tmpPayoutScript = GetScriptForDestination(DecodeDestination("BCkGmkwuiiJoMpdRiAEivJd9AendntmSE3"));

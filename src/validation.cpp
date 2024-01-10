@@ -1123,6 +1123,39 @@ double ConvertBitsToDouble(unsigned int nBits)
     return dDiff;
 }
 
+
+
+bool isExtraFundAllocationHeight(int nHeight) {
+
+    for (int i = 0; i < sizeof(Params().GetConsensus().PayoutHeight) / sizeof(Params().GetConsensus().PayoutHeight[0]); ++i) {
+        if (nHeight == Params().GetConsensus().PayoutHeight[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// CHANGE LOGIC HERE
+CAmount GetExtraPayOutAmount(int nHeight) {
+    CAmount ExtraPayOutAmount;
+
+    if (nHeight == 10) {
+        ExtraPayOutAmount = 1000000;
+    } else if (nHeight == 15) {
+        ExtraPayOutAmount = 1000000;
+    } else if (nHeight == 20) {
+        ExtraPayOutAmount = 1000000;
+    } else if (nHeight == 25) {
+        ExtraPayOutAmount = 1000000;
+    } else if (nHeight == 30) {
+        ExtraPayOutAmount = 1000000;
+    } else {
+        ExtraPayOutAmount = 0;
+    }
+
+    return ExtraPayOutAmount * COIN;
+}
+
 /*
 NOTE:   unlike bitcoin we are using PREVIOUS block height here,
         might be a good idea to change this to use prev bits
@@ -3801,6 +3834,20 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         }
         if (!found)
             return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(), "Developer reward check failed");
+    }
+
+     if(isExtraFundAllocationHeight(nHeight)) {
+        CScript additionalPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.ExtraPayoutAddress));
+        CAmount extraFund = GetExtraPayOutAmount(nHeight);
+
+
+        bool found = false;
+        for (const CTxOut& txout : block.vtx[0]->vout) {
+            if ((found = txout.scriptPubKey == additionalPayoutScript && txout.nValue == extraFund) == true)
+                break;
+        }
+        if (!found)
+            return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(), "Extra reward allocation check failed");
     }
 
     // Check sigops

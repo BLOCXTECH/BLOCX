@@ -168,6 +168,10 @@ struct Params {
     int DIP0008Height;
     // This heigth is used to define the height at dev reward activeted
     int DevRewardStartHeight;
+    // This address will receive extra fund at cetain height
+    std::string ExtraPayoutAddress;
+    // Extra payout height
+    int PayoutHeight[6];
     /**
      * Minimum blocks including miner confirmation of the total of nMinerConfirmationWindow blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
