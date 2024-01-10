@@ -597,12 +597,12 @@ public:
         consensus.DevelopementFundShare = 3;
         consensus.DevelopmentFundAddress = "XXvKJZd3rBzi2kR59Fzhy7ANnXGraSCCfi";
         consensus.DevRewardStartHeight = 64155;
-        consensus.PayoutHeight[0] = 5;
-        consensus.PayoutHeight[1] = 10;
-        consensus.PayoutHeight[2] = 15;
-        consensus.PayoutHeight[3] = 20;
-        consensus.PayoutHeight[4] = 25;
-        consensus.PayoutHeight[5] = 30;
+        consensus.PayoutHeight[0] = 99999999;
+        consensus.PayoutHeight[1] = 99999999;
+        consensus.PayoutHeight[2] = 99999999;
+        consensus.PayoutHeight[3] = 99999999;
+        consensus.PayoutHeight[4] = 99999999;
+        consensus.PayoutHeight[5] = 99999999;
         consensus.ExtraPayoutAddress = "XU8FVYfcWAeKdZfdLk3taPjhzDhhu55LFS";
         consensus.nPowKGWHeight = 1; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
         consensus.nPowDGWHeight = 1; // TODO: make sure to drop all spork6 related code on next testnet reset
