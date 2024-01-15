@@ -262,7 +262,9 @@ void CDKGSessionHandler::SleepBeforePhase(QuorumPhase curPhase,
     // left behind and marked as a bad member. This means that we should not count the last block of the
     // phase as a safe one to keep sleeping, that's why we calculate the phase sleep time as a time of
     // the full phase minus one block here.
-    double phaseSleepTime = (params.dkgPhaseBlocks - 1) * Params().GetConsensus().nPowTargetSpacing * 1000;
+    int64_t blockTime = Params().GetConsensus().GetCurrentPowTargetSpacing(currentHeight);
+
+    double phaseSleepTime = (params.dkgPhaseBlocks - 1) * blockTime * 1000;
     // Expected phase sleep time per member
     double phaseSleepTimePerMember = phaseSleepTime / params.size;
     // Don't expect perfect block times and thus reduce the phase time to be on the secure side (caller chooses factor)
@@ -288,7 +290,9 @@ void CDKGSessionHandler::SleepBeforePhase(QuorumPhase curPhase,
             LOCK(cs);
             if (currentHeight > heightTmp) {
                 // New block(s) just came in
-                int64_t expectedBlockTime = (currentHeight - heightStart) * Params().GetConsensus().nPowTargetSpacing * 1000;
+                int64_t blockTime = Params().GetConsensus().GetCurrentPowTargetSpacing(currentHeight);
+
+                int64_t expectedBlockTime = (currentHeight - heightStart) * blockTime * 1000;
                 if (expectedBlockTime > sleepTime) {
                     // Blocks came faster than we expected, jump into the phase func asap
                     break;
