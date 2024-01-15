@@ -347,6 +347,11 @@ bool CMasternodePayments::IsTransactionValid(const CTransaction& txNew, int nBlo
     }
 
     std::vector<CTxOut> voutMasternodePayments;
+    
+    if (isExtraFundAllocationHeight(nBlockHeight)) {
+        blockReward -= GetExtraPayOutAmount(nBlockHeight);
+    }
+
     if (!GetBlockTxOuts(nBlockHeight, blockReward, voutMasternodePayments)) {
         LogPrintf("CMasternodePayments::%s -- ERROR failed to get payees for block at height %s\n", __func__, nBlockHeight);
         return true;

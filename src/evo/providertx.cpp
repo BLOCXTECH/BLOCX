@@ -98,9 +98,6 @@ bool CheckProRegTx(const CTransaction& tx, const CBlockIndex* pindexPrev, CValid
     if (ptx.nType != MnType::Standard_Masternode && ptx.nType != MnType::Lite) {
         return state.DoS(100, false, REJECT_INVALID, "bad-protx-type");
     }
-    if (ptx.nType != 0) {
-        return state.DoS(100, false, REJECT_INVALID, "bad-protx-type");
-    }
     if (ptx.nMode != 0) {
         return state.DoS(100, false, REJECT_INVALID, "bad-protx-mode");
     }

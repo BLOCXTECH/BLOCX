@@ -408,9 +408,9 @@ UniValue protx_register(const JSONRPCRequest& request, bool isLite)
     if (!EnsureWalletIsAvailable(pwallet, request.fHelp))
         return NullUniValue;
 
-    bool isExternalRegister = request.params[0].get_str() == "register" || request.params[0].get_str() == "register_evo";
-    bool isFundRegister = request.params[0].get_str() == "register_fund" || request.params[0].get_str() == "register_fund_evo";
-    bool isPrepareRegister = request.params[0].get_str() == "register_prepare" || request.params[0].get_str() == "register_prepare_evo";
+    bool isExternalRegister = request.params[0].get_str() == "register" || request.params[0].get_str() == "register_lite";
+    bool isFundRegister = request.params[0].get_str() == "register_fund" || request.params[0].get_str() == "register_fund_lite";
+    bool isPrepareRegister = request.params[0].get_str() == "register_prepare" || request.params[0].get_str() == "register_prepare_lite";
 
     if (isFundRegister && (request.fHelp || (request.params.size() < 8 || request.params.size() > 10))) {
         protx_register_fund_help(pwallet);
@@ -444,6 +444,7 @@ UniValue protx_register(const JSONRPCRequest& request, bool isLite)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, strprintf("invalid collaterall address: %s", request.params[paramIdx].get_str()));
         }
         CScript collateralScript = GetScriptForDestination(collateralDest);
+
         CAmount fundCollateral = GetMnType(ptx.nType).collat_amount;
         CTxOut collateralTxOut(fundCollateral, collateralScript);
         tx.vout.emplace_back(collateralTxOut);
@@ -1145,6 +1146,10 @@ UniValue protx_diff(const JSONRPCRequest& request)
             "  register_fund     - Fund, create and send ProTx to network\n"
             "  register_prepare  - Create an unsigned ProTx\n"
             "  register_submit   - Sign and submit a ProTx\n"
+
+            "  register_lite           - Create Lite Node and send ProTx to network\n"
+            "  register_fund_lite      - Fund, create and send ProTx Lite Node to network\n"
+            "  register_prepare_lite   - Create Lite Node an unsigned ProTx\n"
 #endif
             "  list              - List ProTxs\n"
             "  info              - Return information about a ProTx\n"
@@ -1171,7 +1176,10 @@ UniValue protx(const JSONRPCRequest& request)
 #ifdef ENABLE_WALLET
     if (command == "register" || command == "register_fund" || command == "register_prepare") {
         return protx_register(request, false);
-    } else if (command == "register_evo" || command == "register_fund_evo" || command == "register_prepare_evo") {
+    } else if (command == "register_lite" || command == "register_fund_lite" || command == "register_prepare_lite") {
+        if (chainActive.Height() <= Params().GetConsensus().V3ForkHeight) {
+            throw std::runtime_error("V3Fork is not activated right now");
+        }
         return protx_register(request, true);
     } else if (command == "register_submit") {
         return protx_register_submit(request);

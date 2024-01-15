@@ -559,9 +559,9 @@ bool CQuorumBlockProcessor::GetMinableCommitment(Consensus::LLMQType llmqType, i
     LOCK(minableCommitmentsCs);
 
     bool skip = false;
-    if (nHeigth < Params().GetConsensus().V3ForkHeight && llmqType == Consensus::LLMQ_50_60) {
-        skip = true;
-    }
+    // if (nHeight < Params().GetConsensus().V3ForkHeight && llmqType == Consensus::LLMQ_50_60) {
+    //     skip = true;
+    // }
     auto k = std::make_pair(llmqType, quorumHash);
     auto it = minableCommitmentsByQuorum.find(k);
     if (it == minableCommitmentsByQuorum.end() || skip) {

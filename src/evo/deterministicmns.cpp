@@ -214,8 +214,15 @@ static bool CompareByLastPaid(const CDeterministicMNCPtr& _a, const CDeterminist
 
 CDeterministicMNCPtr CDeterministicMNList::GetMNPayee(bool isFullList, MnType type) const
 {
-    // add logic here
     if (mnMap.size() == 0) {
+        return nullptr;
+    }
+
+    if (type == MnType::Standard_Masternode && tierOne.size() == 0) {
+        return nullptr;
+    }
+
+    if (type == MnType::Lite && tierTwo.size() == 0) {
         return nullptr;
     }
 
@@ -538,9 +545,9 @@ void CDeterministicMNList::UpdateMN(const CDeterministicMNCPtr& oldDmn, const CD
     }
 
     if (dmn->nType == MnType::Standard_Masternode) {
-        tierOne = tierOne.set(dmn->proTxHash, dmn);
+        tierOne = tierOne.set(oldDmn->proTxHash, dmn);
     } else {
-        tierTwo = tierTwo.set(dmn->proTxHash, dmn);
+        tierTwo = tierTwo.set(oldDmn->proTxHash, dmn);
     }
 
     mnMap = mnMap.set(oldDmn->proTxHash, dmn);
@@ -737,6 +744,15 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
     newList.SetBlockHash(uint256()); // we can't know the final block hash, so better not return a (invalid) block hash
     newList.SetHeight(nHeight);
 
+    auto payee = oldList.GetMNPayee(false, MnType::Standard_Masternode);
+    CDeterministicMNCPtr payee2;
+
+    bool isMnTierForkActivated = Params().GetConsensus().MNTierForkHeight <= nHeight;
+
+    if (isMnTierForkActivated) {
+        payee2 = oldList.GetMNPayee(false, MnType::Lite);
+    }
+
     // we iterate the oldList here and update the newList
     // this is only valid as long these have not diverged at this point, which is the case as long as we don't add
     // code above this loop that modifies newList
@@ -770,6 +786,10 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
             CProRegTx proTx;
             if (!GetTxPayload(tx, proTx)) {
                 return _state.DoS(100, false, REJECT_INVALID, "bad-protx-payload");
+            }
+
+            if (proTx.nType == MnType::Lite && !isMnTierForkActivated) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-payload-erl-registration");
             }
 
             auto dmn = std::make_shared<CDeterministicMN>(newList.GetTotalRegisteredCount(), proTx.nType);
@@ -831,9 +851,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
                 return _state.DoS(100, false, REJECT_INVALID, "bad-protx-payload");
             }
 
-            const Consensus::Params& consensusParams = Params().GetConsensus();
-
-            if (proTx.nType == MnType::Lite && consensusParams.MNTierForkHeight < nHeight) {
+            if (proTx.nType == MnType::Lite && !isMnTierForkActivated) {
                 return _state.Invalid(false, REJECT_INVALID, "bad-protx-payload");
             }
 
@@ -964,7 +982,6 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
         }
     }
 
-    auto payee = newList.GetMNPayee(false, MnType::Standard_Masternode);
     // The payee for the current block was determined by the previous block's list but it might have disappeared in the
     // current block. We still pay that MN one last time however.
     if (payee && newList.HasMN(payee->proTxHash)) {
@@ -973,10 +990,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
         newList.UpdateMN(payee->proTxHash, newState);
     }
 
-    bool isMnTierForkActivated = Params().GetConsensus().MNTierForkHeight <= nHeight;
-
     if (isMnTierForkActivated) {
-        auto payee2 = newList.GetMNPayee(false, MnType::Lite);
         if (payee2 && newList.HasMN(payee2->proTxHash)) {
             auto newState = std::make_shared<CDeterministicMNState>(*newList.GetMN(payee2->proTxHash)->pdmnState);
             newState->nLastPaidHeight = nHeight;

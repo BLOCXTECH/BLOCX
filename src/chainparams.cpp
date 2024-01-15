@@ -237,25 +237,6 @@ static Consensus::LLMQParams llmq50_60 = {
         .type = Consensus::LLMQ_50_60,
         .name = "llmq_50_60",
         .size = 50,
-        .minSize = 40,
-        .threshold = 30,
-
-        .dkgInterval = 24, // one DKG per hour
-        .dkgPhaseBlocks = 2,
-        .dkgMiningWindowStart = 10, // dkgPhaseBlocks * 5 = after finalization
-        .dkgMiningWindowEnd = 18,
-        .dkgBadVotesThreshold = 40,
-
-        .signingActiveQuorumCount = 24, // a full day worth of LLMQs
-
-        .keepOldConnections = 25,
-        .recoveryMembers = 25,
-};
-
-static Consensus::LLMQParams llmq4_3 = {
-    .type = Consensus::LLMQ_50_60,
-        .name = "llmq_4_3",
-        .size = 50,
         .minSize = 4,
         .threshold = 3,
 
@@ -385,13 +366,7 @@ public:
         consensus.DevRewardStartHeight = 16700;
         consensus.DevelopmentFundAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
         consensus.RegularNodePercentage = 10;
-        consensus.PayoutHeight[0] = 99999995;
-        consensus.PayoutHeight[1] = 99999996;
-        consensus.PayoutHeight[2] = 99999997;
-        consensus.PayoutHeight[3] = 99999998;
-        consensus.PayoutHeight[4] = 99999999;
-        consensus.PayoutHeight[5] = 99999994;
-        consensus.ExtraPayoutAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
+        consensus.ExtraPayoutAddress = "";
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -591,7 +566,7 @@ public:
         consensus.DIP0003EnforcementHeight = 2;
         consensus.DIP0003EnforcementHash = uint256();
         consensus.DIP0008Height = 2; 
-        consensus.V3ForkHeight = 99999999;
+        consensus.V3ForkHeight = 65475;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 9 * 60;
         consensus.nPowTargetSpacing = 3 * 60;
@@ -599,16 +574,10 @@ public:
         consensus.fPowNoRetargeting = false;
         consensus.DevelopementFundShare = 3;
         consensus.DevelopmentFundAddress = "XXvKJZd3rBzi2kR59Fzhy7ANnXGraSCCfi";
-        consensus.DevRewardStartHeight = 64155;
-        consensus.PayoutHeight[0] = 99999999;
-        consensus.PayoutHeight[1] = 99999999;
-        consensus.PayoutHeight[2] = 99999999;
-        consensus.PayoutHeight[3] = 99999999;
-        consensus.PayoutHeight[4] = 99999999;
-        consensus.PayoutHeight[5] = 99999999;
         consensus.ExtraPayoutAddress = "XU8FVYfcWAeKdZfdLk3taPjhzDhhu55LFS";
-        consensus.MNTierForkHeight = 99999999; 
-        consensus.RegularNodePercentage = 10;
+        consensus.DevRewardStartHeight = 64155;
+        consensus.MNTierForkHeight = 65475; 
+        consensus.RegularNodePercentage = 90;
         consensus.nPowKGWHeight = 1; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
         consensus.nPowDGWHeight = 1; // TODO: make sure to drop all spork6 related code on next testnet reset
         consensus.nRuleChangeActivationThreshold = 2; // 75% for testchains
@@ -726,12 +695,12 @@ public:
         nExtCoinType = 1;
 
         // long living quorum params
-        consensus.llmqs[Consensus::LLMQ_50_60] = llmq4_3;
+        consensus.llmqs[Consensus::LLMQ_50_60] = llmq50_60;
         consensus.llmqs[Consensus::LLMQ_400_60] = llmq400_60;
         consensus.llmqs[Consensus::LLMQ_400_85] = llmq400_85;
         consensus.llmqs[Consensus::LLMQ_100_67] = llmq100_67;
-        consensus.llmqTypeChainLocks = Consensus::LLMQ_4_3;
-        consensus.llmqTypeInstantSend = Consensus::LLMQ_4_3;
+        consensus.llmqTypeChainLocks = Consensus::LLMQ_50_60;
+        consensus.llmqTypeInstantSend = Consensus::LLMQ_50_60;
         consensus.llmqTypePlatform = Consensus::LLMQ_100_67;
 
         fDefaultConsistencyChecks = false;

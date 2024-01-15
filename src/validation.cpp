@@ -1123,34 +1123,77 @@ double ConvertBitsToDouble(unsigned int nBits)
     return dDiff;
 }
 
-
-
 bool isExtraFundAllocationHeight(int nHeight) {
 
-    for (int i = 0; i < sizeof(Params().GetConsensus().PayoutHeight) / sizeof(Params().GetConsensus().PayoutHeight[0]); ++i) {
-        if (nHeight == Params().GetConsensus().PayoutHeight[i]) {
+    if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
+        if (nHeight == 99999991) {
             return true;
+        } else if (nHeight == 99999992) {
+            return true;
+        } else if (nHeight == 99999993) {
+            return true;
+        } else if (nHeight == 99999994) {
+            return true;
+        } else if (nHeight == 99999995) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        int allocationHeight = Params().GetConsensus().V3ForkHeight;
+        if (nHeight == allocationHeight + 2) {
+            return true;
+        } else if (nHeight == allocationHeight + 4) {
+            return true;
+        } else if (nHeight == allocationHeight + 6) {
+            return true;
+        } else if (nHeight == allocationHeight + 8) {
+            return true;
+        } else if (nHeight == allocationHeight + 10) {
+            return true;
+        } else if (nHeight == allocationHeight + 33) {
+            return true;
+        } else {
+            return false;
         }
     }
-    return false;
 }
 
 // CHANGE LOGIC HERE
 CAmount GetExtraPayOutAmount(int nHeight) {
     CAmount ExtraPayOutAmount;
 
-    if (nHeight == 10) {
-        ExtraPayOutAmount = 1000000;
-    } else if (nHeight == 15) {
-        ExtraPayOutAmount = 1000000;
-    } else if (nHeight == 20) {
-        ExtraPayOutAmount = 1000000;
-    } else if (nHeight == 25) {
-        ExtraPayOutAmount = 1000000;
-    } else if (nHeight == 30) {
-        ExtraPayOutAmount = 1000000;
+    if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
+        if (nHeight == 99999991) {
+            ExtraPayOutAmount = 200000;
+        } else if (nHeight == 99999992) {
+            ExtraPayOutAmount = 100000;
+        } else if (nHeight == 99999993) {
+            ExtraPayOutAmount = 100000;
+        } else if (nHeight == 99999994) {
+            ExtraPayOutAmount = 100000;
+        } else if (nHeight == 99999995) {
+            ExtraPayOutAmount = 100000;
+        } else {
+            ExtraPayOutAmount = 0;
+        }
     } else {
-        ExtraPayOutAmount = 0;
+        int allocationHeight = Params().GetConsensus().V3ForkHeight;
+        if (nHeight == allocationHeight + 2) {
+            ExtraPayOutAmount = 200001;
+        } else if (nHeight == allocationHeight + 4) {
+            ExtraPayOutAmount = 100002;
+        } else if (nHeight == allocationHeight + 6) {
+            ExtraPayOutAmount = 100003;
+        } else if (nHeight == allocationHeight + 8) {
+            ExtraPayOutAmount = 100004;
+        } else if (nHeight == allocationHeight + 10) {
+            ExtraPayOutAmount = 100005;
+        } else if (nHeight == allocationHeight + 33) {
+            ExtraPayOutAmount = 100005;
+        } else {
+            ExtraPayOutAmount = 0;
+        }
     }
 
     return ExtraPayOutAmount * COIN;
@@ -1166,68 +1209,54 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     double dDiff;
     CAmount nSubsidyBase;
 
-    if(Params().NetworkIDString() == CBaseChainParams::MAIN) {
-        if (nPrevHeight == 0) {
-            nSubsidyBase = 3000000;
-        } else if (nPrevHeight <= 6000 ) {
-            nSubsidyBase = 2000;
-        } else if (nPrevHeight <= 14000) {
-            nSubsidyBase = 1000;
-        } else if (nPrevHeight <= 24000) {
-            nSubsidyBase = 800;
-        } else if (nPrevHeight <= 44000) {
-            nSubsidyBase = 600;
-        } else if (nPrevHeight <= 74000) {
-            nSubsidyBase = 400;
-        } else if (nPrevHeight <= 109000) {
-            nSubsidyBase = 300;
-        } else if (nPrevHeight <= 144000) {
-            nSubsidyBase = 200;
-        } else if (nPrevHeight <= 179000) {
-            nSubsidyBase = 150;
-        } else if (nPrevHeight <= 214000) {
-            nSubsidyBase = 110;
-        } else if (nPrevHeight <= 249000) {
-            nSubsidyBase = 80;
-        } else if (nPrevHeight <= 284000) {
-            nSubsidyBase = 60;
-        } else if (nPrevHeight <= 319000) {
-            nSubsidyBase = 40;
-        } else if (nPrevHeight <= 354000) {
-            nSubsidyBase = 30;
-        } else if (nPrevHeight <= 389000) {
-            nSubsidyBase = 20;
-        } else if (nPrevHeight <= 424000) {
-            nSubsidyBase = 15;
-        } else if (nPrevHeight <= 459000) {
-            nSubsidyBase = 10;
-        } else if (nPrevHeight <= 494000) {
-            nSubsidyBase = 7;
-        } else if (nPrevHeight <= 529000) {
-            nSubsidyBase = 4;
-        } else if (nPrevHeight <= 559000) {
-            nSubsidyBase = 2;
-        } else if (nPrevHeight <= 589000) {
-            nSubsidyBase = 1;
-        }  else {
-            nSubsidyBase = 0;
-        }
-    } else {
-        if (nPrevHeight == 0) {
-            nSubsidyBase = 3000000;
-        } else if (nPrevHeight <= 6000 ) {
-            nSubsidyBase = 2000;
-        } else if (nPrevHeight <= 14000) {
-            nSubsidyBase = 1000;
-        } else if (nPrevHeight <= 24000) {
-            nSubsidyBase = 800;
-        } else if (nPrevHeight <= 44000) {
-            nSubsidyBase = 600;
-        } else if (nPrevHeight <= 99999999) {
-            nSubsidyBase = 400;
-        } else {
-            nSubsidyBase = 0;
-        }
+    if (nPrevHeight == 0) {
+        nSubsidyBase = 3000000;
+    } else if (nPrevHeight <= 6000 ) {
+        nSubsidyBase = 2000;
+    } else if (nPrevHeight <= 14000) {
+        nSubsidyBase = 1000;
+    } else if (nPrevHeight <= 24000) {
+        nSubsidyBase = 800;
+    } else if (nPrevHeight <= 44000) {
+        nSubsidyBase = 600;
+    } else if (nPrevHeight <= 74000) {
+        nSubsidyBase = 400;
+    } else if (nPrevHeight <= 109000) {
+        nSubsidyBase = 300;
+    } else if (nPrevHeight <= 144000) {
+        nSubsidyBase = 200;
+    } else if (nPrevHeight <= 179000) {
+        nSubsidyBase = 150;
+    } else if (nPrevHeight <= 214000) {
+        nSubsidyBase = 110;
+    } else if (nPrevHeight <= 249000) {
+        nSubsidyBase = 80;
+    } else if (nPrevHeight <= 284000) {
+        nSubsidyBase = 60;
+    } else if (nPrevHeight <= 319000) {
+        nSubsidyBase = 40;
+    } else if (nPrevHeight <= 354000) {
+        nSubsidyBase = 30;
+    } else if (nPrevHeight <= 389000) {
+        nSubsidyBase = 20;
+    } else if (nPrevHeight <= 424000) {
+        nSubsidyBase = 15;
+    } else if (nPrevHeight <= 459000) {
+        nSubsidyBase = 10;
+    } else if (nPrevHeight <= 494000) {
+        nSubsidyBase = 7;
+    } else if (nPrevHeight <= 529000) {
+        nSubsidyBase = 4;
+    } else if (nPrevHeight <= 559000) {
+        nSubsidyBase = 2;
+    } else if (nPrevHeight <= 589000) {
+        nSubsidyBase = 1;
+    }  else {
+	    nSubsidyBase = 0;
+    }
+
+    if (nPrevHeight == Params().GetConsensus().V3ForkHeight && Params().NetworkIDString() == CBaseChainParams::TESTNET) {
+        nSubsidyBase = 1579;
     }
 
     CAmount nSubsidy = nSubsidyBase * COIN;
@@ -2446,6 +2475,10 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 
     int64_t nTime5_2 = GetTimeMicros(); nTimeSubsidy += nTime5_2 - nTime5_1;
     LogPrint(BCLog::BENCHMARK, "      - GetBlockSubsidy: %.2fms [%.2fs (%.2fms/blk)]\n", MILLI * (nTime5_2 - nTime5_1), nTimeSubsidy * MICRO, nTimeSubsidy * MILLI / nBlocksTotal);
+
+    if (isExtraFundAllocationHeight(pindex->nHeight)) {
+        blockReward += GetExtraPayOutAmount(pindex->nHeight);
+    }
 
     if (!IsBlockValueValid(block, pindex->nHeight, blockReward, strError)) {
         return state.DoS(0, error("ConnectBlock(BLOCX): %s", strError), REJECT_INVALID, "bad-cb-amount");
@@ -3854,7 +3887,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
             return state.Invalid(false, state.GetRejectCode(), state.GetRejectReason(), "Developer reward check failed");
     }
 
-     if(isExtraFundAllocationHeight(nHeight)) {
+    if(isExtraFundAllocationHeight(nHeight)) {
         CScript additionalPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.ExtraPayoutAddress));
         CAmount extraFund = GetExtraPayOutAmount(nHeight);
 
