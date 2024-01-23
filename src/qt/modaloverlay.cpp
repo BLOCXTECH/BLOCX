@@ -141,9 +141,11 @@ void ModalOverlay::tipUpdate(int count, const QDateTime& blockDate, double nVeri
         // not syncing
         return;
 
+    int64_t blockTime = Params().GetConsensus().GetCurrentPowTargetSpacing(bestHeaderHeight);
+
     // estimate the number of headers left based on nPowTargetSpacing
     // and check if the gui is not aware of the best header (happens rarely)
-    int estimateNumHeadersLeft = bestHeaderDate.secsTo(currentDate) / Params().GetConsensus().nPowTargetSpacing;
+    int estimateNumHeadersLeft = bestHeaderDate.secsTo(currentDate) / blockTime;
     bool hasBestHeader = bestHeaderHeight >= count;
 
     // show remaining number of blocks

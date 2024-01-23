@@ -16,7 +16,7 @@ class TxViewDelegate;
 class WalletModel;
 
 namespace Ui {
-    class OverviewPage;
+class OverviewPage;
 }
 
 QT_BEGIN_NAMESPACE
@@ -32,8 +32,8 @@ public:
     explicit OverviewPage(QWidget* parent = 0);
     ~OverviewPage();
 
-    void setClientModel(ClientModel *clientModel);
-    void setWalletModel(WalletModel *walletModel);
+    void setClientModel(ClientModel* clientModel);
+    void setWalletModel(WalletModel* walletModel);
     void showOutOfSyncWarning(bool fShow);
 
 public Q_SLOTS:
@@ -41,32 +41,32 @@ public Q_SLOTS:
     void setBalance(const interfaces::WalletBalances& balances);
 
 Q_SIGNALS:
-    void transactionClicked(const QModelIndex &index);
+    void transactionClicked(const QModelIndex& index);
     void outOfSyncWarningClicked();
 
 private:
-    QTimer *timer;
-    Ui::OverviewPage *ui;
-    ClientModel *clientModel;
-    WalletModel *walletModel;
+    QTimer* timer;
+    Ui::OverviewPage* ui;
+    ClientModel* clientModel;
+    WalletModel* walletModel;
     interfaces::WalletBalances m_balances;
     int nDisplayUnit;
     bool fShowAdvancedCJUI;
     int cachedNumISLocks;
 
-    TxViewDelegate *txdelegate;
+    TxViewDelegate* txdelegate;
     std::unique_ptr<TransactionFilterProxy> filter;
 
     void SetupTransactionList(int nNumItems);
     void DisableCoinJoinCompletely();
 
 private Q_SLOTS:
-    void toggleCoinJoin();
+    //void toggleCoinJoin();
     void updateDisplayUnit();
     void updateCoinJoinProgress();
     void updateAdvancedCJUI(bool fShowAdvancedCJUI);
-    void handleTransactionClicked(const QModelIndex &index);
-    void updateAlerts(const QString &warnings);
+    void handleTransactionClicked(const QModelIndex& index);
+    void updateAlerts(const QString& warnings);
     void updateWatchOnlyLabels(bool showWatchOnly);
     void handleOutOfSyncWarningClicks();
 };

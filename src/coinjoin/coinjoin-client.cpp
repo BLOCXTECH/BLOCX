@@ -40,12 +40,10 @@ void CCoinJoinClientQueueManager::ProcessMessage(CNode* pfrom, const std::string
     }
 
     if (strCommand == NetMsgType::DSQUEUE) {
-        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION) {
+        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION && pfrom->nVersion >= DISABLE_COINJOIN_PROTO_VERSION) {
             LogPrint(BCLog::COINJOIN, "DSQUEUE -- peer=%d using obsolete version %i\n", pfrom->GetId(), pfrom->nVersion);
             if (enable_bip61) {
-                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand,
-                                                                                      REJECT_OBSOLETE, strprintf(
-                                "Version must be %d or greater", MIN_COINJOIN_PEER_PROTO_VERSION)));
+                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater, coinjoin is disabled from version %d ", MIN_COINJOIN_PEER_PROTO_VERSION, DISABLE_COINJOIN_PROTO_VERSION)));
             }
             return;
         }
@@ -151,12 +149,10 @@ void CCoinJoinClientSession::ProcessMessage(CNode* pfrom, const std::string& str
     if (!masternodeSync.IsBlockchainSynced()) return;
 
     if (strCommand == NetMsgType::DSSTATUSUPDATE) {
-        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION) {
+        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION && pfrom->nVersion >= DISABLE_COINJOIN_PROTO_VERSION) {
             LogPrint(BCLog::COINJOIN, "DSSTATUSUPDATE -- peer=%d using obsolete version %i\n", pfrom->GetId(), pfrom->nVersion);
             if (enable_bip61) {
-                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand,
-                                                                                      REJECT_OBSOLETE, strprintf(
-                                "Version must be %d or greater", MIN_COINJOIN_PEER_PROTO_VERSION)));
+                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater, coinjoin is disabled from version %d ", MIN_COINJOIN_PEER_PROTO_VERSION, DISABLE_COINJOIN_PROTO_VERSION)));
             }
             return;
         }
@@ -172,12 +168,10 @@ void CCoinJoinClientSession::ProcessMessage(CNode* pfrom, const std::string& str
         ProcessPoolStateUpdate(psssup);
 
     } else if (strCommand == NetMsgType::DSFINALTX) {
-        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION) {
+        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION && pfrom->nVersion >= DISABLE_COINJOIN_PROTO_VERSION) {
             LogPrint(BCLog::COINJOIN, "DSFINALTX -- peer=%d using obsolete version %i\n", pfrom->GetId(), pfrom->nVersion);
             if (enable_bip61) {
-                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand,
-                                                                                      REJECT_OBSOLETE, strprintf(
-                                "Version must be %d or greater", MIN_COINJOIN_PEER_PROTO_VERSION)));
+                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater, coinjoin is disabled from version %d ", MIN_COINJOIN_PEER_PROTO_VERSION, DISABLE_COINJOIN_PROTO_VERSION)));
             }
             return;
         }
@@ -202,12 +196,10 @@ void CCoinJoinClientSession::ProcessMessage(CNode* pfrom, const std::string& str
         SignFinalTransaction(txNew, pfrom, connman);
 
     } else if (strCommand == NetMsgType::DSCOMPLETE) {
-        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION) {
+        if (pfrom->nVersion < MIN_COINJOIN_PEER_PROTO_VERSION && pfrom->nVersion >= DISABLE_COINJOIN_PROTO_VERSION) {
             LogPrint(BCLog::COINJOIN, "DSCOMPLETE -- peer=%d using obsolete version %i\n", pfrom->GetId(), pfrom->nVersion);
             if (enable_bip61) {
-                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand,
-                                                                                      REJECT_OBSOLETE, strprintf(
-                                "Version must be %d or greater", MIN_COINJOIN_PEER_PROTO_VERSION)));
+                connman.PushMessage(pfrom, CNetMsgMaker(pfrom->GetSendVersion()).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE, strprintf("Version must be %d or greater, coinjoin is disabled from version %d ", MIN_COINJOIN_PEER_PROTO_VERSION, DISABLE_COINJOIN_PROTO_VERSION)));
             }
             return;
         }

@@ -212,18 +212,47 @@ static bool CompareByLastPaid(const CDeterministicMNCPtr& _a, const CDeterminist
     return CompareByLastPaid(*_a, *_b);
 }
 
-CDeterministicMNCPtr CDeterministicMNList::GetMNPayee() const
+CDeterministicMNCPtr CDeterministicMNList::GetMNPayee(bool isFullList, MnType type) const
 {
     if (mnMap.size() == 0) {
         return nullptr;
     }
 
+    if (type == MnType::Standard_Masternode && tierOne.size() == 0) {
+        return nullptr;
+    }
+
+    if (type == MnType::Lite && tierTwo.size() == 0) {
+        return nullptr;
+    }
+
     CDeterministicMNCPtr best;
-    ForEachMN(true, [&](const CDeterministicMNCPtr& dmn) {
-        if (!best || CompareByLastPaid(dmn, best)) {
-            best = dmn;
-        }
-    });
+
+    if (isFullList) {
+        ForEachMN(true, [&](const CDeterministicMNCPtr& dmn) {
+            if (!best || CompareByLastPaid(dmn, best)) {
+                best = dmn;
+            }
+        });
+    } else if (type == MnType::Standard_Masternode) {
+        ForEachMNTierOne(true, [&](const CDeterministicMNCPtr& dmn) {
+            if (!best || CompareByLastPaid(dmn, best)) {
+                best = dmn;
+            }
+        });
+    } else if (type == MnType::Lite) {
+        ForEachMNTierTwo(true, [&](const CDeterministicMNCPtr& dmn) {
+            if (!best || CompareByLastPaid(dmn, best)) {
+                best = dmn;
+            }
+        });
+    } else {
+        ForEachMN(true, [&](const CDeterministicMNCPtr& dmn) {
+            if (!best || CompareByLastPaid(dmn, best)) {
+                best = dmn;
+            }
+        });
+    }
 
     return best;
 }
@@ -473,6 +502,12 @@ void CDeterministicMNList::AddMN(const CDeterministicMNCPtr& dmn, bool fBumpTota
                 dmn->proTxHash.ToString(), dmn->pdmnState->pubKeyOperator.Get().ToString())));
     }
 
+    if (dmn->nType == MnType::Standard_Masternode) {
+        tierOne = tierOne.set(dmn->proTxHash, dmn);
+    } else {
+        tierTwo = tierTwo.set(dmn->proTxHash, dmn);
+    }
+
     mnMap = mnMap.set(dmn->proTxHash, dmn);
     mnInternalIdMap = mnInternalIdMap.set(dmn->GetInternalId(), dmn->proTxHash);
     if (fBumpTotalCount) {
@@ -507,6 +542,12 @@ void CDeterministicMNList::UpdateMN(const CDeterministicMNCPtr& oldDmn, const CD
         mnUniquePropertyMap = mnUniquePropertyMapSaved;
         throw(std::runtime_error(strprintf("%s: Can't update a masternode %s with a duplicate pubKeyOperator=%s", __func__,
                 oldDmn->proTxHash.ToString(), pdmnState->pubKeyOperator.Get().ToString())));
+    }
+
+    if (dmn->nType == MnType::Standard_Masternode) {
+        tierOne = tierOne.set(oldDmn->proTxHash, dmn);
+    } else {
+        tierTwo = tierTwo.set(oldDmn->proTxHash, dmn);
     }
 
     mnMap = mnMap.set(oldDmn->proTxHash, dmn);
@@ -560,6 +601,12 @@ void CDeterministicMNList::RemoveMN(const uint256& proTxHash)
         mnUniquePropertyMap = mnUniquePropertyMapSaved;
         throw(std::runtime_error(strprintf("%s: Can't delete a masternode %s with a pubKeyOperator=%s", __func__,
                 proTxHash.ToString(), dmn->pdmnState->pubKeyOperator.Get().ToString())));
+    }
+
+    if (dmn->nType == MnType::Standard_Masternode) {
+        tierOne = tierOne.erase(proTxHash);
+    } else {
+        tierTwo = tierTwo.erase(proTxHash);
     }
 
     mnMap = mnMap.erase(proTxHash);
@@ -697,7 +744,14 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
     newList.SetBlockHash(uint256()); // we can't know the final block hash, so better not return a (invalid) block hash
     newList.SetHeight(nHeight);
 
-    auto payee = oldList.GetMNPayee();
+    auto payee = oldList.GetMNPayee(false, MnType::Standard_Masternode);
+    CDeterministicMNCPtr payee2;
+
+    bool isMnTierForkActivated = Params().GetConsensus().MNTierForkHeight <= nHeight;
+
+    if (isMnTierForkActivated) {
+        payee2 = oldList.GetMNPayee(false, MnType::Lite);
+    }
 
     // we iterate the oldList here and update the newList
     // this is only valid as long these have not diverged at this point, which is the case as long as we don't add
@@ -734,7 +788,11 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
                 return _state.DoS(100, false, REJECT_INVALID, "bad-protx-payload");
             }
 
-            auto dmn = std::make_shared<CDeterministicMN>(newList.GetTotalRegisteredCount());
+            if (proTx.nType == MnType::Lite && !isMnTierForkActivated) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-payload-erl-registration");
+            }
+
+            auto dmn = std::make_shared<CDeterministicMN>(newList.GetTotalRegisteredCount(), proTx.nType);
             dmn->proTxHash = tx.GetHash();
 
             // collateralOutpoint is either pointing to an external collateral or to the ProRegTx itself
@@ -745,7 +803,8 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
             }
 
             Coin coin;
-            if (!proTx.collateralOutpoint.hash.IsNull() && (!view.GetCoin(dmn->collateralOutpoint, coin) || coin.IsSpent() || coin.out.nValue != 100000 * COIN)) {
+            CAmount expectedCollateral = GetMnType(proTx.nType).collat_amount;
+            if (!proTx.collateralOutpoint.hash.IsNull() && (!view.GetCoin(dmn->collateralOutpoint, coin) || coin.IsSpent() || coin.out.nValue != expectedCollateral)) {
                 // should actually never get to this point as CheckProRegTx should have handled this case.
                 // We do this additional check nevertheless to be 100% sure
                 return _state.DoS(100, false, REJECT_INVALID, "bad-protx-collateral");
@@ -792,6 +851,10 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
                 return _state.DoS(100, false, REJECT_INVALID, "bad-protx-payload");
             }
 
+            if (proTx.nType == MnType::Lite && !isMnTierForkActivated) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-payload");
+            }
+
             if (newList.HasUniqueProperty(proTx.addr) && newList.GetUniquePropertyMN(proTx.addr)->proTxHash != proTx.proTxHash) {
                 return _state.DoS(100, false, REJECT_DUPLICATE, "bad-protx-dup-addr");
             }
@@ -800,6 +863,21 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
             if (!dmn) {
                 return _state.DoS(100, false, REJECT_INVALID, "bad-protx-hash");
             }
+
+            if (proTx.nType == MnType::Lite && dmn->nType != MnType::Lite) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-type");
+            }
+            if (proTx.nType == MnType::Standard_Masternode && dmn->nType != MnType::Standard_Masternode) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-type");
+            }
+
+            if (proTx.nType != dmn->nType) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-type-mismatch");
+            }
+            if (!IsValidMnType(proTx.nType)) {
+                return _state.Invalid(false, REJECT_INVALID, "bad-protx-type");
+            }
+
             auto newState = std::make_shared<CDeterministicMNState>(*dmn->pdmnState);
             newState->addr = proTx.addr;
             newState->scriptOperatorPayout = proTx.scriptOperatorPayout;
@@ -910,6 +988,14 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
         auto newState = std::make_shared<CDeterministicMNState>(*newList.GetMN(payee->proTxHash)->pdmnState);
         newState->nLastPaidHeight = nHeight;
         newList.UpdateMN(payee->proTxHash, newState);
+    }
+
+    if (isMnTierForkActivated) {
+        if (payee2 && newList.HasMN(payee2->proTxHash)) {
+            auto newState = std::make_shared<CDeterministicMNState>(*newList.GetMN(payee2->proTxHash)->pdmnState);
+            newState->nLastPaidHeight = nHeight;
+            newList.UpdateMN(payee2->proTxHash, newState);
+        }
     }
 
     mnListRet = std::move(newList);
@@ -1049,7 +1135,8 @@ bool CDeterministicMNManager::IsProTxWithCollateral(const CTransactionRef& tx, u
     if (proTx.collateralOutpoint.n >= tx->vout.size() || proTx.collateralOutpoint.n != n) {
         return false;
     }
-    if (tx->vout[n].nValue != 100000 * COIN) {
+    const CAmount expectedCollateral = GetMnType(proTx.nType).collat_amount;
+    if (tx->vout[n].nValue != expectedCollateral) {
         return false;
     }
     return true;

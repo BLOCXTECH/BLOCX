@@ -73,12 +73,19 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
 
     if(nHeight > 18000 && nHeight <= 24000) {
         devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * 18) / 100;
+    } else if (nHeight <= params.V3ForkHeight) {
+        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
     } else {
-        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;     
+        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * (300/95)) / 100;
     }
 
     coinbaseTx.vout[0].nValue -= devPayoutValue;
     coinbaseTx.vout.push_back(CTxOut(devPayoutValue, devPayoutScript));
+
+    if (isExtraFundAllocationHeight(nHeight)) {
+        CAmount amount = GetExtraPayOutAmount(nHeight);
+        coinbaseTx.vout.push_back(CTxOut(amount, GetScriptForDestination(DecodeDestination(params.ExtraPayoutAddress))));
+    }
 
     //if (nHeight > 16700 && nHeight < 18000) {
     //// Add 10% to Temporary Masternode Reward Adjustment
@@ -209,7 +216,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     // Compute regular coinbase transaction.
     coinbaseTx.vout[0].nValue = blockReward;
 
-    if (nHeight > 16700)
+    if (nHeight > Params().GetConsensus().DevRewardStartHeight)
         FillFoundersReward(coinbaseTx, nHeight);
 
     if (!fDIP0003Active_context) {

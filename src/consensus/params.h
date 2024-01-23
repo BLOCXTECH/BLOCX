@@ -147,6 +147,8 @@ struct Params {
     int nSuperblockStartBlock;
     uint256 nSuperblockStartHash;
     int nSuperblockCycle; // in blocks
+    int nNewSuperBlockCycle;
+    int nNewSuperBlockStartHeight;
     int nGovernanceMinQuorum; // Min absolute vote count to trigger an action
     int nGovernanceFilterElements;
     int nMasternodeMinimumConfirmations;
@@ -166,6 +168,15 @@ struct Params {
     uint256 DIP0003EnforcementHash;
     /** Block height at which DIP0008 becomes active */
     int DIP0008Height;
+    // This heigth is used to define the height at dev reward activeted
+    int DevRewardStartHeight;
+    // This address will receive extra fund at cetain height
+    std::string ExtraPayoutAddress;
+    // Extra payout height
+    int PayoutHeight[6];
+    /** Block height at which MNTier fork becomes enforced*/
+    int MNTierForkHeight;
+    int V3ForkHeight;
     /**
      * Minimum blocks including miner confirmation of the total of nMinerConfirmationWindow blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
@@ -187,12 +198,22 @@ struct Params {
     bool fPowAllowMinDifficultyBlocks;
     bool fPowNoRetargeting;
     int64_t nPowTargetSpacing;
+    int64_t nNewPowTargetSpacing;
+    int64_t nNewPowTargetSpacingForkHeight;
     int64_t nPowTargetTimespan;
     int nPowKGWHeight;
     int nPowDGWHeight;
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
+
+    int64_t GetCurrentPowTargetSpacing(const int& nHeight) const
+    {
+        if (nHeight > nNewPowTargetSpacingForkHeight)
+            return nNewPowTargetSpacing;
+        else
+            return nPowTargetSpacing;
+    }
 
     /** these parameters are only used on devnet and can be configured from the outside */
     int nMinimumDifficultyBlocks{0};

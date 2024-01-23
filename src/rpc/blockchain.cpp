@@ -1795,7 +1795,8 @@ UniValue getchaintxstats(const JSONRPCRequest& request)
         );
 
     const CBlockIndex* pindex;
-    int blockcount = 30 * 24 * 60 * 60 / Params().GetConsensus().nPowTargetSpacing; // By default: 1 month
+    int64_t blockTime = Params().GetConsensus().GetCurrentPowTargetSpacing(chainActive.Tip()->nHeight);
+    int blockcount = 30 * 24 * 60 * 60 / blockTime; // By default: 1 month
 
     if (request.params[1].isNull()) {
         LOCK(cs_main);

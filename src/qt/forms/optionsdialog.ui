@@ -51,7 +51,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <!--<item>
       <widget class="QPushButton" name="btnCoinJoin">
        <property name="text">
         <string notr="true">CoinJoin</string>
@@ -60,7 +60,7 @@
         <bool>true</bool>
        </property>
       </widget>
-     </item>
+     </item>-->
      <item>
       <widget class="QPushButton" name="btnNetwork">
        <property name="text">

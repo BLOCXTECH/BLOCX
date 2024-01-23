@@ -401,16 +401,16 @@ void protx_register_submit_help(CWallet* const pwallet)
 }
 
 // handles register, register_prepare and register_fund in one method
-UniValue protx_register(const JSONRPCRequest& request)
+UniValue protx_register(const JSONRPCRequest& request, bool isLite)
 {
     std::shared_ptr<CWallet> const wallet = GetWalletForJSONRPCRequest(request);
     CWallet* const pwallet = wallet.get();
     if (!EnsureWalletIsAvailable(pwallet, request.fHelp))
         return NullUniValue;
 
-    bool isExternalRegister = request.params[0].get_str() == "register";
-    bool isFundRegister = request.params[0].get_str() == "register_fund";
-    bool isPrepareRegister = request.params[0].get_str() == "register_prepare";
+    bool isExternalRegister = request.params[0].get_str() == "register" || request.params[0].get_str() == "register_lite";
+    bool isFundRegister = request.params[0].get_str() == "register_fund" || request.params[0].get_str() == "register_fund_lite";
+    bool isPrepareRegister = request.params[0].get_str() == "register_prepare" || request.params[0].get_str() == "register_prepare_lite";
 
     if (isFundRegister && (request.fHelp || (request.params.size() < 8 || request.params.size() > 10))) {
         protx_register_fund_help(pwallet);
@@ -426,13 +426,16 @@ UniValue protx_register(const JSONRPCRequest& request)
 
     size_t paramIdx = 1;
 
-    CAmount collateralAmount = 100000 * COIN;
-
     CMutableTransaction tx;
     tx.nVersion = 3;
     tx.nType = TRANSACTION_PROVIDER_REGISTER;
 
     CProRegTx ptx;
+    if(isLite){
+        ptx.nType = MnType::Lite;
+    } else {
+        ptx.nType = MnType::Standard_Masternode;
+    }
     ptx.nVersion = CProRegTx::CURRENT_VERSION;
 
     if (isFundRegister) {
@@ -442,7 +445,8 @@ UniValue protx_register(const JSONRPCRequest& request)
         }
         CScript collateralScript = GetScriptForDestination(collateralDest);
 
-        CTxOut collateralTxOut(collateralAmount, collateralScript);
+        CAmount fundCollateral = GetMnType(ptx.nType).collat_amount;
+        CTxOut collateralTxOut(fundCollateral, collateralScript);
         tx.vout.emplace_back(collateralTxOut);
 
         paramIdx++;
@@ -514,9 +518,10 @@ UniValue protx_register(const JSONRPCRequest& request)
     }
 
     if (isFundRegister) {
+        CAmount fundCollateral = GetMnType(ptx.nType).collat_amount;
         uint32_t collateralIndex = (uint32_t) -1;
         for (uint32_t i = 0; i < tx.vout.size(); i++) {
-            if (tx.vout[i].nValue == collateralAmount) {
+            if (tx.vout[i].nValue == fundCollateral) {
                 collateralIndex = i;
                 break;
             }
@@ -1141,6 +1146,10 @@ UniValue protx_diff(const JSONRPCRequest& request)
             "  register_fund     - Fund, create and send ProTx to network\n"
             "  register_prepare  - Create an unsigned ProTx\n"
             "  register_submit   - Sign and submit a ProTx\n"
+
+            "  register_lite           - Create Lite Node and send ProTx to network\n"
+            "  register_fund_lite      - Fund, create and send ProTx Lite Node to network\n"
+            "  register_prepare_lite   - Create Lite Node an unsigned ProTx\n"
 #endif
             "  list              - List ProTxs\n"
             "  info              - Return information about a ProTx\n"
@@ -1166,7 +1175,12 @@ UniValue protx(const JSONRPCRequest& request)
 
 #ifdef ENABLE_WALLET
     if (command == "register" || command == "register_fund" || command == "register_prepare") {
-        return protx_register(request);
+        return protx_register(request, false);
+    } else if (command == "register_lite" || command == "register_fund_lite" || command == "register_prepare_lite") {
+        if (chainActive.Height() <= Params().GetConsensus().V3ForkHeight) {
+            throw std::runtime_error("V3Fork is not activated right now");
+        }
+        return protx_register(request, true);
     } else if (command == "register_submit") {
         return protx_register_submit(request);
     } else if (command == "update_service") {

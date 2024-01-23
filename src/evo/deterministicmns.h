@@ -8,6 +8,7 @@
 #include <arith_uint256.h>
 #include <bls/bls.h>
 #include <dbwrapper.h>
+#include <evo/dmn_types.h>
 #include <evo/evodb.h>
 #include <evo/providertx.h>
 #include <evo/simplifiedmns.h>
@@ -211,7 +212,9 @@ private:
 
 public:
     CDeterministicMN() = delete; // no default constructor, must specify internalId
-    explicit CDeterministicMN(uint64_t _internalId) : internalId(_internalId)
+    explicit CDeterministicMN(uint64_t _internalId, MnType mnType = MnType::Standard_Masternode) :
+        internalId(_internalId),
+        nType(mnType)
     {
         // only non-initial values
         assert(_internalId != std::numeric_limits<uint64_t>::max());
@@ -232,6 +235,7 @@ public:
     uint256 proTxHash;
     COutPoint collateralOutpoint;
     uint16_t nOperatorReward;
+    MnType nType{MnType::Standard_Masternode};
     CDeterministicMNStateCPtr pdmnState;
 
 public:
@@ -245,6 +249,7 @@ public:
         READWRITE(collateralOutpoint);
         READWRITE(nOperatorReward);
         READWRITE(pdmnState);
+        READWRITE(nType);
     }
 
     template<typename Stream>
@@ -315,6 +320,8 @@ private:
     int nHeight{-1};
     uint32_t nTotalRegisteredCount{0};
     MnMap mnMap;
+    MnMap tierOne;
+    MnMap tierTwo;
     MnInternalIdMap mnInternalIdMap;
 
     // map of unique properties like address and keys
@@ -352,6 +359,8 @@ public:
     template<typename Stream>
     void Unserialize(Stream& s) {
         mnMap = MnMap();
+        tierOne = MnMap();
+        tierTwo = MnMap();
         mnUniquePropertyMap = MnUniquePropertyMap();
         mnInternalIdMap = MnInternalIdMap();
 
@@ -369,6 +378,25 @@ public:
         return mnMap.size();
     }
 
+    template <typename Callback>
+    void ForEachMNTierOne(bool onlyValid, Callback&& cb) const
+    {
+        for (const auto& p : tierOne) {
+            if (!onlyValid || IsMNValid(p.second)) {
+                cb(p.second);
+            }
+        }
+    }
+    template <typename Callback>
+    void ForEachMNTierTwo(bool onlyValid, Callback&& cb) const
+    {
+        for (const auto& p : tierTwo) {
+            if (!onlyValid || IsMNValid(p.second)) {
+                cb(p.second);
+            }
+        }
+    }
+
     size_t GetValidMNsCount() const
     {
         size_t count = 0;
@@ -378,6 +406,14 @@ public:
             }
         }
         return count;
+    }
+
+    size_t GetAllTierOneMNCount() const {
+        return tierOne.size();
+    }
+
+    size_t GetAllTierTwoMNCount() const {
+        return tierTwo.size();
     }
 
     template <typename Callback>
@@ -436,7 +472,7 @@ public:
     CDeterministicMNCPtr GetValidMNByCollateral(const COutPoint& collateralOutpoint) const;
     CDeterministicMNCPtr GetMNByService(const CService& service) const;
     CDeterministicMNCPtr GetMNByInternalId(uint64_t internalId) const;
-    CDeterministicMNCPtr GetMNPayee() const;
+    CDeterministicMNCPtr GetMNPayee(bool isFullList, MnType type = MnType::Standard_Masternode) const;
 
     /**
      * Calculates the projected MN payees for the next *count* blocks. The result is not guaranteed to be correct

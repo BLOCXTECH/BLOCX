@@ -120,10 +120,14 @@ UniValue masternode_count(const JSONRPCRequest& request)
     auto mnList = deterministicMNManager->GetListAtChainTip();
     int total = mnList.GetAllMNsCount();
     int enabled = mnList.GetValidMNsCount();
+    int tierOneMN = mnList.GetAllTierOneMNCount();
+    int tierTwoMN = mnList.GetAllTierTwoMNCount();
 
     UniValue obj(UniValue::VOBJ);
     obj.pushKV("total", total);
     obj.pushKV("enabled", enabled);
+    obj.pushKV("Standard", tierOneMN);
+    obj.pushKV("Lite", tierTwoMN);
     return obj;
 }
 
@@ -339,7 +343,7 @@ UniValue masternode_winners(const JSONRPCRequest& request)
     int nStartHeight = std::max(nChainTipHeight - nCount, 1);
 
     for (int h = nStartHeight; h <= nChainTipHeight; h++) {
-        auto payee = deterministicMNManager->GetListForBlock(pindexTip->GetAncestor(h - 1)).GetMNPayee();
+        auto payee = deterministicMNManager->GetListForBlock(pindexTip->GetAncestor(h - 1)).GetMNPayee(true);
         std::string strPayments = GetRequiredPaymentsString(h, payee);
         if (strFilter != "" && strPayments.find(strFilter) == std::string::npos) continue;
         obj.pushKV(strprintf("%d", h), strPayments);
@@ -462,7 +466,7 @@ UniValue masternode_payments(const JSONRPCRequest& request)
             payeesArr.push_back(obj);
         }
 
-        const auto dmnPayee = deterministicMNManager->GetListForBlock(pindex).GetMNPayee();
+        const auto dmnPayee = deterministicMNManager->GetListForBlock(pindex).GetMNPayee(true);
         protxObj.pushKV("proTxHash", dmnPayee == nullptr ? "" : dmnPayee->proTxHash.ToString());
         protxObj.pushKV("amount", payedPerMasternode);
         protxObj.pushKV("payees", payeesArr);
@@ -659,6 +663,8 @@ UniValue masternodelist(const JSONRPCRequest& request)
             objMN.pushKV("address", dmn->pdmnState->addr.ToString());
             objMN.pushKV("payee", payeeStr);
             objMN.pushKV("status", dmnToStatus(dmn));
+            objMN.pushKV("Collateral Amount", GetMnType(dmn->nType).collat_amount);
+            objMN.pushKV("Masternode Type", dmn->nType == MnType::Standard_Masternode ? "Standard Masternode" : "Lite");
             objMN.pushKV("lastpaidtime", dmnToLastPaidTime(dmn));
             objMN.pushKV("lastpaidblock", dmn->pdmnState->nLastPaidHeight);
             objMN.pushKV("owneraddress", EncodeDestination(dmn->pdmnState->keyIDOwner));

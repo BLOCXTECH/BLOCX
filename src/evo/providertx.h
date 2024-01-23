@@ -7,6 +7,7 @@
 
 #include <bls/bls.h>
 #include <consensus/validation.h>
+#include <evo/dmn_types.h>
 #include <primitives/transaction.h>
 
 #include <key_io.h>
@@ -24,7 +25,7 @@ public:
 
 public:
     uint16_t nVersion{CURRENT_VERSION};                    // message version
-    uint16_t nType{0};                                     // only 0 supported for now
+    MnType nType{MnType::Standard_Masternode};             // only 0 supported for now
     uint16_t nMode{0};                                     // only 0 supported for now
     COutPoint collateralOutpoint{uint256(), (uint32_t)-1}; // if hash is null, we refer to a ProRegTx output
     CService addr;
@@ -93,6 +94,7 @@ public:
 
 public:
     uint16_t nVersion{CURRENT_VERSION}; // message version
+    MnType nType{MnType::Standard_Masternode};
     uint256 proTxHash;
     CService addr;
     CScript scriptOperatorPayout;
