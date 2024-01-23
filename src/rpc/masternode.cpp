@@ -126,8 +126,8 @@ UniValue masternode_count(const JSONRPCRequest& request)
     UniValue obj(UniValue::VOBJ);
     obj.pushKV("total", total);
     obj.pushKV("enabled", enabled);
-    obj.pushKV("Tier One", tierOneMN);
-    obj.pushKV("Tier Two", tierTwoMN);
+    obj.pushKV("Standard", tierOneMN);
+    obj.pushKV("Lite", tierTwoMN);
     return obj;
 }
 

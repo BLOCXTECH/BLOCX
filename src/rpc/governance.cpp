@@ -1111,12 +1111,19 @@ UniValue getgovernanceinfo(const JSONRPCRequest& request)
     int nLastSuperblock = 0, nNextSuperblock = 0;
     int nBlockHeight = chainActive.Height();
 
+    int nSuperblockCycle;
+    if (nBlockHeight < Params().GetConsensus().nNewSuperBlockStartHeight) {
+        nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    }
+
     CSuperblock::GetNearestSuperblocksHeights(nBlockHeight, nLastSuperblock, nNextSuperblock);
 
     UniValue obj(UniValue::VOBJ);
     obj.pushKV("governanceminquorum", Params().GetConsensus().nGovernanceMinQuorum);
     obj.pushKV("proposalfee", ValueFromAmount(GOVERNANCE_PROPOSAL_FEE_TX));
-    obj.pushKV("superblockcycle", Params().GetConsensus().nSuperblockCycle);
+    obj.pushKV("superblockcycle", nSuperblockCycle);
     obj.pushKV("lastsuperblock", nLastSuperblock);
     obj.pushKV("nextsuperblock", nNextSuperblock);
 

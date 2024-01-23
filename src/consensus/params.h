@@ -147,6 +147,8 @@ struct Params {
     int nSuperblockStartBlock;
     uint256 nSuperblockStartHash;
     int nSuperblockCycle; // in blocks
+    int nNewSuperBlockCycle;
+    int nNewSuperBlockStartHeight;
     int nGovernanceMinQuorum; // Min absolute vote count to trigger an action
     int nGovernanceFilterElements;
     int nMasternodeMinimumConfirmations;
@@ -174,7 +176,6 @@ struct Params {
     int PayoutHeight[6];
     /** Block height at which MNTier fork becomes enforced*/
     int MNTierForkHeight;
-    int RegularNodePercentage;
     int V3ForkHeight;
     /**
      * Minimum blocks including miner confirmation of the total of nMinerConfirmationWindow blocks in a retargeting period,

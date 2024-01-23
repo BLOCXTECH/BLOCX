@@ -237,8 +237,8 @@ static Consensus::LLMQParams llmq50_60 = {
         .type = Consensus::LLMQ_50_60,
         .name = "llmq_50_60",
         .size = 50,
-        .minSize = 4,
-        .threshold = 3,
+        .minSize = 10,
+        .threshold = 7,
 
         .dkgInterval = 24, // one DKG per hour
         .dkgPhaseBlocks = 2,
@@ -340,6 +340,8 @@ public:
         consensus.nSuperblockStartBlock = 1; 
         consensus.nSuperblockStartHash = uint256();
         consensus.nSuperblockCycle = 14600;
+        consensus.nNewSuperBlockCycle = 29200;
+        consensus.nNewSuperBlockStartHeight = 87601;  // superblockHeight + 1
         consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
         consensus.nMasternodeMinimumConfirmations = 6;
@@ -352,12 +354,12 @@ public:
         consensus.DIP0003EnforcementHeight = 2;
         consensus.DIP0003EnforcementHash = uint256();
         consensus.DIP0008Height = 2; 
-        consensus.V3ForkHeight = 99999999;
+        consensus.V3ForkHeight = 87500;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 9 * 60;
         consensus.nPowTargetSpacing = 3 * 60;
-        consensus.nNewPowTargetSpacing = 1 * 60;
-        consensus.nNewPowTargetSpacingForkHeight = 99999999;
+        consensus.nNewPowTargetSpacing = 90;
+        consensus.nNewPowTargetSpacingForkHeight = 87600;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nPowKGWHeight = 1;
@@ -366,9 +368,9 @@ public:
         consensus.nMinerConfirmationWindow = 3; // nPowTargetTimespan / nPowTargetSpacing
         consensus.DevelopementFundShare = 3;
         consensus.DevRewardStartHeight = 16700;
+        consensus.MNTierForkHeight = 87500;
         consensus.DevelopmentFundAddress = "B4ZQyV266uUDFyJa3vr7D7RV9TD18Th3Dp";
-        consensus.RegularNodePercentage = 10;
-        consensus.ExtraPayoutAddress = "";
+        consensus.ExtraPayoutAddress = "BK25fSfNGPMqS3jHDKm4h2Ad9y8HxsnFL6";
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -473,6 +475,7 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
+        vSeeds.emplace_back("dnsseed.blocx.space");
         vSeeds.emplace_back("node1.blocx.space");
         vSeeds.emplace_back("node2.blocx.space");
         vSeeds.emplace_back("node3.blocx.space");
@@ -525,6 +528,12 @@ public:
                 {14426, uint256S("0x000000000000000b05cb80e138a7c9c3fc2faa640e9c67c3ae1a4e31e394cf09")},
                 {16154, uint256S("0x000000000000016fb125e52e9e667f05a3f9a61a21b49e5b65ef084fc3be1bab")},
                 {17077, uint256S("0x000000000000000793dc563cd63596c5f067d736f5ee39df4aa5f76cd895bba4")},
+                {25654, uint256S("0x00000000000000742ef0fd1bff12241390219ae9cacb091556d1c7202874fc00")},
+                {38412, uint256S("0x00000000000000175230dfb2e5a5e5745f5b680781fd5ad39050ebd051286944")},
+                {51482, uint256S("0x0000000000000013a9360cb82a8c060b2aafd9040139220092a7109e38626c60")},
+                {62541, uint256S("0x0000000000000050fd89facd5f17a48b70d188d899483eb0ab5b14cc6e67ece5")},
+                {74985, uint256S("0x000000000000004cfec6a72a8770d741a06b02532851c46a9e8a587433406f06")},
+                {85330, uint256S("0x000000000000002e87c0b53d5ce7ea2d27b794330076d2a03555d46cfc46d973")},
             }
         };
 
@@ -556,6 +565,8 @@ public:
         consensus.nSuperblockStartBlock = 1; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
         consensus.nSuperblockStartHash = uint256(); // do not check this on testnet
         consensus.nSuperblockCycle = 24; // Superblocks can be issued hourly on testnet
+        consensus.nNewSuperBlockCycle = 99999999;
+        consensus.nNewSuperBlockStartHeight = 99999999;
         consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 500;
         consensus.nMasternodeMinimumConfirmations = 1;
@@ -581,7 +592,6 @@ public:
         consensus.ExtraPayoutAddress = "XU8FVYfcWAeKdZfdLk3taPjhzDhhu55LFS";
         consensus.DevRewardStartHeight = 64155;
         consensus.MNTierForkHeight = 65475; 
-        consensus.RegularNodePercentage = 90;
         consensus.nPowKGWHeight = 1; // nPowKGWHeight >= nPowDGWHeight means "no KGW"
         consensus.nPowDGWHeight = 1; // TODO: make sure to drop all spork6 related code on next testnet reset
         consensus.nRuleChangeActivationThreshold = 2; // 75% for testchains
@@ -758,6 +768,8 @@ public:
         consensus.nSuperblockStartBlock = 1; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPeymentsStartBlock
         consensus.nSuperblockStartHash = uint256(); // do not check this on devnet
         consensus.nSuperblockCycle = 24; // Superblocks can be issued hourly on devnet
+        consensus.nNewSuperBlockCycle = 99999999;
+        consensus.nNewSuperBlockStartHeight = 99999999;
         consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 500;
         consensus.nMasternodeMinimumConfirmations = 1;
@@ -953,6 +965,8 @@ public:
         consensus.nSuperblockStartBlock = 1500;
         consensus.nSuperblockStartHash = uint256(); // do not check this on regtest
         consensus.nSuperblockCycle = 10;
+        consensus.nNewSuperBlockCycle = 99999999;
+        consensus.nNewSuperBlockStartHeight = 99999999;
         consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 100;
         consensus.nMasternodeMinimumConfirmations = 1;

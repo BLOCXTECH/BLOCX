@@ -129,6 +129,11 @@
            <string>Service</string>
           </property>
          </column>
+		 <column>
+          <property name="text">
+           <string>Type</string>
+          </property>
+         </column>
          <column>
           <property name="text">
            <string>Status</string>

@@ -684,6 +684,14 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
         masternodeObj.push_back(obj);
     }
 
+    if (isExtraFundAllocationHeight(pindexPrev->nHeight + 1)) {
+        UniValue obj(UniValue::VOBJ);
+        obj.pushKV("payee", (consensusParams.ExtraPayoutAddress).c_str());
+        obj.pushKV("script", HexStr(GetScriptForDestination(DecodeDestination(consensusParams.ExtraPayoutAddress))));
+        obj.pushKV("amount", GetExtraPayOutAmount(pindexPrev->nHeight + 1));
+        masternodeObj.push_back(obj);
+    }
+
     result.pushKV("masternode", masternodeObj);
     result.pushKV("masternode_payments_started", pindexPrev->nHeight + 1 > consensusParams.nMasternodePaymentsStartBlock);
     result.pushKV("masternode_payments_enforced", true);

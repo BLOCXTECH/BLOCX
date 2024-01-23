@@ -1126,15 +1126,21 @@ double ConvertBitsToDouble(unsigned int nBits)
 bool isExtraFundAllocationHeight(int nHeight) {
 
     if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
-        if (nHeight == 99999991) {
+        if (nHeight == 87500) {
             return true;
-        } else if (nHeight == 99999992) {
+        } else if (nHeight == 130000) {
             return true;
-        } else if (nHeight == 99999993) {
+        } else if (nHeight == 220000) {
             return true;
-        } else if (nHeight == 99999994) {
+        } else if (nHeight == 400000) {
             return true;
-        } else if (nHeight == 99999995) {
+        } else if (nHeight == 575000) {
+            return true;
+        } else if (nHeight == 750000) {
+            return true;
+        } else if (nHeight == 925000) {
+            return true;
+        } else if (nHeight == 1100000) {
             return true;
         } else {
             return false;
@@ -1164,16 +1170,22 @@ CAmount GetExtraPayOutAmount(int nHeight) {
     CAmount ExtraPayOutAmount;
 
     if (Params().NetworkIDString() == CBaseChainParams::MAIN) {
-        if (nHeight == 99999991) {
-            ExtraPayOutAmount = 200000;
-        } else if (nHeight == 99999992) {
-            ExtraPayOutAmount = 100000;
-        } else if (nHeight == 99999993) {
-            ExtraPayOutAmount = 100000;
-        } else if (nHeight == 99999994) {
-            ExtraPayOutAmount = 100000;
-        } else if (nHeight == 99999995) {
-            ExtraPayOutAmount = 100000;
+        if (nHeight == 87500) {
+            ExtraPayOutAmount = 1000000;
+        } else if (nHeight == 130000) {
+            ExtraPayOutAmount = 2000000;
+        } else if (nHeight == 220000) {
+            ExtraPayOutAmount = 1000000;
+        } else if (nHeight == 400000) {
+            ExtraPayOutAmount = 1000000;
+        } else if (nHeight == 575000) {
+            ExtraPayOutAmount = 1000000;
+        } else if (nHeight == 750000) {
+            ExtraPayOutAmount = 1000000;
+        } else if (nHeight == 925000) {
+            ExtraPayOutAmount = 1000000;
+        } else if (nHeight == 1100000) {
+            ExtraPayOutAmount = 1000000;
         } else {
             ExtraPayOutAmount = 0;
         }
@@ -1221,37 +1233,57 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         nSubsidyBase = 600;
     } else if (nPrevHeight <= 74000) {
         nSubsidyBase = 400;
-    } else if (nPrevHeight <= 109000) {
+    } else if (nPrevHeight <= 87500) {
         nSubsidyBase = 300;
-    } else if (nPrevHeight <= 144000) {
-        nSubsidyBase = 200;
-    } else if (nPrevHeight <= 179000) {
+    } else if (nPrevHeight <= 172000) {
         nSubsidyBase = 150;
-    } else if (nPrevHeight <= 214000) {
-        nSubsidyBase = 110;
-    } else if (nPrevHeight <= 249000) {
+    } else if (nPrevHeight <= 316000) {
+        nSubsidyBase = 120;
+    } else if (nPrevHeight <= 460000) {
+        nSubsidyBase = 100;
+    } else if (nPrevHeight <= 604000) {
         nSubsidyBase = 80;
-    } else if (nPrevHeight <= 284000) {
-        nSubsidyBase = 60;
-    } else if (nPrevHeight <= 319000) {
+    } else if (nPrevHeight <= 748000) {
+        nSubsidyBase = 65;
+    } else if (nPrevHeight <= 892000) {
+        nSubsidyBase = 50;
+    } else if (nPrevHeight <= 1036000) {
         nSubsidyBase = 40;
-    } else if (nPrevHeight <= 354000) {
+    } else if (nPrevHeight <= 1180000) {
         nSubsidyBase = 30;
-    } else if (nPrevHeight <= 389000) {
+    } else if (nPrevHeight <= 1324000) {
+        nSubsidyBase = 25;
+    } else if (nPrevHeight <= 1468000) {
         nSubsidyBase = 20;
-    } else if (nPrevHeight <= 424000) {
+    } else if (nPrevHeight <= 1612000) {
         nSubsidyBase = 15;
-    } else if (nPrevHeight <= 459000) {
+    } else if (nPrevHeight <= 1756000) {
+        nSubsidyBase = 12;
+    } else if (nPrevHeight <= 1900000) {
         nSubsidyBase = 10;
-    } else if (nPrevHeight <= 494000) {
+    } else if (nPrevHeight <= 2044000) {
+        nSubsidyBase = 9;
+    } else if (nPrevHeight <= 2188000) {
+        nSubsidyBase = 8;
+    } else if (nPrevHeight <= 2332000) {
         nSubsidyBase = 7;
-    } else if (nPrevHeight <= 529000) {
+    } else if (nPrevHeight <= 2476000) {
+        nSubsidyBase = 6;
+    } else if (nPrevHeight <= 2620000) {
+        nSubsidyBase = 5;
+    } else if (nPrevHeight <= 2764000) {
         nSubsidyBase = 4;
-    } else if (nPrevHeight <= 559000) {
+    } else if (nPrevHeight <= 2908000) {
+        nSubsidyBase = 3;
+    } else if (nPrevHeight <= 3052000) {
         nSubsidyBase = 2;
-    } else if (nPrevHeight <= 589000) {
+    } else if (nPrevHeight <= 3196000) {
         nSubsidyBase = 1;
-    }  else {
+    } else if (nPrevHeight <= 3340000) {
+        nSubsidyBase = 0.5;
+    } else if (nPrevHeight <= 3648000) {
+        nSubsidyBase = 0.25;
+    } else {
 	    nSubsidyBase = 0;
     }
 
@@ -1273,8 +1305,10 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
     CAmount nSuperblockPart; 
     if (nPrevHeight < 16700) {
         nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.05 : 0;    
-    } else {
+    } else if (nPrevHeight <= consensusParams.V3ForkHeight) {
         nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.07 : 0;      
+    } else {
+        nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy * 0.05 : 0;
     }
 
     return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
@@ -1287,8 +1321,10 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue, int nReallocActiva
             return static_cast<CAmount>(blockValue * 0.30);
         }else if (nHeight <= 24000) {
             return static_cast<CAmount>(blockValue * 0.335);
-        } else {
+        } else if (nHeight <= 87500){
             return static_cast<CAmount>(blockValue * 0.485);
+        } else {
+            return static_cast<CAmount>(blockValue * (4800/95));
         }
     }
     CAmount ret = blockValue * 0.5;
@@ -1298,7 +1334,13 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue, int nReallocActiva
         return ret;
     }
 
-    int nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
+    int nSuperblockCycle;
+    if (nHeight < Params().GetConsensus().nNewSuperBlockStartHeight) {
+        nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    }
+
     // Actual realocation starts in the cycle next to one activation happens in
     int nReallocStart = nReallocActivationHeight - nReallocActivationHeight % nSuperblockCycle + nSuperblockCycle;
 
@@ -3874,8 +3916,10 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
 
         if (nHeight > 18000 && nHeight <= 24000) {
             devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * 18) / 100;
-        } else {
+        } else if (nHeight <= consensusParams.V3ForkHeight) {
             devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
+        } else {
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * (300/95)) / 100;
         }
 
         bool found = false;

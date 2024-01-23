@@ -419,7 +419,13 @@ void CGovernanceManager::UpdateCachesAndClean()
                 // keep hashes of deleted proposals forever
                 nTimeExpired = std::numeric_limits<int64_t>::max();
             } else {
-                int64_t nSuperblockCycleSeconds = Params().GetConsensus().nSuperblockCycle * blockTime;
+                int nSuperblockCycle;
+                if (chainActive.Tip()->nHeight < Params().GetConsensus().nNewSuperBlockStartHeight) {
+                    nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
+                } else {
+                    nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+                }
+                int64_t nSuperblockCycleSeconds = nSuperblockCycle * blockTime;
                 nTimeExpired = pObj->GetCreationTime() + 2 * nSuperblockCycleSeconds + GOVERNANCE_DELETION_DELAY;
             }
 
@@ -746,7 +752,13 @@ bool CGovernanceManager::MasternodeRateCheck(const CGovernanceObject& govobj, bo
     const COutPoint& masternodeOutpoint = govobj.GetMasternodeOutpoint();
     int64_t nTimestamp = govobj.GetCreationTime();
     int64_t nNow = GetAdjustedTime();
-    int64_t nSuperblockCycleSeconds = Params().GetConsensus().nSuperblockCycle * blockTime;
+    int nSuperblockCycle;
+    if (chainActive.Tip()->nHeight < Params().GetConsensus().nNewSuperBlockStartHeight) {
+        nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    }
+    int64_t nSuperblockCycleSeconds = nSuperblockCycle * blockTime;
 
     std::string strHash = govobj.GetHash().ToString();
 
@@ -883,7 +895,13 @@ void CGovernanceManager::CheckPostponedObjects(CConnman& connman)
 
     // Perform additional relays for triggers
     int64_t nNow = GetAdjustedTime();
-    int64_t nSuperblockCycleSeconds = Params().GetConsensus().nSuperblockCycle * blockTime;
+    int nSuperblockCycle;
+    if (chainActive.Tip()->nHeight < Params().GetConsensus().nNewSuperBlockStartHeight) {
+        nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    }
+    int64_t nSuperblockCycleSeconds = nSuperblockCycle * blockTime;
 
     for (auto it = setAdditionalRelayObjects.begin(); it != setAdditionalRelayObjects.end();) {
         auto itObject = mapObjects.find(*it);
