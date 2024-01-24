@@ -1324,7 +1324,7 @@ CAmount GetMasternodePayment(int nHeight, CAmount blockValue, int nReallocActiva
         } else if (nHeight <= 87500){
             return static_cast<CAmount>(blockValue * 0.485);
         } else {
-            return static_cast<CAmount>(blockValue * (4800/95));
+            return static_cast<CAmount>(blockValue * (48.0/95.0));
         }
     }
     CAmount ret = blockValue * 0.5;
@@ -3919,7 +3919,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         } else if (nHeight <= consensusParams.V3ForkHeight) {
             devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
         } else {
-            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * (300/95)) / 100;
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * (300.0/95.0)) / 100;
         }
 
         bool found = false;

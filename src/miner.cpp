@@ -76,7 +76,7 @@ void BlockAssembler::FillFoundersReward(CMutableTransaction& coinbaseTx, int nHe
     } else if (nHeight <= params.V3ForkHeight) {
         devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * params.DevelopementFundShare) / 100;
     } else {
-        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * (300/95)) / 100;
+        devPayoutValue = (GetBlockSubsidy(0, nHeight, params) * (300.0/95.0)) / 100;
     }
 
     coinbaseTx.vout[0].nValue -= devPayoutValue;

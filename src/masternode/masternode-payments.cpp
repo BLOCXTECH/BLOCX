@@ -292,7 +292,7 @@ bool CMasternodePayments::GetBlockTxOuts(int nBlockHeight, CAmount blockReward, 
         dmnPayee2 = deterministicMNManager->GetListForBlock(pindex).GetMNPayee(false, MnType::Lite);
 
         if (dmnPayee2) {
-            mnTierOneReward = (masternodeReward * (4400/48)) / 100;
+            mnTierOneReward = (masternodeReward * (4400.0/48.0)) / 100;
             mnTierTwoReward = masternodeReward - mnTierOneReward;
         }
     }
