@@ -278,6 +278,48 @@ std::vector<CDeterministicMNCPtr> CDeterministicMNList::GetProjectedMNPayees(int
     return result;
 }
 
+std::vector<CDeterministicMNCPtr> CDeterministicMNList::GetProjectedMNPayeesTierOne(int nCount) const
+{
+    if (nCount > GetValidMNsCount()) {
+        nCount = GetValidMNsCount();
+    }
+
+    std::vector<CDeterministicMNCPtr> result;
+    result.reserve(nCount);
+
+    ForEachMNTierOne(true, [&](const CDeterministicMNCPtr& dmn) {
+        result.emplace_back(dmn);
+    });
+    std::sort(result.begin(), result.end(), [&](const CDeterministicMNCPtr& a, const CDeterministicMNCPtr& b) {
+        return CompareByLastPaid(a, b);
+    });
+
+    result.resize(nCount);
+
+    return result;
+}
+
+std::vector<CDeterministicMNCPtr> CDeterministicMNList::GetProjectedMNPayeesTierTwo(int nCount) const
+{
+    if (nCount > GetValidMNsCount()) {
+        nCount = GetValidMNsCount();
+    }
+
+    std::vector<CDeterministicMNCPtr> result;
+    result.reserve(nCount);
+
+    ForEachMNTierTwo(true, [&](const CDeterministicMNCPtr& dmn) {
+        result.emplace_back(dmn);
+    });
+    std::sort(result.begin(), result.end(), [&](const CDeterministicMNCPtr& a, const CDeterministicMNCPtr& b) {
+        return CompareByLastPaid(a, b);
+    });
+
+    result.resize(nCount);
+
+    return result;
+}
+
 std::vector<CDeterministicMNCPtr> CDeterministicMNList::CalculateQuorum(size_t maxSize, const uint256& modifier) const
 {
     auto scores = CalculateScores(modifier);

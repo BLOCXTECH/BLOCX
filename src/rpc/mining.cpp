@@ -712,6 +712,28 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     result.pushKV("superblocks_started", pindexPrev->nHeight + 1 > consensusParams.nSuperblockStartBlock);
     result.pushKV("superblocks_enabled", AreSuperblocksEnabled());
 
+    {
+        CScript devPayoutScript = GetScriptForDestination(DecodeDestination(consensusParams.DevelopmentFundAddress));
+        CAmount devPayoutValue;
+
+        int nHeight = pindexPrev->nHeight + 1;
+
+        if (nHeight > 18000 && nHeight <= 24000) {
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * 18) / 100;
+        } else if (nHeight <= consensusParams.V3ForkHeight) {
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * consensusParams.DevelopementFundShare) / 100;
+        } else {
+            devPayoutValue = (GetBlockSubsidy(0, nHeight, consensusParams) * (300.0 / 95.0)) / 100;
+        }
+
+        UniValue obj(UniValue::VOBJ);
+        obj.pushKV("payee", (consensusParams.DevelopmentFundAddress).c_str());
+        obj.pushKV("script", HexStr(devPayoutScript));
+        obj.pushKV("amount", devPayoutValue);
+        result.pushKV("devfee", obj);
+    }
+
+
     result.pushKV("coinbase_payload", HexStr(pblock->vtx[0]->vExtraPayload));
 
     return result;

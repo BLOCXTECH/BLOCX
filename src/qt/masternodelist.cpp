@@ -202,11 +202,18 @@ void MasternodeList::updateDIP3List()
 
     nTimeUpdatedDIP3 = GetTime();
 
-    auto projectedPayees = mnList.GetProjectedMNPayees(mnList.GetValidMNsCount());
-    std::map<uint256, int> nextPayments;
-    for (size_t i = 0; i < projectedPayees.size(); i++) {
-        const auto& dmn = projectedPayees[i];
-        nextPayments.emplace(dmn->proTxHash, mnList.GetHeight() + (int)i + 1);
+    auto projectedPayeesTierOne = mnList.GetProjectedMNPayeesTierOne(mnList.GetAllTierOneMNCount());
+    std::map<uint256, int> nextPaymentsOne;
+    for (size_t i = 0; i < projectedPayeesTierOne.size(); i++) {
+        const auto& dmn = projectedPayeesTierOne[i];
+        nextPaymentsOne.emplace(dmn->proTxHash, mnList.GetHeight() + (int)i + 1);
+    }
+
+    auto projectedPayeesTierTwo = mnList.GetProjectedMNPayeesTierTwo(mnList.GetAllTierTwoMNCount());
+    std::map<uint256, int> nextPaymentsTwo;
+    for (size_t i = 0; i < projectedPayeesTierTwo.size(); i++) {
+        const auto& dmn = projectedPayeesTierTwo[i];
+        nextPaymentsTwo.emplace(dmn->proTxHash, mnList.GetHeight() + (int)i + 1);
     }
 
     std::set<COutPoint> setOutpts;
@@ -240,9 +247,17 @@ void MasternodeList::updateDIP3List()
 
         QString strNextPayment = "UNKNOWN";
         int nNextPayment = 0;
-        if (nextPayments.count(dmn->proTxHash)) {
-            nNextPayment = nextPayments[dmn->proTxHash];
-            strNextPayment = QString::number(nNextPayment);
+
+        if (dmn->nType == MnType::Standard_Masternode) {
+            if (nextPaymentsOne.count(dmn->proTxHash)) {
+                nNextPayment = nextPaymentsOne[dmn->proTxHash];
+                strNextPayment = QString::number(nNextPayment);
+            }
+        } else {
+            if (nextPaymentsTwo.count(dmn->proTxHash)) {
+                nNextPayment = nextPaymentsTwo[dmn->proTxHash];
+                strNextPayment = QString::number(nNextPayment);
+            }
         }
         QTableWidgetItem* nextPaymentItem = new CMasternodeListWidgetItem<int>(strNextPayment, nNextPayment);
 

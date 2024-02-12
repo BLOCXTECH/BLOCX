@@ -277,7 +277,7 @@
        <item row="9" column="0">
         <widget class="QLabel" name="masternodeCountLabel">
          <property name="text">
-          <string>Number of Masternodes</string>
+          <string>Number of Standard Masternodes</string>
          </property>
         </widget>
        </item>
@@ -297,21 +297,41 @@
          </property>
         </widget>
        </item>
-       <item row="10" column="0">
+        <item row="10" column="0">
+        <widget class="QLabel" name="liteCountLabel">
+         <property name="text">
+          <string>Number of Lite Masternodes</string>
+         </property>
+        </widget>
+       </item>
+	   <item row="10" column="1">
+        <widget class="QLabel" name="liteCount">
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
           <string>Block chain</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="0">
+       <item row="12" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>Current number of blocks</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="1" colspan="2">
+       <item row="12" column="1" colspan="2">
         <widget class="QLabel" name="numberOfBlocks">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
@@ -327,14 +347,14 @@
          </property>
         </widget>
        </item>
-       <item row="12" column="0">
+       <item row="13" column="0">
         <widget class="QLabel" name="labelLastBlockTime">
          <property name="text">
           <string>Last block time</string>
          </property>
         </widget>
        </item>
-       <item row="12" column="1" colspan="2">
+       <item row="13" column="1" colspan="2">
         <widget class="QLabel" name="lastBlockTime">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
@@ -350,14 +370,14 @@
          </property>
         </widget>
        </item>
-       <item row="13" column="0">
+       <item row="14" column="0">
         <widget class="QLabel" name="lastBlockHashLabel">
          <property name="text">
           <string>Last block hash</string>
          </property>
         </widget>
        </item>
-       <item row="13" column="1">
+       <item row="14" column="1">
         <widget class="QLabel" name="lastBlockHash">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
@@ -373,21 +393,21 @@
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
+       <item row="15" column="0">
         <widget class="QLabel" name="labelMempoolTitle">
          <property name="text">
           <string>Memory Pool</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
+       <item row="16" column="0">
         <widget class="QLabel" name="labelNumberOfTransactions">
          <property name="text">
           <string>Current number of transactions</string>
          </property>
         </widget>
        </item>
-       <item row="15" column="1">
+       <item row="16" column="1">
         <widget class="QLabel" name="mempoolNumberTxs">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
@@ -403,14 +423,14 @@
          </property>
         </widget>
        </item>
-       <item row="16" column="0">
+       <item row="17" column="0">
         <widget class="QLabel" name="labelMemoryUsage">
          <property name="text">
           <string>Memory usage</string>
          </property>
         </widget>
        </item>
-       <item row="16" column="1">
+       <item row="17" column="1">
         <widget class="QLabel" name="mempoolSize">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>
@@ -466,7 +486,7 @@
          </item>
         </layout>
        </item>
-       <item row="18" column="0">
+       <item row="19" column="0">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -479,14 +499,14 @@
          </property>
         </spacer>
        </item>
-       <item row="17" column="0">
+       <item row="18" column="0">
         <widget class="QLabel" name="labelInstantSendLockCount">
          <property name="text">
           <string>InstantSend locks</string>
          </property>
         </widget>
        </item>
-       <item row="17" column="1">
+       <item row="18" column="1">
         <widget class="QLabel" name="instantSendLockCount">
          <property name="cursor">
           <cursorShape>IBeamCursor</cursorShape>

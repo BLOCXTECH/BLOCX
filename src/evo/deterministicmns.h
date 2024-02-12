@@ -416,6 +416,28 @@ public:
         return tierTwo.size();
     }
 
+    size_t GetValidStandardMNsCount() const
+    {
+        size_t count = 0;
+        for (const auto& p : tierOne) {
+            if (IsMNValid(p.second)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    size_t GetValidLiteMNsCount() const
+    {
+        size_t count = 0;
+        for (const auto& p : tierTwo) {
+            if (IsMNValid(p.second)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     template <typename Callback>
     void ForEachMN(bool onlyValid, Callback&& cb) const
     {
@@ -481,6 +503,8 @@ public:
      * @return
      */
     std::vector<CDeterministicMNCPtr> GetProjectedMNPayees(int nCount) const;
+    std::vector<CDeterministicMNCPtr> GetProjectedMNPayeesTierOne(int nCount) const;
+    std::vector<CDeterministicMNCPtr> GetProjectedMNPayeesTierTwo(int nCount) const;
 
     /**
      * Calculate a quorum based on the modifier. The resulting list is deterministically sorted by score
