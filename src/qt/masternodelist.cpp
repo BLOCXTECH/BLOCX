@@ -1,11 +1,11 @@
-#include <qt/masternodelist.h>
 #include <qt/forms/ui_masternodelist.h>
+#include <qt/masternodelist.h>
 
-#include <qt/clientmodel.h>
 #include <clientversion.h>
 #include <coins.h>
-#include <qt/guiutil.h>
 #include <netbase.h>
+#include <qt/clientmodel.h>
+#include <qt/guiutil.h>
 #include <qt/walletmodel.h>
 
 #include <univalue.h>
@@ -54,8 +54,8 @@ MasternodeList::MasternodeList(QWidget* parent) :
     ui->setupUi(this);
 
     GUIUtil::setFont({ui->label_count_2,
-                      ui->countLabelDIP3
-                     }, GUIUtil::FontWeight::Bold, 14);
+                         ui->countLabelDIP3},
+        GUIUtil::FontWeight::Bold, 14);
     GUIUtil::setFont({ui->label_filter_2}, GUIUtil::FontWeight::Normal, 15);
 
     int columnAddressWidth = 200;
@@ -202,18 +202,11 @@ void MasternodeList::updateDIP3List()
 
     nTimeUpdatedDIP3 = GetTime();
 
-    auto projectedPayeesTierOne = mnList.GetProjectedMNPayeesTierOne(mnList.GetAllTierOneMNCount());
-    std::map<uint256, int> nextPaymentsOne;
-    for (size_t i = 0; i < projectedPayeesTierOne.size(); i++) {
-        const auto& dmn = projectedPayeesTierOne[i];
-        nextPaymentsOne.emplace(dmn->proTxHash, mnList.GetHeight() + (int)i + 1);
-    }
-
-    auto projectedPayeesTierTwo = mnList.GetProjectedMNPayeesTierTwo(mnList.GetAllTierTwoMNCount());
-    std::map<uint256, int> nextPaymentsTwo;
-    for (size_t i = 0; i < projectedPayeesTierTwo.size(); i++) {
-        const auto& dmn = projectedPayeesTierTwo[i];
-        nextPaymentsTwo.emplace(dmn->proTxHash, mnList.GetHeight() + (int)i + 1);
+    auto projectedPayees = mnList.GetProjectedMNPayees(mnList.GetValidMNsCount());
+    std::map<uint256, int> nextPayments;
+    for (size_t i = 0; i < projectedPayees.size(); i++) {
+        const auto& dmn = projectedPayees[i];
+        nextPayments.emplace(dmn->proTxHash, mnList.GetHeight() + (int)i + 1);
     }
 
     std::set<COutPoint> setOutpts;
@@ -228,10 +221,10 @@ void MasternodeList::updateDIP3List()
     mnList.ForEachMN(false, [&](const CDeterministicMNCPtr& dmn) {
         if (walletModel && ui->checkBoxMyMasternodesOnly->isChecked()) {
             bool fMyMasternode = setOutpts.count(dmn->collateralOutpoint) ||
-                walletModel->wallet().isSpendable(dmn->pdmnState->keyIDOwner) ||
-                walletModel->wallet().isSpendable(dmn->pdmnState->keyIDVoting) ||
-                walletModel->wallet().isSpendable(dmn->pdmnState->scriptPayout) ||
-                walletModel->wallet().isSpendable(dmn->pdmnState->scriptOperatorPayout);
+                                 walletModel->wallet().isSpendable(dmn->pdmnState->keyIDOwner) ||
+                                 walletModel->wallet().isSpendable(dmn->pdmnState->keyIDVoting) ||
+                                 walletModel->wallet().isSpendable(dmn->pdmnState->scriptPayout) ||
+                                 walletModel->wallet().isSpendable(dmn->pdmnState->scriptOperatorPayout);
             if (!fMyMasternode) return;
         }
         // populate list
@@ -247,17 +240,9 @@ void MasternodeList::updateDIP3List()
 
         QString strNextPayment = "UNKNOWN";
         int nNextPayment = 0;
-
-        if (dmn->nType == MnType::Standard_Masternode) {
-            if (nextPaymentsOne.count(dmn->proTxHash)) {
-                nNextPayment = nextPaymentsOne[dmn->proTxHash];
-                strNextPayment = QString::number(nNextPayment);
-            }
-        } else {
-            if (nextPaymentsTwo.count(dmn->proTxHash)) {
-                nNextPayment = nextPaymentsTwo[dmn->proTxHash];
-                strNextPayment = QString::number(nNextPayment);
-            }
+        if (nextPayments.count(dmn->proTxHash)) {
+            nNextPayment = nextPayments[dmn->proTxHash];
+            strNextPayment = QString::number(nNextPayment);
         }
         QTableWidgetItem* nextPaymentItem = new CMasternodeListWidgetItem<int>(strNextPayment, nNextPayment);
 

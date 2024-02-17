@@ -156,12 +156,6 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state)
         allowEmptyTxInOut = true;
     }
 
-    /* The Masternode update service has been temporarily disabled.
-    User can spend the MN collateral and create Masternode again to start receiving rewards.*/
-    if (tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE) {
-        return false;
-    }
-
     // Basic checks that don't depend on any context
     if (!allowEmptyTxInOut && tx.vin.empty())
         return state.DoS(10, false, REJECT_INVALID, "bad-txns-vin-empty");

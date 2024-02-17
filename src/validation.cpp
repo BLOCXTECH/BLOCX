@@ -638,6 +638,20 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         *pfMissingInputs = false;
     }
 
+    if (chainActive.Tip()->nHeight > chainparams.GetConsensus().V3ForkHeight && tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE) {
+        // this condition will be removed from next version
+        if (Params().NetworkIDString() == CBaseChainParams::MAIN && chainActive.Tip()->nHeight < 106300) {
+            return false;
+        }
+        CProUpServTx proTx;
+        if (GetTxPayload(tx, proTx)) {
+            auto dmn = deterministicMNManager->GetListAtChainTip().GetMN(proTx.proTxHash);
+            if (dmn->nType == MnType::Lite) {
+                return false;
+            }
+        }
+    }
+
     if (!CheckTransaction(tx, state))
         return false; // state filled in by CheckTransaction
 
