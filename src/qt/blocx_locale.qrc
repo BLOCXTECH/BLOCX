@@ -19,6 +19,7 @@
         <file alias="th">locale/blocx_th.qm</file>
         <file alias="tr">locale/blocx_tr.qm</file>
         <file alias="vi">locale/blocx_vi.qm</file>
+        <file alias="id">locale/blocx_id.qm</file>
         <file alias="zh_CN">locale/blocx_zh_CN.qm</file>
         <file alias="zh_TW">locale/blocx_zh_TW.qm</file>
     </qresource>
