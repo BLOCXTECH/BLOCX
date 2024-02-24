@@ -154,8 +154,8 @@ CQuorumManager::CQuorumManager(CEvoDB& _evoDb, CBLSWorker& _blsWorker, CDKGSessi
     blsWorker(_blsWorker),
     dkgManager(_dkgManager)
 {
-    CLLMQUtils::InitQuorumsCache(mapQuorumsCache);
-    CLLMQUtils::InitQuorumsCache(scanQuorumsCache);
+    CLLMQUtils::InitQuorumsCache(mapQuorumsCache, false);
+    CLLMQUtils::InitQuorumsCache(scanQuorumsCache, false);
     quorumThreadInterrupt.reset();
 }
 
@@ -258,6 +258,8 @@ void CQuorumManager::UpdatedBlockTip(const CBlockIndex* pindexNew, bool fInitial
     }
 
     TriggerQuorumDataRecoveryThreads(pindexNew);
+
+    StartCleanupOldQuorumDataThread(pindexNew);
 }
 
 void CQuorumManager::EnsureQuorumConnections(Consensus::LLMQType llmqType, const CBlockIndex* pindexNew) const
@@ -848,6 +850,104 @@ void CQuorumManager::StartQuorumDataRecoveryThread(const CQuorumCPtr pQuorum, co
         }
         pQuorum->fQuorumDataRecoveryThreadRunning = false;
         printLog("Done");
+    });
+}
+
+static void DataCleanupHelper(CDBWrapper& db, std::set<uint256> skip_list, bool compact = false)
+{
+    const auto prefixes = {DB_QUORUM_QUORUM_VVEC, DB_QUORUM_SK_SHARE};
+
+    CDBBatch batch(db);
+    std::unique_ptr<CDBIterator> pcursor(db.NewIterator());
+
+    for (const auto& prefix : prefixes) {
+        auto start = std::make_tuple(prefix, uint256());
+        pcursor->Seek(start);
+
+        int count{0};
+        while (pcursor->Valid()) {
+            decltype(start) k;
+
+            if (!pcursor->GetKey(k) || std::get<0>(k) != prefix) {
+                break;
+            }
+
+            pcursor->Next();
+
+            if (skip_list.find(std::get<1>(k)) != skip_list.end()) continue;
+
+            ++count;
+            batch.Erase(k);
+
+            if (batch.SizeEstimate() >= (1 << 24)) {
+                db.WriteBatch(batch);
+                batch.Clear();
+            }
+        }
+
+        db.WriteBatch(batch);
+
+        LogPrint(BCLog::LLMQ, "CQuorumManager::%s -- %s removed %d\n", __func__, prefix, count);
+    }
+
+    pcursor.reset();
+
+    if (compact) {
+        // Avoid using this on regular cleanups, use on db migrations only
+        LogPrint(BCLog::LLMQ, "CQuorumManager::%s -- compact start\n", __func__);
+        db.CompactFull();
+        LogPrint(BCLog::LLMQ, "CQuorumManager::%s -- compact end\n", __func__);
+    }
+}
+
+
+void CQuorumManager::StartCleanupOldQuorumDataThread(const CBlockIndex* pIndex) const
+{
+    if (!fMasternodeMode || pIndex == nullptr || (pIndex->nHeight % 576 != 58)) {
+        return;
+    }
+
+    cxxtimer::Timer t(/*start=*/ true);
+    LogPrint(BCLog::LLMQ, "CQuorumManager::%s -- start\n", __func__);
+
+    // do not block the caller thread
+    workerPool.push([pIndex, t, this](int threadId) {
+        std::set<uint256> dbKeysToSkip;
+
+        LOCK(cs_cleanup);
+        if (cleanupQuorumsCache.empty()) {
+            CLLMQUtils::InitQuorumsCache(cleanupQuorumsCache, false);
+        }
+        for (const auto& params : Params().GetConsensus().llmqs) {
+            if (quorumThreadInterrupt) {
+                break;
+            }
+            LOCK(cs_cleanup);
+            auto& cache = cleanupQuorumsCache[params.second.type];
+            const CBlockIndex* pindex_loop{pIndex};
+            std::set<uint256> quorum_keys;
+            while (pindex_loop != nullptr && pIndex->nHeight - pindex_loop->nHeight < (params.second.keepOldKeys * params.second.dkgInterval)) {
+                uint256 quorum_key;
+                if (cache.get(pindex_loop->GetBlockHash(), quorum_key)) {
+                    quorum_keys.insert(quorum_key);
+                    if (quorum_keys.size() >= params.second.keepOldKeys) break; // extra safety belt
+                }
+                pindex_loop = pindex_loop->pprev;
+            }
+            for (const auto& pQuorum : ScanQuorums(params.second.type, pIndex, params.second.keepOldKeys - quorum_keys.size())) {
+                const uint256 quorum_key = MakeQuorumKey(*pQuorum);
+                quorum_keys.insert(quorum_key);
+                cache.insert(pQuorum->pindexQuorum->GetBlockHash(), quorum_key);
+            }
+            // dbKeysToSkip.merge(quorum_keys);
+            dbKeysToSkip.insert(quorum_keys.begin(), quorum_keys.end());
+        }
+
+        if (!quorumThreadInterrupt) {
+            DataCleanupHelper(evoDb.GetRawDB(), dbKeysToSkip);
+        }
+
+        LogPrint(BCLog::LLMQ, "CQuorumManager::StartCleanupOldQuorumDataThread -- done. time=%d\n", t.count());
     });
 }
 

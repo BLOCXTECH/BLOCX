@@ -734,6 +734,9 @@ public:
 
 private:
     CEvoDB& evoDb;
+    CCriticalSection cs_cleanup;
+    // We have performed CleanupCache() on this height.
+    int did_cleanup GUARDED_BY(cs_cleanup) {0};
 
     std::unordered_map<uint256, CDeterministicMNList, StaticSaltedHasher> mnListsCache;
     std::unordered_map<uint256, CDeterministicMNListDiff, StaticSaltedHasher> mnListDiffsCache;

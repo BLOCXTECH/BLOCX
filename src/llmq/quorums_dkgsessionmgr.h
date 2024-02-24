@@ -70,6 +70,8 @@ public:
     /// Read encrypted (unverified) DKG contributions for the member with the given proTxHash from the llmqDb
     bool GetEncryptedContributions(Consensus::LLMQType llmqType, const CBlockIndex* pindexQuorum, const std::vector<bool>& validMembers, const uint256& proTxHash, std::vector<CBLSIESEncryptedObject<CBLSSecretKey>>& vecRet);
 
+    void CleanupOldContributions() const;
+
 private:
     void CleanupCache();
 };

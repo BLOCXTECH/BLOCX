@@ -288,6 +288,49 @@ void CDKGSessionManager::CleanupCache()
     }
 }
 
+void CDKGSessionManager::CleanupOldContributions() const
+{
+    if (llmqDb.IsEmpty()) {
+        return;
+    }
+
+    const auto prefixes = {DB_VVEC, DB_SKCONTRIB, DB_ENC_CONTRIB};
+
+    for (const auto& params : Params().GetConsensus().llmqs) {
+        // For how many blocks recent DKG info should be kept
+        const int MAX_CYCLES = params.second.keepOldKeys;
+        const int MAX_STORE_DEPTH = MAX_CYCLES * params.second.dkgInterval;
+
+        CDBBatch batch(llmqDb);
+        size_t cnt_old{0}, cnt_all{0};
+        for (const auto& prefix : prefixes) {
+            std::unique_ptr<CDBIterator> pcursor(llmqDb.NewIterator());
+            auto start = std::make_tuple(prefix, params.second.type, uint256(), uint256());
+            decltype(start) k;
+
+            pcursor->Seek(start);
+            LOCK(cs_main);
+            while (pcursor->Valid()) {
+                if (!pcursor->GetKey(k) || std::get<0>(k) != prefix || std::get<1>(k) != params.second.type) {
+                    break;
+                }
+                cnt_all++;
+                const CBlockIndex* pindexQuorum = LookupBlockIndex(std::get<2>(k));
+                if (pindexQuorum == nullptr || chainActive.Tip()->nHeight - pindexQuorum->nHeight > MAX_STORE_DEPTH) {
+                    // not found or too old
+                    batch.Erase(k);
+                    cnt_old++;
+                }
+                pcursor->Next();
+            }
+            pcursor.reset();
+        }
+        if (cnt_old > 0) {
+            llmqDb.WriteBatch(batch);
+        }
+    }
+}
+
 bool IsQuorumDKGEnabled()
 {
     return sporkManager.IsSporkActive(SPORK_17_QUORUM_DKG_ENABLED);

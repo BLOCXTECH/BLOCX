@@ -190,6 +190,7 @@ static Consensus::LLMQParams llmq_test = {
         .signingActiveQuorumCount = 2, // just a few ones to allow easier testing
 
         .keepOldConnections = 3,
+        .keepOldKeys = 4,
         .recoveryMembers = 3,
 };
 
@@ -210,6 +211,7 @@ static Consensus::LLMQParams llmq_test_v17 = {
         .signingActiveQuorumCount = 2, // just a few ones to allow easier testing
 
         .keepOldConnections = 3,
+        .keepOldKeys = 4,
         .recoveryMembers = 3,
 };
 
@@ -230,6 +232,7 @@ static Consensus::LLMQParams llmq_devnet = {
         .signingActiveQuorumCount = 3, // just a few ones to allow easier testing
 
         .keepOldConnections = 4,
+        .keepOldKeys = 8,
         .recoveryMembers = 6,
 };
 
@@ -249,6 +252,7 @@ static Consensus::LLMQParams llmq50_60 = {
         .signingActiveQuorumCount = 24, // a full day worth of LLMQs
 
         .keepOldConnections = 25,
+        .keepOldKeys = 48,
         .recoveryMembers = 25,
 };
 
@@ -268,6 +272,7 @@ static Consensus::LLMQParams llmq400_60 = {
         .signingActiveQuorumCount = 4, // two days worth of LLMQs
 
         .keepOldConnections = 5,
+        .keepOldKeys = 8,
         .recoveryMembers = 100,
 };
 
@@ -288,6 +293,7 @@ static Consensus::LLMQParams llmq400_85 = {
         .signingActiveQuorumCount = 4, // four days worth of LLMQs
 
         .keepOldConnections = 5,
+        .keepOldKeys = 8,
         .recoveryMembers = 100,
 };
 
@@ -308,6 +314,7 @@ static Consensus::LLMQParams llmq100_67 = {
         .signingActiveQuorumCount = 24, // a full day worth of LLMQs
 
         .keepOldConnections = 25,
+        .keepOldKeys = 24 * 30 * 2,
         .recoveryMembers = 50,
 };
 

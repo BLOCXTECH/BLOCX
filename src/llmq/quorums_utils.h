@@ -107,11 +107,11 @@ public:
         return HexStr(vBytes);
     }
     template <typename CacheType>
-    static void InitQuorumsCache(CacheType& cache)
+    static void InitQuorumsCache(CacheType& cache, bool limit_by_connections = true)
     {
-        for (auto& llmq : Params().GetConsensus().llmqs) {
+        for (const auto& llmq : Params().GetConsensus().llmqs) {
             cache.emplace(std::piecewise_construct, std::forward_as_tuple(llmq.first),
-                                                    std::forward_as_tuple(llmq.second.signingActiveQuorumCount + 1));
+                                                    std::forward_as_tuple(limit_by_connections ? llmq.second.keepOldConnections: llmq.second.keepOldKeys));
         }
     }
 };

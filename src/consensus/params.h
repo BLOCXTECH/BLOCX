@@ -125,6 +125,8 @@ struct LLMQParams {
     // should be at least one more then the active quorums set.
     int keepOldConnections;
 
+    int keepOldKeys;
+
     // How many members should we try to send all sigShares to before we give up.
     int recoveryMembers;
 };
