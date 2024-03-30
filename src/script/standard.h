@@ -9,9 +9,7 @@
 #include <script/interpreter.h>
 #include <uint256.h>
 
-#include <boost/variant.hpp>
-
-#include <stdint.h>
+#include <variant>
 
 static const bool DEFAULT_ACCEPT_DATACARRIER = true;
 
@@ -23,7 +21,7 @@ class CScriptID : public uint160
 {
 public:
     CScriptID() : uint160() {}
-    CScriptID(const CScript& in);
+    explicit CScriptID(const CScript& in);
     CScriptID(const uint160& in) : uint160(in) {}
 };
 
@@ -35,33 +33,32 @@ static const unsigned int MAX_OP_RETURN_RELAY = 83;
 
 /**
  * A data carrying output is an unspendable output containing data. The script
- * type is designated as TX_NULL_DATA.
+ * type is designated as TxoutType::NULL_DATA.
  */
 extern bool fAcceptDatacarrier;
 
-/** Maximum size of TX_NULL_DATA scripts that this node considers standard. */
+/** Maximum size of TxoutType::NULL_DATA scripts that this node considers standard. */
 extern unsigned nMaxDatacarrierBytes;
 
 /**
  * Mandatory script verification flags that all new blocks must comply with for
  * them to be valid. (but old blocks may not comply with) Currently just P2SH,
- * but in the future other flags may be added, such as a soft-fork to enforce
- * strict DER encoding.
+ * but in the future other flags may be added.
  *
  * Failing one of these tests may trigger a DoS ban - see CheckInputs() for
  * details.
  */
 static const unsigned int MANDATORY_SCRIPT_VERIFY_FLAGS = SCRIPT_VERIFY_P2SH;
 
-enum txnouttype
+enum class TxoutType
 {
-    TX_NONSTANDARD,
+    NONSTANDARD,
     // 'standard' transaction types:
-    TX_PUBKEY,
-    TX_PUBKEYHASH,
-    TX_SCRIPTHASH,
-    TX_MULTISIG,
-    TX_NULL_DATA, //!< unspendable OP_RETURN script that carries data
+    PUBKEY,
+    PUBKEYHASH,
+    SCRIPTHASH,
+    MULTISIG,
+    NULL_DATA, //!< unspendable OP_RETURN script that carries data
 };
 
 class CNoDestination {
@@ -70,20 +67,36 @@ public:
     friend bool operator<(const CNoDestination &a, const CNoDestination &b) { return true; }
 };
 
+struct PKHash : public uint160
+{
+    PKHash() : uint160() {}
+    explicit PKHash(const uint160& hash) : uint160(hash) {}
+    explicit PKHash(const CPubKey& pubkey);
+    using uint160::uint160;
+};
+
+struct ScriptHash : public uint160
+{
+    ScriptHash() : uint160() {}
+    explicit ScriptHash(const uint160& hash) : uint160(hash) {}
+    explicit ScriptHash(const CScript& script);
+    using uint160::uint160;
+};
+
 /**
  * A txout script template with a specific destination. It is either:
  *  * CNoDestination: no destination set
- *  * CKeyID: TX_PUBKEYHASH destination
- *  * CScriptID: TX_SCRIPTHASH destination
+ *  * CKeyID: TxoutType::PUBKEYHASH destination
+ *  * CScriptID: TxoutType::SCRIPTHASH destination
  *  A CTxDestination is the internal data type encoded in a bitcoin address
  */
-typedef boost::variant<CNoDestination, CKeyID, CScriptID> CTxDestination;
+using CTxDestination = std::variant<CNoDestination, PKHash, ScriptHash>;
 
 /** Check whether a CTxDestination is a CNoDestination. */
 bool IsValidDestination(const CTxDestination& dest);
 
-/** Get the name of a txnouttype as a C string, or nullptr if unknown. */
-const char* GetTxnOutputType(txnouttype t);
+/** Get the name of a TxoutType as a C string, or nullptr if unknown. */
+const char* GetTxnOutputType(TxoutType t);
 
 /**
  * Parse a scriptPubKey and identify script type for standard scripts. If
@@ -92,11 +105,10 @@ const char* GetTxnOutputType(txnouttype t);
  * script hash, for P2PKH it will contain the key hash, etc.
  *
  * @param[in]   scriptPubKey   Script to parse
- * @param[out]  typeRet        The script type
  * @param[out]  vSolutionsRet  Vector of parsed pubkeys and hashes
- * @return                     True if script matches standard template
+ * @return                     The script type. TxoutType::NONSTANDARD represents a failed solve.
  */
-bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::vector<unsigned char> >& vSolutionsRet);
+TxoutType Solver(const CScript& scriptPubKey, std::vector<std::vector<unsigned char>>& vSolutionsRet);
 
 /**
  * Parse a standard scriptPubKey for the destination address. Assigns result to
@@ -113,7 +125,7 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
  * addressRet is populated with a single value and nRequiredRet is set to 1.
  * Returns true if successful.
  */
-bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<CTxDestination>& addressRet, int& nRequiredRet);
+bool ExtractDestinations(const CScript& scriptPubKey, TxoutType& typeRet, std::vector<CTxDestination>& addressRet, int& nRequiredRet);
 
 /**
  * Generate a Bitcoin scriptPubKey for the given CTxDestination. Returns a P2PKH

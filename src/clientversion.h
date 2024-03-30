@@ -6,12 +6,12 @@
 #define BITCOIN_CLIENTVERSION_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/blocx-config.h>
+#include <config/bitcoin-config.h>
 #endif //HAVE_CONFIG_H
 
 // Check that required client information is defined
-#if !defined(CLIENT_VERSION_MAJOR) || !defined(CLIENT_VERSION_MINOR) || !defined(CLIENT_VERSION_REVISION) || !defined(CLIENT_VERSION_BUILD) || !defined(CLIENT_VERSION_IS_RELEASE) || !defined(COPYRIGHT_YEAR)
-#error Client version information missing: version is not defined by blocx-config.h or in any other way
+#if !defined(CLIENT_VERSION_MAJOR) || !defined(CLIENT_VERSION_MINOR) || !defined(CLIENT_VERSION_BUILD) || !defined(CLIENT_VERSION_IS_RELEASE) || !defined(COPYRIGHT_YEAR)
+#error Client version information missing: version is not defined by bitcoin-config.h or in any other way
 #endif
 
 /**
@@ -22,7 +22,7 @@
 #define DO_STRINGIZE(X) #X
 
 //! Copyright string used in Windows .rc files
-#define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin Core Developers, " STRINGIZE(COPYRIGHT_YEAR) " " COPYRIGHT_HOLDERS_FINAL
+#define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin Core Developers, 2014-" STRINGIZE(COPYRIGHT_YEAR) " " COPYRIGHT_HOLDERS_FINAL
 
 /**
  * blocxd-res.rc includes this file, but it cannot cope with real c++ code.
@@ -36,9 +36,8 @@
 #include <vector>
 
 static const int CLIENT_VERSION =
-                           1000000 * CLIENT_VERSION_MAJOR
-                         +   10000 * CLIENT_VERSION_MINOR
-                         +     100 * CLIENT_VERSION_REVISION
+                             10000 * CLIENT_VERSION_MAJOR
+                         +     100 * CLIENT_VERSION_MINOR
                          +       1 * CLIENT_VERSION_BUILD;
 
 extern const std::string CLIENT_NAME;

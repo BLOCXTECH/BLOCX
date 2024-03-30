@@ -1,4 +1,4 @@
-<TS language="it" version="2.1">
+<TS version="2.1" language="it">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -78,8 +78,8 @@
         <translation>Questi sono i tuoi indirizzi BLOCX per inviare i pagamenti. Controlla sempre l'ammontare e l'indirizzo di destinazione prima di inviare i blocx.</translation>
     </message>
     <message>
-        <source>These are your BLOCX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Questi sono i tuoi indirizzi di BLOCX per ricevere i pagamenti. Si raccomanda di usare un nuovo indirizzo di ricezione per ogni operazione.</translation>
+        <source>These are your BLOCX addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
+        <translation>Questi sono i tuoi indirizzi BLOCX per ricevere i pagamenti. Utilizza il pulsante "Crea nuovo indirizzo di ricezione" nella scheda di ricezione per creare nuovi indirizzi.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -115,7 +115,9 @@
     </message>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>C'é stato un errore mentre si salvava la lista degli indirizzi a %1. Per favore riprovare nuovamente.</translation>
+        <comment>An error message.</comment>
+        <extracomment>%1 is a name of the file (e.g., "addrbook.csv") that the bitcoin addresses were exported to.</extracomment>
+        <translation>C'é stato un errore durante il tentativo di salvare la lista degli indirizzi a %1. Per favore riprovare nuovamente.</translation>
     </message>
 </context>
 <context>
@@ -191,12 +193,8 @@
         <translation>Ripeti la nuova passphrase</translation>
     </message>
     <message>
-        <source>Show password</source>
-        <translation>Mostra password</translation>
-    </message>
-    <message>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Inserisci la nuova passphrase per il portafoglio.&lt;br/&gt;Si prega di usare una passphrase di &lt;b&gt;dieci o più caratteri casuali&lt;/b&gt;, o &lt;b&gt;otto o più parole&lt;/b&gt;.</translation>
+        <source>Show passphrase</source>
+        <translation>Mostra passphrase</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -227,10 +225,6 @@
         <translation>Cambia la passphrase</translation>
     </message>
     <message>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Inserire la vecchia passphrase e la nuova passphrase nel portafoglio</translation>
-    </message>
-    <message>
         <source>Confirm wallet encryption</source>
         <translation>Conferma la cifratura del portafoglio</translation>
     </message>
@@ -247,8 +241,28 @@
         <translation>Portafoglio cifrato</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your funds from being stolen by malware infecting your computer.</source>
-        <translation>%1 si chiuderà ora per completare il processo di crittografia. Ricorda che il crittaggio del tuo portafoglio non può proteggere completamente i tuoi fondi dal furto tramite malware che infettano il tuo computer</translation>
+        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Immettere la nuova passphrase per il portafoglio.&lt;br/&gt;Si prega di utilizzare una passphrase di&lt;b&gt;dieci o più caratteri casuali&lt;/b&gt;,oppure&lt;b&gt;otto o più parole&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Enter the old passphrase and new passphrase for the wallet.</source>
+        <translation>Immettere la vecchia passphrase e la nuova passphrase per il portafoglio.</translation>
+    </message>
+    <message>
+        <source>Remember that encrypting your wallet cannot fully protect your funds from being stolen by malware infecting your computer.</source>
+        <translation>Ricorda che la crittografia del tuo portafoglio non può proteggere completamente i tuoi fondi dal furto di malware che infetta il tuo computer.</translation>
+    </message>
+    <message>
+        <source>Wallet to be encrypted</source>
+        <translation>Portafoglio da crittografare</translation>
+    </message>
+    <message>
+        <source>Your wallet is about to be encrypted. </source>
+        <translation>Il tuo portafoglio sta per essere crittografato.</translation>
+    </message>
+    <message>
+        <source>Your wallet is now encrypted. </source>
+        <translation>Il tuo portafoglio è ora crittografato.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. Previous backups of the unencrypted wallet file contain the same HD seed and still have full access to all your funds just like the new, encrypted wallet.</source>
@@ -316,18 +330,6 @@
         <translation>Si è verificato un errore irreversibile. BLOCX Core non può più continuare in sicurezza e terminerà le operazioni.</translation>
     </message>
     <message>
-        <source>BLOCX Core</source>
-        <translation>BLOCX Core</translation>
-    </message>
-    <message>
-        <source>Wallet</source>
-        <translation>Portafoglio</translation>
-    </message>
-    <message>
-        <source>Node</source>
-        <translation>Nodo</translation>
-    </message>
-    <message>
         <source>&amp;Overview</source>
         <translation>&amp;Sintesi</translation>
     </message>
@@ -352,6 +354,50 @@
         <translation>Richieste di pagamenti (genera codici QR e blocx: URLs)</translation>
     </message>
     <message>
+        <source>&amp;Sending addresses</source>
+        <translation>&amp;Indirizzi di invio</translation>
+    </message>
+    <message>
+        <source>&amp;Receiving addresses</source>
+        <translation>&amp;Indirizzi di ricezione</translation>
+    </message>
+    <message>
+        <source>Open Wallet</source>
+        <translation>Portafoglio aperto</translation>
+    </message>
+    <message>
+        <source>Open a wallet</source>
+        <translation>Apri un portafoglio</translation>
+    </message>
+    <message>
+        <source>Close Wallet...</source>
+        <translation>Chiudi Portafoglio...</translation>
+    </message>
+    <message>
+        <source>Close wallet</source>
+        <translation>Chiudi il portafoglio</translation>
+    </message>
+    <message>
+        <source>No wallets available</source>
+        <translation>Nessun portafoglio disponibile</translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation>&amp;Finestra</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation>Minimizzare</translation>
+    </message>
+    <message>
+        <source>Zoom</source>
+        <translation>Ingrandisci</translation>
+    </message>
+    <message>
+        <source>Main Window</source>
+        <translation>Finestra principale</translation>
+    </message>
+    <message>
         <source>&amp;Transactions</source>
         <translation>&amp;Transazioni</translation>
     </message>
@@ -374,10 +420,6 @@
     <message>
         <source>Quit application</source>
         <translation>Chiudi applicazione</translation>
-    </message>
-    <message>
-        <source>Show information about BLOCX Core</source>
-        <translation>Mostra le informazioni su BLOCX Core</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -476,10 +518,6 @@
         <translation>&amp;Console di Debug</translation>
     </message>
     <message>
-        <source>Open debugging console</source>
-        <translation>Apri la console di Debug</translation>
-    </message>
-    <message>
         <source>&amp;Network Monitor</source>
         <translation>&amp;Monitor di rete</translation>
     </message>
@@ -520,16 +558,8 @@
         <translation>Mostra le copie del portafoglio create automaticamente</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
-        <translation>&amp;Indirizzi d'invio...</translation>
-    </message>
-    <message>
         <source>Show the list of used sending addresses and labels</source>
         <translation>Mostra la lista degli indirizzi di invio utilizzati</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses...</source>
-        <translation>Indirizzi di &amp;ricezione...</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
@@ -540,16 +570,16 @@
         <translation>Apri &amp;URI...</translation>
     </message>
     <message>
-        <source>Open a blocx: URI or payment request</source>
-        <translation>Apri un blocx: URI o una richiesta di pagamento</translation>
-    </message>
-    <message>
         <source>&amp;Command-line options</source>
         <translation>Opzioni riga di &amp;comando</translation>
     </message>
     <message>
         <source>Show the %1 help message to get a list with possible BLOCX command-line options</source>
         <translation>Mostra il messaggio di aiuto di %1 per ottenere una lista di opzioni di comando per BLOCX </translation>
+    </message>
+    <message>
+        <source>default wallet</source>
+        <translation>portafoglio predefinito</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -570,6 +600,26 @@
         <translation>&amp;File</translation>
     </message>
     <message>
+        <source>Show information about %1</source>
+        <translation>Mostra informazioni %1</translation>
+    </message>
+    <message>
+        <source>Open debugging and diagnostic console</source>
+        <translation>Aprire la console di debug e diagnostica</translation>
+    </message>
+    <message>
+        <source>Open a blocx: URI</source>
+        <translation>Apri un blocx: URI</translation>
+    </message>
+    <message>
+        <source>Create Wallet...</source>
+        <translation>Crea portafoglio...</translation>
+    </message>
+    <message>
+        <source>Create a new wallet</source>
+        <translation>Crea un nuovo portafoglio</translation>
+    </message>
+    <message>
         <source>%1 &amp;information</source>
         <translation>%1 &amp;Informazioni</translation>
     </message>
@@ -582,10 +632,6 @@
         <translation>&amp;Impostazioni</translation>
     </message>
     <message>
-        <source>&amp;Tools</source>
-        <translation>&amp;Strumenti</translation>
-    </message>
-    <message>
         <source>&amp;Help</source>
         <translation>&amp;Aiuto</translation>
     </message>
@@ -593,9 +639,17 @@
         <source>Tabs toolbar</source>
         <translation>Barra degli strumenti "Tabs"</translation>
     </message>
+    <message>
+        <source>&amp;Governance</source>
+        <translation>&amp;Governance</translation>
+    </message>
+    <message>
+        <source>View Governance Proposals</source>
+        <translation>Visualizza le Proposte di Governance</translation>
+    </message>
     <message numerus="yes">
         <source>%n active connection(s) to BLOCX network</source>
-        <translation><numerusform>%n connessione attiva alla rete BLOCX</numerusform><numerusform>%n connessioni attive alla rete BLOCX</numerusform></translation>
+        <translation><numerusform>%n connessione attiva alla rete BLOCX</numerusform><numerusform>%n connessioni attive alla rete BLOCX</numerusform><numerusform>%n connessioni attive alla rete BLOCX</numerusform></translation>
     </message>
     <message>
         <source>Network activity disabled</source>
@@ -627,7 +681,7 @@
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Elaborati %n blocchi della cronologia delle transazioni.</numerusform><numerusform>Elaborati %n blocchi della cronologia delle transazioni.</numerusform></translation>
+        <translation><numerusform>Elaborati %n blocchi della cronologia delle transazioni.</numerusform><numerusform>Elaborati %n blocchi della cronologia delle transazioni.</numerusform><numerusform>Elaborati %n blocchi della cronologia delle transazioni.</numerusform></translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -658,8 +712,16 @@
         <translation>Errore</translation>
     </message>
     <message>
+        <source>Error: %1</source>
+        <translation>Errore: %1</translation>
+    </message>
+    <message>
         <source>Warning</source>
         <translation>Attenzione</translation>
+    </message>
+    <message>
+        <source>Warning: %1</source>
+        <translation>Avvertimento: %1</translation>
     </message>
     <message>
         <source>Information</source>
@@ -742,6 +804,14 @@
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation>Il portafoglio è &lt;b&gt;cifrato&lt;/b&gt; ed attualmente &lt;b&gt;bloccato&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
+        <translation>Il Proxy è &lt;b&gt;abilitato&lt;/b&gt;:%1</translation>
+    </message>
+    <message>
+        <source>Original message:</source>
+        <translation>Messaggio originale:</translation>
     </message>
 </context>
 <context>
@@ -940,6 +1010,60 @@
     </message>
 </context>
 <context>
+    <name>CreateWalletActivity</name>
+    <message>
+        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Creazione del portafoglio&lt;b&gt;%1&lt;/b&gt;...</translation>
+    </message>
+    <message>
+        <source>Create wallet failed</source>
+        <translation>Creazione portafoglio non riuscita</translation>
+    </message>
+    <message>
+        <source>Create wallet warning</source>
+        <translation>Crea avviso portafoglio</translation>
+    </message>
+</context>
+<context>
+    <name>CreateWalletDialog</name>
+    <message>
+        <source>Create Wallet</source>
+        <translation>Crea portafoglio</translation>
+    </message>
+    <message>
+        <source>Wallet Name</source>
+        <translation>Nome Portafoglio</translation>
+    </message>
+    <message>
+        <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
+        <translation>Cripta il portafoglio. Il portafoglio verrà crittografato con una passphrase a tua scelta.</translation>
+    </message>
+    <message>
+        <source>Encrypt Wallet</source>
+        <translation>Crittografa il portafoglio</translation>
+    </message>
+    <message>
+        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
+        <translation>Disabilita le chiavi private per questo portafoglio. I portafogli con chiavi private disabilitate non avranno chiavi private e non possono avere un seme HD o chiavi private importate. Questo è l'ideale per i portafogli watch-only.</translation>
+    </message>
+    <message>
+        <source>Disable Private Keys</source>
+        <translation>Disabilita le Chiavi Private</translation>
+    </message>
+    <message>
+        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
+        <translation>Crea un portafoglio vuoto. I portafogli vuoti inizialmente non hanno chiavi o script privati. È possibile importare chiavi private e indirizzi oppure impostare un seme HD in un secondo momento.</translation>
+    </message>
+    <message>
+        <source>Make Blank Wallet</source>
+        <translation>Crea un Portafoglio Vuoto</translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation>Creare</translation>
+    </message>
+</context>
+<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -978,8 +1102,12 @@
         <translation>L'indirizzo inserito "%1" non é un indirizzo BLOCX valido</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book.</source>
-        <translation>L'indirizzo inserito "%1" è già in rubrica.</translation>
+        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
+        <translation>L'indirizzo "%1" esiste già come indirizzo di ricezione con etichetta "%2" e quindi non può essere aggiunto come indirizzo di invio.</translation>
+    </message>
+    <message>
+        <source>The entered address "%1" is already in the address book with label "%2".</source>
+        <translation>L'indirizzo inserito "%1" è già nella rubrica con l'etichetta "%2".</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -1014,14 +1142,37 @@
     </message>
 </context>
 <context>
+    <name>GovernanceList</name>
+    <message>
+        <source>Form</source>
+        <translation>Modulo</translation>
+    </message>
+    <message>
+        <source>Filter List:</source>
+        <translation>Elenco filtri:</translation>
+    </message>
+    <message>
+        <source>Filter proposal list</source>
+        <translation>Filtra l'elenco delle proposal</translation>
+    </message>
+    <message>
+        <source>Proposal Count:</source>
+        <translation>Conteggio delle proposte:</translation>
+    </message>
+    <message>
+        <source>Filter by Title</source>
+        <translation>Filtra per Titolo</translation>
+    </message>
+    <message>
+        <source>Proposal Info: %1</source>
+        <translation>Informazioni sulla proposta: %1</translation>
+    </message>
+</context>
+<context>
     <name>HelpMessageDialog</name>
     <message>
         <source>version</source>
         <translation>versione</translation>
-    </message>
-    <message>
-        <source>(%1-bit)</source>
-        <translation>(%1-bit)</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -1118,10 +1269,6 @@
         <translation>Stato</translation>
     </message>
     <message>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
         <source>Filter List:</source>
         <translation>Lista dei Filtri:</translation>
     </message>
@@ -1144,6 +1291,10 @@
     <message>
         <source>Service</source>
         <translation>Assistenza</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Scrivi</translation>
     </message>
     <message>
         <source>PoSe Score</source>
@@ -1281,8 +1432,12 @@
         <translation>Nascondi</translation>
     </message>
     <message>
-        <source>Unknown. Syncing Headers (%1)...</source>
-        <translation>Sconosciuto. Sincronizzazione Headers (%1)...</translation>
+        <source>BLOCX Core is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
+        <translation>BLOCX Core è attualmente in fase di sincronizzazione. Scaricherà le intestazioni e i blocchi dai peers e li convaliderà fino a raggiungere la punta della blockchain.</translation>
+    </message>
+    <message>
+        <source>Unknown. Syncing Headers (%1, %2%)...</source>
+        <translation>Sconosciuto. Sincronizzazione intestazioni (%1, %2%)...</translation>
     </message>
 </context>
 <context>
@@ -1292,20 +1447,27 @@
         <translation>Apri URI</translation>
     </message>
     <message>
-        <source>Open payment request from URI or file</source>
-        <translation>Apri richiesta di pagamento da URI o file</translation>
-    </message>
-    <message>
         <source>URI:</source>
         <translation>URI:</translation>
     </message>
+</context>
+<context>
+    <name>OpenWalletActivity</name>
     <message>
-        <source>Select payment request file</source>
-        <translation>Seleziona il file di richiesta di pagamento</translation>
+        <source>Open wallet failed</source>
+        <translation>Apertura Portafoglio non riuscita</translation>
     </message>
     <message>
-        <source>Select payment request file to open</source>
-        <translation>Seleziona il file di richiesta di pagamento da aprire</translation>
+        <source>Open wallet warning</source>
+        <translation>Avviso Portafoglio Aperto</translation>
+    </message>
+    <message>
+        <source>default wallet</source>
+        <translation>portafoglio predefinito</translation>
+    </message>
+    <message>
+        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Apertura Portafoglio &lt;b&gt;%1&lt;/b&gt;...</translation>
     </message>
 </context>
 <context>
@@ -1321,10 +1483,6 @@
     <message>
         <source>Size of &amp;database cache</source>
         <translation>Dimensione della cache del &amp;database.</translation>
-    </message>
-    <message>
-        <source>MB</source>
-        <translation>MB</translation>
     </message>
     <message>
         <source>Number of script &amp;verification threads</source>
@@ -1343,12 +1501,44 @@
         <translation>&amp;Aspetto</translation>
     </message>
     <message>
+        <source>Prune &amp;block storage to</source>
+        <translation>Elimina &amp;blocca lo spazio di archiviazione su</translation>
+    </message>
+    <message>
+        <source>GB</source>
+        <translation>GB</translation>
+    </message>
+    <message>
+        <source>Reverting this setting requires re-downloading the entire blockchain.</source>
+        <translation>Il ripristino di questa impostazione richiede il nuovo download dell'intera blockchain.</translation>
+    </message>
+    <message>
+        <source>MiB</source>
+        <translation>MiB</translation>
+    </message>
+    <message>
+        <source>Whether to keep the specified custom change address or not.</source>
+        <translation>Indica se mantenere o meno l'indirizzo di modifica personalizzato specificato.</translation>
+    </message>
+    <message>
+        <source>Keep custom change &amp;address</source>
+        <translation>Mantieni la modifica personalizzata &amp;address</translation>
+    </message>
+    <message>
         <source>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</source>
         <translation>Mostra la tabella aggiuntiva che elenca tutti i Masternode nella prima sotto-tabella &lt;br/&gt;e tutti i Masternode sulla rete nella seconda sotto-tabella.</translation>
     </message>
     <message>
         <source>Show Masternodes Tab</source>
         <translation>Mostra la Tabella dei Masternode</translation>
+    </message>
+    <message>
+        <source>Show additional tab listing governance proposals.</source>
+        <translation>Mostra la scheda aggiuntiva che elenca le proposte di governance.</translation>
+    </message>
+    <message>
+        <source>Show Governance Tab</source>
+        <translation>Mostra la scheda Governance</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</source>
@@ -1407,6 +1597,10 @@
         <translation>Apri automaticamente la porta utilizzata dal client BLOCX Core nel router. Funziona solo se il router supporta UPnP ed è attivato.</translation>
     </message>
     <message>
+        <source>Map port using NA&amp;T-PMP</source>
+        <translation>Mappa Porta utilizzando NA&amp;T-PMP</translation>
+    </message>
+    <message>
         <source>Accept connections from outside.</source>
         <translation>Accetta connessioni dall'esterno.</translation>
     </message>
@@ -1429,6 +1623,10 @@
     <message>
         <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor hidden services:</source>
         <translation>Usa SOCKS separati e 5 proxy per raggiungere i peer tramite i servizi nascosti di Tor:</translation>
+    </message>
+    <message>
+        <source>Options set in this dialog are overridden by the command line or in the configuration file:</source>
+        <translation>Le opzioni impostate in questa finestra di dialogo sono sovrascritte dalla riga di comando o nel file di configurazione:</translation>
     </message>
     <message>
         <source>Hide the icon from the system tray.</source>
@@ -1479,8 +1677,16 @@
         <translation>Rete</translation>
     </message>
     <message>
+        <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
+        <translation>L'abilitazione dell'eliminazione riduce significativamente lo spazio su disco necessario per archiviare le transazioni. Tutti i blocchi sono ancora completamente convalidati. Il ripristino di questa impostazione richiede il nuovo download dell'intera blockchain.</translation>
+    </message>
+    <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Mappa le porte tramite &amp;UPnP</translation>
+    </message>
+    <message>
+        <source>Automatically open the BLOCX Core client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
+        <translation>Apri automaticamente la porta del client BLOCX Core sul router. Funziona solo quando il tuo router supporta NAT-PMP ed è abilitato. La porta esterna potrebbe essere casuale.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1559,10 +1765,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Decimal digits</source>
         <translation>Cifre decimali</translation>
-    </message>
-    <message>
-        <source>Active command-line options that override above options:</source>
-        <translation>Opzioni command-line attive che sostituiscono i settaggi sopra elencati:</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
@@ -1737,7 +1939,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message numerus="yes">
         <source>%n Rounds</source>
-        <translation><numerusform>%n Round</numerusform><numerusform>%n Rounds</numerusform></translation>
+        <translation><numerusform>%n Round</numerusform><numerusform>%n Rounds</numerusform><numerusform>%n Rounds</numerusform></translation>
     </message>
     <message>
         <source>Found enough compatible inputs to mix %1</source>
@@ -1765,7 +1967,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message numerus="yes">
         <source>Denominated inputs have %5 of %n rounds on average</source>
-        <translation><numerusform>Gli input denominati hanno in media %5 di %n round </numerusform><numerusform>Gli input denominati hanno in media %5 di %n round </numerusform></translation>
+        <translation><numerusform>Gli input denominati hanno in media %5 di %n round </numerusform><numerusform>Gli input denominati hanno in media %5 di %n round </numerusform><numerusform>Gli input denominati hanno in media %5 di %n round </numerusform></translation>
     </message>
     <message>
         <source>keys left: %1</source>
@@ -1851,8 +2053,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>"blocx: //" non è un URI valido. Utilizza  "blocx:".</translation>
     </message>
     <message>
-        <source>Payment request fetch URL is invalid: %1</source>
-        <translation>URL di recupero della Richiesta di pagamento non valido: %1</translation>
+        <source>Cannot process payment request as BIP70 is no longer supported.</source>
+        <translation>Impossibile elaborare la richiesta di pagamento in quanto BIP70 non è più supportato.</translation>
+    </message>
+    <message>
+        <source>Due to discontinued support, you should request the merchant to provide you with a BIP21 compatible URI or use a wallet that does continue to support BIP70.</source>
+        <translation>A causa dell'interruzione del supporto, dovresti richiedere al commerciante di fornirti un URI compatibile con BIP21 o utilizzare un portafoglio che continui a supportare BIP70.</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
@@ -1865,66 +2071,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Payment request file handling</source>
         <translation>Gestione del file di richiesta del pagamento</translation>
-    </message>
-    <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Il file di richiesta del pagamento non può essere letto! Il file in questione potrebbe essere non valido.</translation>
-    </message>
-    <message>
-        <source>Payment request rejected</source>
-        <translation>Richiesta di pagamento rifiutata</translation>
-    </message>
-    <message>
-        <source>Payment request network doesn't match client network.</source>
-        <translation>La rete della richiesta di pagamento non coincide con la rete del cliente.</translation>
-    </message>
-    <message>
-        <source>Payment request expired.</source>
-        <translation>Richiesta di pagamento scaduta.</translation>
-    </message>
-    <message>
-        <source>Payment request is not initialized.</source>
-        <translation>La richiesta di pagamento non è stata inizializzata</translation>
-    </message>
-    <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Le richieste di pagamento non verificate verso script di pagamento personalizzati non sono supportate.</translation>
-    </message>
-    <message>
-        <source>Invalid payment request.</source>
-        <translation>Richiesta di pagamento invalida</translation>
-    </message>
-    <message>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>L'importo di pagamento richiesto di %1 è troppo basso (considerato come infinitesimale).</translation>
-    </message>
-    <message>
-        <source>Refund from %1</source>
-        <translation>Rimborso da %1</translation>
-    </message>
-    <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Il pagamento richiesto %1 é troppo grande (%2 bytes, permesso %3 bytes).</translation>
-    </message>
-    <message>
-        <source>Error communicating with %1: %2</source>
-        <translation>Errore di comunicazione con %1: %2</translation>
-    </message>
-    <message>
-        <source>Payment request cannot be parsed!</source>
-        <translation>La richiesta di pagamento non può essere analizzata o processata!</translation>
-    </message>
-    <message>
-        <source>Bad response from server %1</source>
-        <translation>Risposta errata da parte del server %1</translation>
-    </message>
-    <message>
-        <source>Network request error</source>
-        <translation>Errore di richiesta di rete</translation>
-    </message>
-    <message>
-        <source>Payment acknowledged</source>
-        <translation>Pagamento riconosciuto</translation>
     </message>
 </context>
 <context>
@@ -1952,6 +2098,56 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Received</source>
         <translation>Ricevuto</translation>
+    </message>
+</context>
+<context>
+    <name>Proposal</name>
+    <message>
+        <source>Passing +%1</source>
+        <translation>Passando +%1</translation>
+    </message>
+    <message>
+        <source>Needs additional %1 votes</source>
+        <translation>Needs additional %1 votes</translation>
+    </message>
+</context>
+<context>
+    <name>ProposalModel</name>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+    <message>
+        <source>Hash</source>
+        <translation>Hash</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>Titolo</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Inizio</translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation>Fine</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>Importo</translation>
+    </message>
+    <message>
+        <source>Active</source>
+        <translation>Attiva</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Stato</translation>
     </message>
 </context>
 <context>
@@ -1989,12 +2185,52 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Reimposta tutti i campi dell'interfaccia grafica</translation>
     </message>
     <message>
-        <source>Set SSL root certificates for payment request (default: -system-)</source>
-        <translation>Imposta i certificati root SSL per le richieste di pagamento (default: -system-)</translation>
-    </message>
-    <message>
         <source>Show splash screen on startup (default: %u)</source>
         <translation>Mostra schermata iniziale all'avvio (default: %u)</translation>
+    </message>
+    <message>
+        <source>Error: Specified data directory "%1" does not exist.</source>
+        <translation>Errore: la Cartella dati specificata "%1" non esiste.</translation>
+    </message>
+    <message>
+        <source>Error: Cannot parse configuration file: %1.</source>
+        <translation>Errore: impossibile analizzare il file di configurazione: %1.</translation>
+    </message>
+    <message>
+        <source>Error: %1</source>
+        <translation>Errore: %1</translation>
+    </message>
+    <message>
+        <source>Error initializing settings: %1</source>
+        <translation>Errore durante l'inizializzazione delle impostazioni: %1</translation>
+    </message>
+    <message>
+        <source>Error: Failed to load application fonts.</source>
+        <translation>Errore:Impossibile caricare i caratteri dell'applicazione</translation>
+    </message>
+    <message>
+        <source>Error: Specified font-family invalid. Valid values: %1.</source>
+        <translation>Errore: La famiglia di caratteri specificata non è valida. Valori validi: %1.</translation>
+    </message>
+    <message>
+        <source>Error: Specified font-weight-normal invalid. Valid range %1 to %2.</source>
+        <translation>Errore: il font-weight-normal specificato non è valido. Intervallo valido da %1 a %2.</translation>
+    </message>
+    <message>
+        <source>Error: Specified font-weight-bold invalid. Valid range %1 to %2.</source>
+        <translation>Errore: il valore del carattere specificato in grassetto non è valido. Intervallo valido da %1 a %2.</translation>
+    </message>
+    <message>
+        <source>Error: Specified font-scale invalid. Valid range %1 to %2.</source>
+        <translation>Errore: scala dei caratteri specificata non valida. Intervallo valido da %1 a %2.</translation>
+    </message>
+    <message>
+        <source>Error: Invalid -custom-css-dir path.</source>
+        <translation>Errore: percorso -custom-css-dir non valido.</translation>
+    </message>
+    <message>
+        <source>Error: %1 CSS file(s) missing in -custom-css-dir path.</source>
+        <translation>Errore: %1 file(s) CSS mancanti nel percorso -custom-css-dir.</translation>
     </message>
     <message>
         <source>%1 didn't yet exit safely...</source>
@@ -2050,27 +2286,27 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation><numerusform>%n secondo</numerusform><numerusform>%n secondi</numerusform></translation>
+        <translation><numerusform>%n secondo</numerusform><numerusform>%n secondi</numerusform><numerusform>%n secondi</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation><numerusform>%n minuto</numerusform><numerusform>%n minuti</numerusform></translation>
+        <translation><numerusform>%n minuto</numerusform><numerusform>%n minuti</numerusform><numerusform>%n minuti</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation><numerusform>%n ora</numerusform><numerusform>%n ore</numerusform></translation>
+        <translation><numerusform>%n ora</numerusform><numerusform>%n ore</numerusform><numerusform>%n ore</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
-        <translation><numerusform>%n giorno</numerusform><numerusform>%n giorni</numerusform></translation>
+        <translation><numerusform>%n giorno</numerusform><numerusform>%n giorni</numerusform><numerusform>%n giorni</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
-        <translation><numerusform>%n settimana</numerusform><numerusform>%n settimane</numerusform></translation>
+        <translation><numerusform>%n settimana</numerusform><numerusform>%n settimane</numerusform><numerusform>%n settimane</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
-        <translation><numerusform>%n anno</numerusform><numerusform>%n anni</numerusform></translation>
+        <translation><numerusform>%n anno</numerusform><numerusform>%n anni</numerusform><numerusform>%n anni</numerusform></translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -2098,49 +2334,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
 </context>
 <context>
-    <name>QObject::QObject</name>
-    <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
-        <translation>Errore: La cartella dati "%1" specificata non esiste.</translation>
-    </message>
-    <message>
-        <source>Error: Cannot parse configuration file: %1. Only use key=value syntax.</source>
-        <translation>Errore: impossibile interpretare il file di configurazione: %1. Usare esclusivamente la sintassi chiave=valore.</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Errore: %1</translation>
-    </message>
-    <message>
-        <source>Error: Failed to load application fonts.</source>
-        <translation>Errore: impossibile caricare i caratteri dell'applicazione.</translation>
-    </message>
-    <message>
-        <source>Error: Specified font-family invalid. Valid values: %1.</source>
-        <translation>Errore: famiglia di caratteri specificata non valida. Valori validi: %1.</translation>
-    </message>
-    <message>
-        <source>Error: Specified font-weight-normal invalid. Valid range %1 to %2.</source>
-        <translation>Errore: carattere normale di peso specificato non valido. Intervallo valido da %1 a %2.</translation>
-    </message>
-    <message>
-        <source>Error: Specified font-weight-bold invalid. Valid range %1 to %2.</source>
-        <translation>Errore: caratteri specificati in grassetto non validi. Intervallo valido da %1 a %2.</translation>
-    </message>
-    <message>
-        <source>Error: Specified font-scale invalid. Valid range %1 to %2.</source>
-        <translation>Errore: scala del carattere specificata non valida. Intervallo valido da %1 a %2.</translation>
-    </message>
-    <message>
-        <source>Error: Invalid -custom-css-dir path.</source>
-        <translation>Errore: percorso -custom-css-dir non valido.</translation>
-    </message>
-    <message>
-        <source>Error: %1 CSS file(s) missing in -custom-css-dir path.</source>
-        <translation>Errore: %1 file CSS mancante nel percorso -custom-css-dir.</translation>
-    </message>
-</context>
-<context>
     <name>QRDialog</name>
     <message>
         <source>QR-Code Title</source>
@@ -2154,29 +2347,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <source>&amp;Save Image...</source>
         <translation>&amp;Salva Immagine</translation>
     </message>
-    <message>
-        <source>Error creating QR Code.</source>
-        <translation>Errore di generazione del QR Code</translation>
-    </message>
-</context>
-<context>
-    <name>QRGeneralImageWidget</name>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>&amp;Salva Immagine</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Image</source>
-        <translation>&amp;Copia Immagine</translation>
-    </message>
-    <message>
-        <source>Save QR Code</source>
-        <translation>Salva codice QR</translation>
-    </message>
-    <message>
-        <source>PNG Image (*.png)</source>
-        <translation>Immagine PNG (*.png)</translation>
-    </message>
 </context>
 <context>
     <name>QRImageWidget</name>
@@ -2187,6 +2357,18 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>&amp;Copy Image</source>
         <translation>&amp;Copia Immagine</translation>
+    </message>
+    <message>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Risultato URI troppo lungo, provare a ridurre il testo per etichetta/messaggio.</translation>
+    </message>
+    <message>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Errore di codifica dell'URI nel codice QR.</translation>
+    </message>
+    <message>
+        <source>QR code support not available.</source>
+        <translation>Supporto codice QR non disponibile.</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -2244,16 +2426,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>File log del Debug</translation>
     </message>
     <message>
-        <source>Current number of blocks</source>
-        <translation>Numero attuale di blocchi</translation>
-    </message>
-    <message>
         <source>Client version</source>
         <translation>Versione client</translation>
-    </message>
-    <message>
-        <source>Using BerkeleyDB version</source>
-        <translation>Usando la versione BerkeleyDB</translation>
     </message>
     <message>
         <source>Block chain</source>
@@ -2344,16 +2518,16 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Ripeti l'analisi dei file della blockchain 2</translation>
     </message>
     <message>
+        <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockchain files or missing/obsolete transactions.</source>
+        <translation>I pulsanti seguenti riavvieranno il portafoglio con le opzioni della riga di comando per riparare il portafoglio, e risolvere i problemi con file blockchain corrotti o transazioni mancanti/obsolete.</translation>
+    </message>
+    <message>
         <source>-rescan=1: Rescan the block chain for missing wallet transactions starting from wallet creation time.</source>
         <translation>-rescan= 1: Riesamina la catena di blocchi per le transazioni del portafoglio mancanti a partire dal momento della creazione del portafoglio.</translation>
     </message>
     <message>
         <source>-rescan=2: Rescan the block chain for missing wallet transactions starting from genesis block.</source>
         <translation>-rescan=2: Riesamina la catena di blocchi per le transazioni del portafoglio mancanti a partire dal blocco genesis.</translation>
-    </message>
-    <message>
-        <source>Wallet Path</source>
-        <translation>Percorso del Portafoglio</translation>
     </message>
     <message>
         <source>User Agent</source>
@@ -2364,8 +2538,32 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Datadir</translation>
     </message>
     <message>
+        <source>To specify a non-default location of the data directory use the '%1' option.</source>
+        <translation>Per specificare un percorso non predefinito della directory dei dati, utilizzare l'opzione '%1'.</translation>
+    </message>
+    <message>
+        <source>Blocksdir</source>
+        <translation>Blocksdir</translation>
+    </message>
+    <message>
+        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
+        <translation>Per specificare una posizione non predefinita della directory dei blocchi, utilizzare l'opzione '%1'.</translation>
+    </message>
+    <message>
+        <source>Current block height</source>
+        <translation>Altezza attuale del blocco</translation>
+    </message>
+    <message>
         <source>Last block hash</source>
         <translation>Ultimo blocco hash</translation>
+    </message>
+    <message>
+        <source>Latest ChainLocked block hash</source>
+        <translation>Ultimo hash di blocco ChainLocked</translation>
+    </message>
+    <message>
+        <source>Latest ChainLocked block height</source>
+        <translation>Ultima altezza del blocco ChainLocked</translation>
     </message>
     <message>
         <source>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</source>
@@ -2444,36 +2642,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>&amp;Riparare Portafoglio</translation>
     </message>
     <message>
-        <source>Salvage wallet</source>
-        <translation>Recuperare il portafoglio</translation>
-    </message>
-    <message>
-        <source>Recover transactions 1</source>
-        <translation>Ristabilire le transazioni 1</translation>
-    </message>
-    <message>
-        <source>Recover transactions 2</source>
-        <translation>Ristabilire le transazioni 2</translation>
-    </message>
-    <message>
         <source>Upgrade wallet format</source>
         <translation>Aggiorna il formato del portafoglio </translation>
-    </message>
-    <message>
-        <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</source>
-        <translation>I bottoni sottostanti reiniziaranno il portafoglio con le opzioni di linea di comando per riparare il portafoglio e sistemare problemi con i file della blockchain corrotti o con transazioni perse o inadeguate </translation>
-    </message>
-    <message>
-        <source>-salvagewallet: Attempt to recover private keys from a corrupt wallet.dat.</source>
-        <translation>-recuperareportafoglio: Tenta di recuperare le chiavi private da un wallet.dat corrotto.</translation>
-    </message>
-    <message>
-        <source>-zapwallettxes=1: Recover transactions from blockchain (keep meta-data, e.g. account owner).</source>
-        <translation>-zapwallettxes=1: Recupera transazioni dalla blockchain (mantiene i meta-data, es. il propietario del conto)</translation>
-    </message>
-    <message>
-        <source>-zapwallettxes=2: Recover transactions from blockchain (drop meta-data).</source>
-        <translation>-zapwallettxes=2: Recupera transazioni dalla blockchain (non conserva i meta-data)</translation>
     </message>
     <message>
         <source>-upgradewallet: Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
@@ -2584,6 +2754,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>In uscita</translation>
     </message>
     <message>
+        <source>Outbound block-relay</source>
+        <translation>Block-relay in uscita</translation>
+    </message>
+    <message>
         <source>Yes</source>
         <translation>Si</translation>
     </message>
@@ -2627,6 +2801,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Messaggio facoltativo da allegare alla richiesta di pagamento, che verrà visualizzato all'apertura della richiesta.&lt;br&gt; Nota: il messaggio non verrà inviato con il pagamento sulla rete di BLOCX.</translation>
     </message>
     <message>
+        <source>An optional label to associate with the new receiving address (used by you to identify an invoice).  It is also attached to the payment request.</source>
+        <translation>Un'etichetta facoltativa da associare al nuovo indirizzo di ricezione (da te utilizzata per identificare una fattura). È inoltre allegato alla richiesta di pagamento.</translation>
+    </message>
+    <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
         <translation>Usa questo modulo per richiedere pagamenti. Tutti i campi sono &lt;b&gt;opzionali&lt;/b&gt;.</translation>
     </message>
@@ -2643,8 +2821,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>&amp;Importo:</translation>
     </message>
     <message>
-        <source>&amp;Request payment</source>
-        <translation>&amp;Richiedi pagamento</translation>
+        <source>&amp;Create new receiving address</source>
+        <translation>&amp;Crea nuovo indirizzo di ricezione</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
@@ -2685,6 +2863,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Copy URI</source>
         <translation>Copia URI</translation>
+    </message>
+    <message>
+        <source>Copy address</source>
+        <translation>Copia Indirizzo</translation>
     </message>
     <message>
         <source>Copy label</source>
@@ -2748,14 +2930,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Wallet</source>
         <translation>Portafoglio</translation>
-    </message>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>L'URI risultante è troppo lungo, prova a ridurre il testo nell'etichetta / messaggio.</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Errore nella codifica dell'URI nel codice QR</translation>
     </message>
 </context>
 <context>
@@ -2856,20 +3030,20 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Scegli...</translation>
     </message>
     <message>
-        <source>collapse fee-settings</source>
-        <translation>Abbassare la finestra delle opzioni delle commissioni</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for blocx transactions than the network can process.</source>
+        <translation>Quando il volume delle transazioni è inferiore allo spazio nei blocchi, i miner e i nodi di inoltro possono applicare una commissione minima. Pagare solo questa tariffa minima va bene, ma tieni presente che ciò può comportare una transazione mai confermata una volta che c'è più richiesta di transazioni precipitose di quanto la rete possa elaborare.</translation>
+    </message>
+    <message>
+        <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
+        <translation>Una commissione troppo bassa potrebbe comportare una transazione mai confermata (leggi il tooltip)</translation>
     </message>
     <message>
         <source>Confirmation time target:</source>
         <translation>Obiettivo del tempo di conferma:</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 XBLOCX and the transaction is only 250 bytes, then "per kilobyte" only pays 250 XBLOCX in fee,&lt;br /&gt;while "at least" pays 1000 XBLOCX. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <source>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 duffs in fee,&lt;br /&gt;while "at least" pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
         <translation>Se la tariffa personalizzata è impostata su 1000 duff e la transazione è di soli 250 byte, paga solo 250 duff "per kilobyte" di Fee, &lt;br /&gt;mentre paga "almeno"  1000 duff. Per le transazioni più grandi di un kilobyte pagate entrambi per kilobyte.</translation>
-    </message>
-    <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for blocx transactions than the network can process.</source>
-        <translation>Pagare solo la commissione minima va bene finché il volume di transazioni è minore rispetto allo spazio nei blocchi. &lt;br /&gt;Ma sii consapevole che questo potrebbe risultare in una transazione non confermata, una volta che ci fosse più richiesta di transazioni di BLOCX di quanto la rete possa elaborare.</translation>
     </message>
     <message>
         <source>per kilobyte</source>
@@ -2884,12 +3058,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Nota: dati insufficienti per la stima della commissione, utilizzando altrimenti la commissione di fallback.</translation>
     </message>
     <message>
-        <source>Hide</source>
-        <translation>Nascondi</translation>
+        <source>Hide transaction fee settings</source>
+        <translation>Nascondi le impostazioni delle commissioni di transazione</translation>
     </message>
     <message>
-        <source>(read the tooltip)</source>
-        <translation>(leggi il suggerimento)</translation>
+        <source>Hide</source>
+        <translation>Nascondi</translation>
     </message>
     <message>
         <source>Recommended:</source>
@@ -2964,10 +3138,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>%1 (%2 bloccare)</translation>
     </message>
     <message>
-        <source>from wallet %1</source>
-        <translation>dal wallet %1</translation>
-    </message>
-    <message>
         <source>using</source>
         <translation>utilizzando</translation>
     </message>
@@ -2978,14 +3148,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Are you sure you want to send?</source>
         <translation>Sei sicuro di voler inviare?</translation>
-    </message>
-    <message>
-        <source>are added as transaction fee</source>
-        <translation>sono aggiunti come pagamento per la transazione</translation>
-    </message>
-    <message>
-        <source>Total Amount = &lt;b&gt;%1&lt;/b&gt;&lt;br /&gt;= %2</source>
-        <translation>Importo totale =&lt;b&gt;%1&lt;/b&gt;&lt;br /&gt;= %2</translation>
     </message>
     <message>
         <source>&lt;b&gt;(%1 of %2 entries displayed)&lt;/b&gt;</source>
@@ -3000,12 +3162,40 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Conferma l'azione di invio %1</translation>
     </message>
     <message>
+        <source>Cr&amp;eate Unsigned</source>
+        <translation>Cr&amp;eate Non firmato</translation>
+    </message>
+    <message>
+        <source>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation>Crea una Transazione Bitcoin con Firma Parziale (PSBT) da utilizzare ad es. con un portafoglio %1 offline o con un portafoglio hardware compatibile con PSBT.</translation>
+    </message>
+    <message>
+        <source> from wallet '%1'</source>
+        <translation>Dal wallet '%1'</translation>
+    </message>
+    <message>
+        <source>%1 to '%2'</source>
+        <translation>%1 a '%2'</translation>
+    </message>
+    <message>
+        <source>Do you want to draft this transaction?</source>
+        <translation>Vuoi la bozza di questa transazione?</translation>
+    </message>
+    <message>
+        <source>This will produce a Partially Signed Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation>Questo produrrà una transazione con Firma Parziale (PSBT) che puoi copiare e quindi firmare con, ad es., un portafoglio %1 offline o con un portafoglio hardware compatibile con PSBT.</translation>
+    </message>
+    <message>
         <source>%1 funds only</source>
         <translation>Solo fondi %1</translation>
     </message>
     <message>
         <source>any available funds</source>
         <translation>eventuali fondi disponibili</translation>
+    </message>
+    <message>
+        <source>Transaction fee</source>
+        <translation>Commissione di transazione</translation>
     </message>
     <message>
         <source>(%1 transactions have higher fees usually due to no change output being allowed)</source>
@@ -3021,15 +3211,47 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message numerus="yes">
         <source>This transaction will consume %n input(s)</source>
-        <translation><numerusform>Questa transazione consumerà %n input</numerusform><numerusform>Questa transazione consumerà %n input</numerusform></translation>
+        <translation><numerusform>Questa transazione consumerà %n input</numerusform><numerusform>Questa transazione consumerà %n input</numerusform><numerusform>Questa transazione consumerà %n input</numerusform></translation>
     </message>
     <message>
         <source>Warning: Using %1 with %2 or more inputs can harm your privacy and is not recommended</source>
         <translation>Avviso: l'utilizzo di %1 con %2 o più input può danneggiare la tua privacy e non è raccomandato</translation>
     </message>
     <message>
+        <source>Click to learn more</source>
+        <translation>Clicca per saperne di più</translation>
+    </message>
+    <message>
+        <source>Total Amount</source>
+        <translation>Importo Totale</translation>
+    </message>
+    <message>
+        <source>or</source>
+        <translation>oppure</translation>
+    </message>
+    <message>
+        <source>To review recipient list click "Show Details..."</source>
+        <translation>Per rivedere l'elenco dei destinatari facendo clic su "Mostra dettagli..."</translation>
+    </message>
+    <message>
         <source>Confirm send coins</source>
         <translation>Conferma l'invio di blocx</translation>
+    </message>
+    <message>
+        <source>Confirm transaction proposal</source>
+        <translation>Conferma la proposta di transazione</translation>
+    </message>
+    <message>
+        <source>Copy PSBT to clipboard</source>
+        <translation>Copia PSBT negli appunti</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Invia</translation>
+    </message>
+    <message>
+        <source>PSBT copied</source>
+        <translation>PSBT copiata</translation>
     </message>
     <message>
         <source>The recipient address is not valid. Please recheck.</source>
@@ -3056,10 +3278,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Creazione transazione fallita!</translation>
     </message>
     <message>
-        <source>The transaction was rejected with the following reason: %1</source>
-        <translation>La transazione è stata respinta per il seguente motivo: %1</translation>
-    </message>
-    <message>
         <source>A fee higher than %1 is considered an absurdly high fee.</source>
         <translation> Una commissione maggiore di %1 è considerata irragionevolmente elevata.</translation>
     </message>
@@ -3067,13 +3285,9 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <source>Payment request expired.</source>
         <translation>Richiesta di pagamento scaduta.</translation>
     </message>
-    <message>
-        <source>Pay only the required fee of %1</source>
-        <translation> Paga solo la commissione richiesta di %1</translation>
-    </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
-        <translation><numerusform>Inizio della confirmazione stimato in %n blocco</numerusform><numerusform>Inizio del processo di conferma stimato in %n blocchi</numerusform></translation>
+        <translation><numerusform>Inizio della confirmazione stimato in %n blocco</numerusform><numerusform>Inizio del processo di conferma stimato in %n blocchi</numerusform><numerusform>Inizio del processo di conferma stimato in %n blocchi</numerusform></translation>
     </message>
     <message>
         <source>Warning: Invalid BLOCX address</source>
@@ -3098,10 +3312,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
 </context>
 <context>
     <name>SendCoinsEntry</name>
-    <message>
-        <source>This is a normal payment.</source>
-        <translation>Questo è un normale pagamento.</translation>
-    </message>
     <message>
         <source>Pay &amp;To:</source>
         <translation>Paga &amp;a:</translation>
@@ -3143,6 +3353,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>I&amp;mporto:</translation>
     </message>
     <message>
+        <source>The amount to send in the selected unit</source>
+        <translation>L'importo da inviare nell'unità selezionata</translation>
+    </message>
+    <message>
         <source>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of BLOCX than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation>La commissione verrà detratta dall'importo inviato. Il destinatario riceverà un importo inferiore di BLOCX rispetto a quello inserito nel campo dell'importo. Se sono selezionati più destinatari, la commissione verrà divisa in parti uguali.</translation>
     </message>
@@ -3177,17 +3391,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Memo:</source>
         <translation>Memo:</translation>
-    </message>
-    <message>
-        <source>Enter a label for this address to add it to your address book</source>
-        <translation>Inserisci un'etichetta per questo indirizzo, per aggiungerlo nella rubrica</translation>
-    </message>
-</context>
-<context>
-    <name>SendConfirmationDialog</name>
-    <message>
-        <source>Yes</source>
-        <translation>Si</translation>
     </message>
 </context>
 <context>
@@ -3274,6 +3477,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>The BLOCX address the message was signed with</source>
         <translation>L'indirizzo BLOCX con cui era firmato il messaggio</translation>
+    </message>
+    <message>
+        <source>The signed message to verify</source>
+        <translation>Messaggio firmato da verificare</translation>
+    </message>
+    <message>
+        <source>The signature given when the message was signed</source>
+        <translation>La firma fornita quando il messaggio è stato firmato</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified BLOCX address</source>
@@ -3382,7 +3593,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <name>TransactionDesc</name>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Aperto per %n blocco in piú</numerusform><numerusform>Aperto per %n blocchi in piú</numerusform></translation>
+        <translation><numerusform>Aperto per %n blocco in piú</numerusform><numerusform>Aperto per %n blocchi in piú</numerusform><numerusform>Aperto per %n blocchi in piú</numerusform></translation>
     </message>
     <message>
         <source>Open until %1</source>
@@ -3470,7 +3681,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
-        <translation><numerusform>Matura in %n blocco in piú</numerusform><numerusform>Matura in %n blocchi in piú</numerusform></translation>
+        <translation><numerusform>Matura in %n blocco in piú</numerusform><numerusform>Matura in %n blocchi in piú</numerusform><numerusform>Matura in %n blocchi in piú</numerusform></translation>
     </message>
     <message>
         <source>not accepted</source>
@@ -3515,10 +3726,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Transaction total size</source>
         <translation>Dimensione totale della transazione</translation>
-    </message>
-    <message>
-        <source>Merchant</source>
-        <translation>Negoziante</translation>
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
@@ -3576,7 +3783,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Aperto per %n blocco in piú</numerusform><numerusform>Aperto per %n blocchi in piú</numerusform></translation>
+        <translation><numerusform>Aperto per %n blocco in piú</numerusform><numerusform>Aperto per %n blocchi in piú</numerusform><numerusform>Aperto per %n blocchi in piú</numerusform></translation>
     </message>
     <message>
         <source>Open until %1</source>
@@ -3786,6 +3993,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Abbandona transazione </translation>
     </message>
     <message>
+        <source>Resend transaction</source>
+        <translation>Invia nuovamente la transazione</translation>
+    </message>
+    <message>
         <source>Copy address</source>
         <translation>Copia l'indirizzo</translation>
     </message>
@@ -3810,8 +4021,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Copia i dettagli dell'intera transazione</translation>
     </message>
     <message>
-        <source>Edit label</source>
-        <translation>Modifica l'etichetta</translation>
+        <source>Edit address label</source>
+        <translation>Modifica etichetta indirizzo</translation>
     </message>
     <message>
         <source>Show transaction details</source>
@@ -3894,10 +4105,33 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
 </context>
 <context>
+    <name>WalletController</name>
+    <message>
+        <source>Close wallet</source>
+        <translation>Chiudi il portafoglio</translation>
+    </message>
+    <message>
+        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
+        <translation>Sei sicuro di voler chiudere il portafoglio&lt;i&gt;%1&lt;/i&gt;?</translation>
+    </message>
+    <message>
+        <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
+        <translation>La chiusura del portafoglio per periodi prolungati può comportare la risincronizzazione dell'intera catena se l'eliminazione è abilitata.</translation>
+    </message>
+</context>
+<context>
     <name>WalletFrame</name>
     <message>
-        <source>No wallet has been loaded.</source>
-        <translation>Non è stato caricato alcun portafoglio.</translation>
+        <source>No wallet has been loaded.
+Go to File &gt; Open Wallet to load a wallet.
+- OR -</source>
+        <translation>Nessun portafoglio è stato caricato.
+Vai su File &gt; Apri Wallet per caricare un Wallet.
+- Oppure -</translation>
+    </message>
+    <message>
+        <source>Create a new wallet</source>
+        <translation>Crea un nuovo Wallet</translation>
     </message>
 </context>
 <context>
@@ -3905,6 +4139,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Send Coins</source>
         <translation>Invia Monete</translation>
+    </message>
+    <message>
+        <source>default wallet</source>
+        <translation>portafoglio predefinito</translation>
     </message>
 </context>
 <context>
@@ -3955,6 +4193,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
         <translation>Errore: Ascolto per le connessioni in entrata non riuscito (ascoltare errore restituito %s)</translation>
+    </message>
+    <message>
+        <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
+        <translation>Stima della tariffa non riuscita. La commissione di riserva è disabilitata. Attendi qualche blocco o abilita -fallbackfee.</translation>
+    </message>
+    <message>
+        <source>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</source>
+        <translation>Questo errore potrebbe verificarsi se questo portafoglio non è stato arrestato in modo corretto ed è stato caricato l'ultima volta utilizzando una build con una versione più recente di Berkeley DB. In tal caso, utilizzare l'ultimo software che ha caricato questo portafoglio</translation>
     </message>
     <message>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
@@ -4017,14 +4263,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Errore di lettura del database, spegnimento</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Errore</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is low!</source>
-        <translation>Errore: la spazio libero sul disco è insufficiente!</translation>
-    </message>
-    <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>Nessuna porta disponibile per l'ascolto. Usa -listen=0 se vuoi procedere comunque.</translation>
     </message>
@@ -4049,6 +4287,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Importo non valido per -maxtxfee=&lt;amount&gt;: '%s' (deve essere almeno pari alla commissione 'minrelay fee' di %s per prevenire transazioni bloccate)</translation>
     </message>
     <message>
+        <source>SQLiteDatabase: Unknown sqlite wallet schema version %d. Only version %d is supported</source>
+        <translation>SQLiteDatabase: schema del wallet sqlite alla versione sconosciuta %d. È supportata solo la versione %d</translation>
+    </message>
+    <message>
         <source>Transaction index can't be disabled with governance validation enabled. Either start with -disablegovernance command line switch or enable transaction index.</source>
         <translation>L'indice di transazione non può essere disabilitato con la convalida della governance abilitata. Inizia con l'opzione della riga di comando -disablegovernance o abilita l'indice delle transazioni.</translation>
     </message>
@@ -4059,18 +4301,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Entry exceeds maximum size.</source>
         <translation>L'ingresso supera la dimensione massima.</translation>
-    </message>
-    <message>
-        <source>Failed to load fulfilled requests cache from</source>
-        <translation>Impossibile caricare la cache delle richieste soddisfatte da</translation>
-    </message>
-    <message>
-        <source>Failed to load governance cache from</source>
-        <translation>Caricamento della cache di governance non riuscito</translation>
-    </message>
-    <message>
-        <source>Failed to load masternode cache from</source>
-        <translation>Impossibile caricare la cache del masternode da</translation>
     </message>
     <message>
         <source>Found enough users, signing ( waiting %s )</source>
@@ -4095,10 +4325,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Incorrect or no genesis block found. Wrong datadir for network?</source>
         <translation>Blocco genesis non corretto o non trovato. Cartella dati errata?</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation>Informazioni</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -4181,18 +4407,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Risposta sconosciuta.</translation>
     </message>
     <message>
-        <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>
-        <translation>Ignorata opzione -benchmark non supportata, utilizzare -debug=bench.</translation>
-    </message>
-    <message>
-        <source>Unsupported argument -debugnet ignored, use -debug=net.</source>
-        <translation>Argomento -debugnet ignorato in quanto non supportato, usare -debug=net.</translation>
-    </message>
-    <message>
-        <source>Unsupported argument -tor found, use -onion.</source>
-        <translation>Rilevato argomento -tor non supportato, utilizzare -onion.</translation>
-    </message>
-    <message>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>Il commento del User Agent (%s) contiene caratteri non sicuri.</translation>
     </message>
@@ -4217,10 +4431,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>%s  è inattivo.</translation>
     </message>
     <message>
-        <source>%s request incomplete: %s</source>
-        <translation>Richiesta di %s incompleta: %s</translation>
-    </message>
-    <message>
         <source>Can't mix while sync in progress.</source>
         <translation>Impossibile fare il mixing quando la sincronizzazione è in corso.</translation>
     </message>
@@ -4235,10 +4445,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>%s file contains all private keys from this wallet. Do not share it with anyone!</source>
         <translation>%s il file contiene tutte le chiavi private di questo portafoglio. Non condividerlo con nessuno!</translation>
-    </message>
-    <message>
-        <source>-masternode option is deprecated and ignored, specifying -masternodeblsprivkey is enough to start this node as a masternode.</source>
-        <translation>-L'opzione masternode è deprecata e ignorata, specificare -masternodeblsprivkey è sufficiente per avviare questo nodo come masternode.</translation>
     </message>
     <message>
         <source>Failed to create backup, file already exists! This could happen if you restarted wallet in less than 60 seconds. You can continue if you are ok with this.</source>
@@ -4257,10 +4463,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Prune: l'ultima sincronizzazione del portafoglio risulta essere oltre la riduzione dei dati. È necessario eseguire un -reindex (scaricare nuovamente la blockchain in caso di nodo pruned)</translation>
     </message>
     <message>
-        <source>Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again.</source>
-        <translation>Non è possibile un Rescan in modalità pruned. Sarà necessario utilizzare -reindex che farà scaricare nuovamente tutta la blockchain.</translation>
-    </message>
-    <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>Il database dei blocchi contiene un blocco che sembra provenire dal futuro. Questo può essere dovuto alla data e ora del tuo computer impostate in modo scorretto. Ricostruisci il database dei blocchi se sei certo che la data e l'ora sul tuo computer siano corrette</translation>
     </message>
@@ -4273,24 +4475,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>La lunghezza totale della stringa di network version (%i) eccede la lunghezza massima (%i). Ridurre il numero o la dimensione di uacomments.</translation>
     </message>
     <message>
-        <source>Unsupported argument -socks found. Setting SOCKS version isn't possible anymore, only SOCKS5 proxies are supported.</source>
-        <translation>Argomento -socks non supportato. Non è più possibile impostare la versione SOCKS, solamente i proxy SOCKS5 sono supportati.</translation>
-    </message>
-    <message>
-        <source>Unsupported argument -whitelistalwaysrelay ignored, use -whitelistrelay and/or -whitelistforcerelay.</source>
-        <translation>Argomento non supportato -whitelistalwaysrelay è stato ignorato, utilizzare -whitelistrelay e/o -whitelistforcerelay.</translation>
-    </message>
-    <message>
         <source>WARNING! Failed to replenish keypool, please unlock your wallet to do so.</source>
         <translation>ATTENZIONE! Impossibile riempire il keypool, per favore sblocca il tuo portafoglio per farlo ..</translation>
     </message>
     <message>
         <source>Wallet is locked, can't replenish keypool! Automatic backups and mixing are disabled, please unlock your wallet to replenish keypool.</source>
         <translation>Il Portafoglio è bloccato, non può ricostituire il keypool! I backup e il mixaggio automatici sono disabilitati, sblocca il tuo portafoglio per ricostituire il keypool.</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown block versions being mined! It's possible unknown rules are in effect</source>
-        <translation>Attenzione: si stanno minando versioni sconocsiute di blocchi! E' possibile che siano attive regole sconosciute</translation>
     </message>
     <message>
         <source>You need to rebuild the database using -reindex to change -timestampindex</source>
@@ -4301,8 +4491,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Per ritornare alla modalità unpruned sarà necessario ricostruire il database utilizzando l'opzione -reindex. L'intera blockchain sarà riscaricata.</translation>
     </message>
     <message>
-        <source>-litemode is deprecated.</source>
-        <translation>-litemode è deprecato.</translation>
+        <source>%s failed</source>
+        <translation>%s fallito</translation>
     </message>
     <message>
         <source>-maxmempool must be at least %d MB</source>
@@ -4313,16 +4503,36 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Backup automatici disabilitati</translation>
     </message>
     <message>
+        <source>Cannot set -peerblockfilters without -blockfilterindex.</source>
+        <translation>Impossibile impostare -peerblockfilters senza -blockfilterindex.</translation>
+    </message>
+    <message>
+        <source>Config setting for %s only applied on %s network when in [%s] section.</source>
+        <translation>L'impostazione di configurazione per %s è stata applicata solo sulla rete %s nella sezione [%s].</translation>
+    </message>
+    <message>
+        <source>Could not find asmap file %s</source>
+        <translation>Impossibile trovare il file asmap %s</translation>
+    </message>
+    <message>
+        <source>Could not parse asmap file %s</source>
+        <translation>Impossibile analizzare il file asmap %s</translation>
+    </message>
+    <message>
         <source>ERROR! Failed to create automatic backup</source>
         <translation>ERRORE! Impossibile creare il backup automatico</translation>
+    </message>
+    <message>
+        <source>Error loading %s: Private keys can only be disabled during creation</source>
+        <translation>Errore durante il caricamento di %s: le chiavi private possono essere disabilitate solo durante la creazione</translation>
     </message>
     <message>
         <source>Error upgrading evo database</source>
         <translation>Errore durante l'aggiornamento del database evo</translation>
     </message>
     <message>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Errore: si è presentato un errore interno fatale, consulta il file debug.log per maggiori dettagli</translation>
+        <source>Error: Disk space is low for %s</source>
+        <translation>Errore: lo spazio su disco è insufficiente per %s</translation>
     </message>
     <message>
         <source>Error: failed to add socket to epollfd (epoll_ctl returned error %s)</source>
@@ -4331,18 +4541,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Exceeded max tries.</source>
         <translation>Numero massimo di tentativi superato.</translation>
-    </message>
-    <message>
-        <source>Failed to clear fulfilled requests cache at</source>
-        <translation>Impossibile cancellare la cache delle richieste soddisfatte a</translation>
-    </message>
-    <message>
-        <source>Failed to clear governance cache at</source>
-        <translation>Impossibile svuotare la cache della governance in</translation>
-    </message>
-    <message>
-        <source>Failed to clear masternode cache at</source>
-        <translation>Impossibile cancellare la cache del masternode in</translation>
     </message>
     <message>
         <source>Failed to commit EvoDB</source>
@@ -4361,12 +4559,20 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Impossibile eliminare il backup, errore: %s</translation>
     </message>
     <message>
-        <source>Failed to load sporks cache from</source>
-        <translation>Impossibile caricare la cache degli sporks da</translation>
-    </message>
-    <message>
         <source>Failed to rescan the wallet during initialization</source>
         <translation>Impossibile eseguire nuovamente la scansione del portafoglio durante l'inizializzazione</translation>
+    </message>
+    <message>
+        <source>Failed to verify database</source>
+        <translation>Impossibile verificare il database</translation>
+    </message>
+    <message>
+        <source>Ignoring duplicate -wallet %s.</source>
+        <translation>Duplicato -wallet %s ignorato.</translation>
+    </message>
+    <message>
+        <source>Invalid P2P permission: '%s'</source>
+        <translation>Autorizzazione P2P non valida: '%s'</translation>
     </message>
     <message>
         <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
@@ -4375,14 +4581,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Invalid masternodeblsprivkey. Please see documentation.</source>
         <translation>Invalid masternodeblsprivkey. Per favore vedi documentazione.</translation>
-    </message>
-    <message>
-        <source>It has been replaced by -disablegovernance.</source>
-        <translation>È stato sostituito da -disablegovernance.</translation>
-    </message>
-    <message>
-        <source>Its replacement -disablegovernance has been forced instead.</source>
-        <translation>La sua sostituzione -disablegovernance è stata invece forzata.</translation>
     </message>
     <message>
         <source>Loading block index...</source>
@@ -4437,6 +4635,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>La modalità prune non può essere configurata con un valore negativo.</translation>
     </message>
     <message>
+        <source>Prune mode is incompatible with -blockfilterindex.</source>
+        <translation>La modalità Prune non è compatibile con -blockfilterindex.</translation>
+    </message>
+    <message>
         <source>Prune mode is incompatible with -disablegovernance=false.</source>
         <translation>La modalità di sfoltimento non è compatibile con -disablegovernance = false.</translation>
     </message>
@@ -4447,6 +4649,26 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Pruning blockstore...</source>
         <translation>Pruning del blockstore...</translation>
+    </message>
+    <message>
+        <source>SQLiteDatabase: Failed to execute statement to verify database: %s</source>
+        <translation>SQLiteDatabase: Impossibile eseguire l'istruzione per verificare il database: %s</translation>
+    </message>
+    <message>
+        <source>SQLiteDatabase: Failed to prepare statement to verify database: %s</source>
+        <translation>SQLiteDatabase: Impossibile preparare l'istruzione per verificare il database: %s</translation>
+    </message>
+    <message>
+        <source>SQLiteDatabase: Failed to read database verification error: %s</source>
+        <translation>SQLiteDatabase: Impossibile leggere l'errore di verifica del database: %s</translation>
+    </message>
+    <message>
+        <source>SQLiteDatabase: Unexpected application id. Expected %u, got %u</source>
+        <translation>SQLiteDatabase: ID applicazione imprevisto. Previsto %u, ottenuto %u</translation>
+    </message>
+    <message>
+        <source>Section [%s] is not recognized.</source>
+        <translation>La sezione [%s] non è riconosciuta.</translation>
     </message>
     <message>
         <source>Specified -walletdir "%s" does not exist</source>
@@ -4463,6 +4685,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Synchronizing blockchain...</source>
         <translation>Sincronizzazione blockchain...</translation>
+    </message>
+    <message>
+        <source>The specified config file %s does not exist
+</source>
+        <translation>Il file di configurazione specificato %s non esiste
+</translation>
     </message>
     <message>
         <source>The wallet will avoid paying less than the minimum relay fee.</source>
@@ -4505,16 +4733,20 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Impossibile collegarsi a %s su questo computer. Probabilmente %s è già in esecuzione.</translation>
     </message>
     <message>
+        <source>Unable to create the PID file '%s': %s</source>
+        <translation>Impossibile creare il file PID '%s': %s</translation>
+    </message>
+    <message>
         <source>Unable to generate initial keys</source>
         <translation>Impossibile generare le chiavi iniziali</translation>
     </message>
     <message>
-        <source>Upgrading UTXO database</source>
-        <translation>Aggiornamento del database UTXO</translation>
+        <source>Unknown -blockfilterindex value %s.</source>
+        <translation>Sconosciuto - valore blockfilterindex %s.</translation>
     </message>
     <message>
-        <source>Wallet %s resides outside wallet directory %s</source>
-        <translation>Il portafoglio %s risiede fuori dalla directory del portafoglio %s</translation>
+        <source>Upgrading UTXO database</source>
+        <translation>Aggiornamento del database UTXO</translation>
     </message>
     <message>
         <source>Wallet needed to be rewritten: restart %s to complete</source>
@@ -4541,20 +4773,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>È necessario ricostruire il database usando -reindex per cambiare -spentindex</translation>
     </message>
     <message>
-        <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation>È necessario ricostruire il database usando -reindex per cambiare -txindex</translation>
-    </message>
-    <message>
         <source>no mixing available.</source>
         <translation>nessun mixing disponibile.</translation>
     </message>
     <message>
         <source>see debug.log for details.</source>
         <translation>vedere debug.log per i dettagli.</translation>
-    </message>
-    <message>
-        <source>BLOCX Core</source>
-        <translation>BLOCX Core</translation>
     </message>
     <message>
         <source>The %s developers</source>
@@ -4601,32 +4825,32 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Questo è il costo di transazione che potresti pagare quando le stime della fee non sono disponibili.</translation>
     </message>
     <message>
-        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation>Questo prodotto include software sviluppato dal progetto OpenSSL per l'uso del Toolkit OpenSSL %s, software crittografico scritto da Eric Young e software UPnP scritto da Thomas Bernard.</translation>
-    </message>
-    <message>
         <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
         <translation>Impossibile riprodurre i blocchi. Dovrai ricostruire il database usando -reindex-chainstate.</translation>
     </message>
     <message>
-        <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Attenzione: file del Portafoglio corrotto, dati recuperati! %s originale salvato come %s in %s; se il saldo o le transazioni non sono corrette effettua un ripristino da un backup.</translation>
+        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
+        <translation>Avviso: chiavi private rilevate nel portafoglio {%s} con chiavi private disabilitate</translation>
     </message>
     <message>
         <source>%d of last 100 blocks have unexpected version</source>
         <translation>%d degli ultimi 100 blocchi ha una versione inattesa</translation>
     </message>
     <message>
-        <source>%s corrupt, salvage failed</source>
-        <translation>%s corrotto, recupero fallito</translation>
-    </message>
-    <message>
         <source>%s is not a valid backup folder!</source>
         <translation>%s non è una cartella di backup valida!</translation>
     </message>
     <message>
+        <source>%s is only allowed with a single wallet file</source>
+        <translation>%s è consentito solo con un singolo file di portafoglio</translation>
+    </message>
+    <message>
         <source>%s is set very high!</source>
         <translation>%s ha un'impostazione molto alta!</translation>
+    </message>
+    <message>
+        <source>%s request incomplete:</source>
+        <translation>%s richiesta incompleta:</translation>
     </message>
     <message>
         <source>-devnet can only be specified once</source>
@@ -4639,6 +4863,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>-rpcport must be specified when -devnet and -server are specified</source>
         <translation>-rpcport deve essere specificato quando -devnet e -server sono specificati</translation>
+    </message>
+    <message>
+        <source>A fatal internal error occurred, see debug.log for details</source>
+        <translation>Si è verificato un errore interno irreversibile, vedere debug.log per i dettagli</translation>
     </message>
     <message>
         <source>Cannot resolve -%s address: '%s'</source>
@@ -4657,6 +4885,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Copyright (C)</translation>
     </message>
     <message>
+        <source>Disk space is too low!</source>
+        <translation>Lo spazio su disco è insufficiente!</translation>
+    </message>
+    <message>
         <source>Error loading %s</source>
         <translation>Errore caricamento %s</translation>
     </message>
@@ -4673,10 +4905,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Errore durante il caricamento di %s: non è possibile disabilitare l'HD su un portafoglio HD già esistente</translation>
     </message>
     <message>
-        <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
-        <translation>Errore durante il caricamento del portafoglio%s. Il Nome -wallet filename  specificato è duplicato </translation>
-    </message>
-    <message>
         <source>Error upgrading chainstate database</source>
         <translation>Errore durante l'aggiornamento del database chainstate</translation>
     </message>
@@ -4685,8 +4913,36 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Errore: impossibile aggiungere il socket a kqueuefd (kevent ha restituito l'errore %s)</translation>
     </message>
     <message>
+        <source>Failed to clear fulfilled requests cache at %s</source>
+        <translation>Impossibile svuotare la cache delle richieste soddisfatte alle %s</translation>
+    </message>
+    <message>
+        <source>Failed to clear governance cache at %s</source>
+        <translation>Impossibile svuotare la cache di governance alle %s</translation>
+    </message>
+    <message>
+        <source>Failed to clear masternode cache at %s</source>
+        <translation>Impossibile svuotare la cache del masternode alle %s</translation>
+    </message>
+    <message>
         <source>Failed to find mixing queue to join</source>
         <translation>Impossibile trovare la coda di mixaggio a cui unirsi</translation>
+    </message>
+    <message>
+        <source>Failed to load fulfilled requests cache from %s</source>
+        <translation>Impossibile caricare la cache delle richieste soddisfatte da %s</translation>
+    </message>
+    <message>
+        <source>Failed to load governance cache from %s</source>
+        <translation>Impossibile caricare la cache di governance da %s</translation>
+    </message>
+    <message>
+        <source>Failed to load masternode cache from %s</source>
+        <translation>Impossibile caricare la cache del masternode da %s</translation>
+    </message>
+    <message>
+        <source>Failed to load sporks cache from %s</source>
+        <translation>Impossibile caricare la cache di Spork da %s</translation>
     </message>
     <message>
         <source>Failed to start a new mixing queue</source>
@@ -4757,6 +5013,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>L'ultima coda è stata creata troppo di recente.</translation>
     </message>
     <message>
+        <source>%s corrupt. Try using the wallet tool blocx-wallet to salvage or restoring a backup.</source>
+        <translation>%s danneggiato. Prova a utilizzare lo strumento portafoglio blocx-wallet per salvare o ripristinare un backup.</translation>
+    </message>
+    <message>
+        <source>Can't generate a change-address key. No keys in the internal keypool and can't generate any keys.</source>
+        <translation>Impossibile generare una chiave di modifica dell'indirizzo. Nessuna chiave nel pool di chiavi interno e non è possibile generare alcuna chiave.</translation>
+    </message>
+    <message>
         <source>Last successful action was too recent.</source>
         <translation>Ultima azione successo era troppo recente.</translation>
     </message>
@@ -4797,10 +5061,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Transazione non valida</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transazione troppo grande in base alla policy sulle commissioni</translation>
-    </message>
-    <message>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
         <translation>Incapace di legare al %s su questo computer (bind return error %s)</translation>
     </message>
@@ -4829,6 +5089,10 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Categoria di registrazione non supportata %s=%s.</translation>
     </message>
     <message>
+        <source>Upgrading txindex database</source>
+        <translation>Aggiornamento del database txindex</translation>
+    </message>
+    <message>
         <source>Verifying blocks...</source>
         <translation>Verifica blocchi...</translation>
     </message>
@@ -4839,14 +5103,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Wallet is locked.</source>
         <translation>Portafoglio bloccato</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation>Attenzione</translation>
-    </message>
-    <message>
-        <source>Warning: %s is deprecated, please use %s instead</source>
-        <translation>Avviso: %s è deprecato, utilizza invece %s</translation>
     </message>
     <message>
         <source>Warning: can't use %s and %s together, will prefer %s</source>
@@ -4867,10 +5123,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <source>Your entries added successfully.</source>
         <translation>Le tue voci sono state aggiunte con successo.</translation>
-    </message>
-    <message>
-        <source>Zapping all transactions from wallet...</source>
-        <translation>Cancella e ricompila tutte le transazioni dal wallet...</translation>
     </message>
 </context>
 </TS>

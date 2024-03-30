@@ -1,60 +1,82 @@
-Mac OS X Build Instructions and Notes
-====================================
+# macOS Build Instructions and Notes
+
 The commands in this guide should be executed in a Terminal application.
-The built-in one is located in `/Applications/Utilities/Terminal.app`.
+The built-in one is located in
+```
+/Applications/Utilities/Terminal.app
+```
 
-Preparation
------------
-Install the OS X command line tools:
+## Preparation
+Install the macOS command line tools:
 
-`xcode-select --install`
+```shell
+xcode-select --install
+```
 
 When the popup appears, click `Install`.
 
 Then install [Homebrew](https://brew.sh).
 
-Base build dependencies
------------------------
+## Base build dependencies
 
-```bash
-brew install automake libtool pkg-config
+```shell
+brew install automake libtool pkg-config libnatpmp sqlite
 ```
 
-If you want to build the disk image with `make deploy` (.dmg / optional), you need RSVG
-```bash
+See [dependencies.md](dependencies.md) for a complete overview.
+
+If you want to build the disk image with `make deploy` (.dmg / optional), you need RSVG:
+```shell
 brew install librsvg
 ```
 
-Building
---------
+If you run into issues, check [Homebrew's troubleshooting page](https://docs.brew.sh/Troubleshooting).
+
+## Building
 
 It's possible that your `PATH` environment variable contains some problematic strings, run
-```bash
+```shell
 export PATH=$(echo "$PATH" | sed -e '/\\/!s/ /\\ /g') # fix whitespaces
 ```
 
 Next, follow the instructions in [build-generic](build-generic.md)
 
-Running
--------
+## `disable-wallet` mode
+When the intention is to run only a P2P node without a wallet, BLOCX Core may be
+compiled in `disable-wallet` mode with:
+```shell
+./configure --disable-wallet
+```
+
+In this case there is no dependency on Berkeley DB 4.8 and SQLite.
+
+Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
+
+## Running
 
 BLOCX Core is now available at `./src/blocxd`
 
-Before running, it's recommended you create an RPC configuration file.
+Before running, you may create an empty configuration file:
+```shell
+mkdir -p "/Users/${USER}/Library/Application Support/BLOCXCore"
 
-    echo -e "rpcuser=blocxrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/BLOCX/blocx.conf"
+touch "/Users/${USER}/Library/Application Support/BLOCXCore/blocx.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/BLOCX/blocx.conf"
+chmod 600 "/Users/${USER}/Library/Application Support/BLOCXCore/blocx.conf"
+```
 
-The first time you run blocxd, it will start downloading the blockchain. This process could take several hours.
+The first time you run blocxd, it will start downloading the blockchain. This process could
+take many hours, or even days on slower than average systems.
 
 You can monitor the download process by looking at the debug.log file:
+```shell
+tail -f $HOME/Library/Application\ Support/BLOCXCore/debug.log
+```
 
-    tail -f $HOME/Library/Application\ Support/BLOCX/debug.log
+## Other commands:
 
-Other commands:
--------
-
-    ./src/blocxd -daemon # Starts the blocx daemon.
-    ./src/blocx-cli --help # Outputs a list of command-line options.
-    ./src/blocx-cli help # Outputs a list of RPC commands when the daemon is running.
+```shell
+./src/blocxd -daemon # Starts the blocx daemon.
+./src/blocx-cli --help # Outputs a list of command-line options.
+./src/blocx-cli help # Outputs a list of RPC commands when the daemon is running.
+```

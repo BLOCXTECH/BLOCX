@@ -2,7 +2,6 @@
 # Copyright (c) 2013-2015 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-import biplist
 from ds_store import DSStore
 from mac_alias import Alias
 import sys
@@ -13,7 +12,7 @@ package_name_ns = sys.argv[2]
 ds = DSStore.open(output_file, 'w+')
 ds['.']['bwsp'] = {
     'ShowStatusBar': False,
-    'WindowBounds': b'{{300, 280}, {500, 343}}',
+    'WindowBounds': '{{300, 280}, {500, 343}}',
     'ContainerShowSidebar': False,
     'SidebarWidth': 0,
     'ShowTabView': False,
@@ -44,10 +43,10 @@ alias = Alias.from_bytes(icvp['backgroundImageAlias'])
 alias.volume.name = package_name_ns
 alias.volume.posix_path = '/Volumes/' + package_name_ns
 alias.volume.disk_image_alias.target.filename = package_name_ns + '.temp.dmg'
-alias.volume.disk_image_alias.target.carbon_path = 'Macintosh HD:Users:\x00blocxuser:\x00Documents:\x00blocx:\x00blocx:\x00' + package_name_ns + '.temp.dmg'
-alias.volume.disk_image_alias.target.posix_path = 'Users/blocxuser/Documents/blocx/blocx/' + package_name_ns + '.temp.dmg'
+alias.volume.disk_image_alias.target.carbon_path = 'Macintosh HD:Users:\x00blocxcoreuser:\x00Documents:\x00blocxcore:\x00blocxcore:\x00' + package_name_ns + '.temp.dmg'
+alias.volume.disk_image_alias.target.posix_path = 'Users/blocxcoreuser/Documents/blocxcore/blocxcore/' + package_name_ns + '.temp.dmg'
 alias.target.carbon_path = package_name_ns + ':.background:\x00background.tiff'
-icvp['backgroundImageAlias'] = biplist.Data(alias.to_bytes())
+icvp['backgroundImageAlias'] = alias.to_bytes()
 ds['.']['icvp'] = icvp
 
 ds['.']['vSrn'] = ('long', 1)

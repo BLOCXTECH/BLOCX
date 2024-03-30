@@ -69,7 +69,7 @@
         <translation>C&amp;lose</translation>
     </message>
     <message>
-        <location filename="../addressbookpage.cpp" line="+77"/>
+        <location filename="../addressbookpage.cpp" line="+79"/>
         <source>Choose the address to send coins to</source>
         <translation>Choose the address to send coins to</translation>
     </message>
@@ -100,8 +100,8 @@
     </message>
     <message>
         <location line="+5"/>
-        <source>These are your BLOCX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>These are your BLOCX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
+        <source>These are your BLOCX addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.</source>
+        <translation>These are your BLOCX addresses for receiving payments. Use the &apos;Create new receiving address&apos; button in the receive tab to create new addresses.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -124,12 +124,12 @@
         <translation>&amp;Show address QR code</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+135"/>
         <source>QR code</source>
         <translation>QR code</translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+70"/>
         <source>Export Address List</source>
         <translation>Export Address List</translation>
     </message>
@@ -144,15 +144,17 @@
         <translation>Exporting Failed</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
+        <comment>An error message.</comment>
+        <extracomment>%1 is a name of the file (e.g., &quot;addrbook.csv&quot;) that the bitcoin addresses were exported to.</extracomment>
         <translation>There was an error trying to save the address list to %1. Please try again.</translation>
     </message>
 </context>
 <context>
     <name>AddressTableModel</name>
     <message>
-        <location filename="../addresstablemodel.cpp" line="+164"/>
+        <location filename="../addresstablemodel.cpp" line="+165"/>
         <source>Label</source>
         <translation>Label</translation>
     </message>
@@ -162,7 +164,7 @@
         <translation>Address</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+40"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
@@ -241,16 +243,11 @@
     </message>
     <message>
         <location line="+14"/>
-        <source>Show password</source>
-        <translation>Show password</translation>
+        <source>Show passphrase</source>
+        <translation>Show passphrase</translation>
     </message>
     <message>
-        <location filename="../askpassphrasedialog.cpp" line="+54"/>
-        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location filename="../askpassphrasedialog.cpp" line="+58"/>
         <source>Encrypt wallet</source>
         <translation>Encrypt wallet</translation>
     </message>
@@ -286,12 +283,7 @@
         <translation>Change passphrase</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Enter the old passphrase and new passphrase to the wallet.</source>
-        <translation>Enter the old passphrase and new passphrase to the wallet.</translation>
-    </message>
-    <message>
-        <location line="+45"/>
+        <location line="+46"/>
         <source>Confirm wallet encryption</source>
         <translation>Confirm wallet encryption</translation>
     </message>
@@ -306,17 +298,42 @@
         <translation>Are you sure you wish to encrypt your wallet?</translation>
     </message>
     <message>
+        <location line="+20"/>
         <location line="+10"/>
-        <location line="+12"/>
-        <location line="+59"/>
+        <location line="+62"/>
         <source>Wallet encrypted</source>
         <translation>Wallet encrypted</translation>
     </message>
     <message>
-        <location line="-69"/>
-        <location line="+12"/>
-        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your funds from being stolen by malware infecting your computer.</source>
-        <translation>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your funds from being stolen by malware infecting your computer.</translation>
+        <location line="-169"/>
+        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Enter the old passphrase and new passphrase for the wallet.</source>
+        <translation>Enter the old passphrase and new passphrase for the wallet.</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>Remember that encrypting your wallet cannot fully protect your funds from being stolen by malware infecting your computer.</source>
+        <translation>Remember that encrypting your wallet cannot fully protect your funds from being stolen by malware infecting your computer.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Wallet to be encrypted</source>
+        <translation>Wallet to be encrypted</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Your wallet is about to be encrypted. </source>
+        <translation>Your wallet is about to be encrypted. </translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+10"/>
+        <source>Your wallet is now encrypted. </source>
+        <translation>Your wallet is now encrypted. </translation>
     </message>
     <message>
         <location line="-8"/>
@@ -324,37 +341,38 @@
         <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. Previous backups of the unencrypted wallet file contain the same HD seed and still have full access to all your funds just like the new, encrypted wallet.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+10"/>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location line="+7"/>
-        <location line="+43"/>
+        <location line="+8"/>
+        <location line="+47"/>
         <location line="+6"/>
         <source>Wallet encryption failed</source>
         <translation>Wallet encryption failed</translation>
     </message>
     <message>
-        <location line="-55"/>
+        <location line="-60"/>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
         <translation>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <location line="+49"/>
+        <location line="+8"/>
+        <location line="+53"/>
         <source>The supplied passphrases do not match.</source>
         <translation>The supplied passphrases do not match.</translation>
     </message>
     <message>
-        <location line="-37"/>
+        <location line="-40"/>
+        <location line="+8"/>
         <source>Wallet unlock failed</source>
         <translation>Wallet unlock failed</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+11"/>
+        <location line="-7"/>
+        <location line="+14"/>
         <location line="+19"/>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
         <translation>The passphrase entered for the wallet decryption was incorrect.</translation>
@@ -379,7 +397,7 @@
 <context>
     <name>BanTableModel</name>
     <message>
-        <location filename="../bantablemodel.cpp" line="+88"/>
+        <location filename="../bantablemodel.cpp" line="+86"/>
         <source>IP/Netmask</source>
         <translation>IP/Netmask</translation>
     </message>
@@ -392,7 +410,7 @@
 <context>
     <name>BitcoinAmountField</name>
     <message>
-        <location filename="../bitcoinamountfield.cpp" line="+249"/>
+        <location filename="../bitcoinamountfield.cpp" line="+291"/>
         <source>Amount in %1</source>
         <translation>Amount in %1</translation>
     </message>
@@ -400,27 +418,12 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <location filename="../blocx.cpp" line="+540"/>
+        <location filename="../bitcoin.cpp" line="+396"/>
         <source>A fatal error occurred. BLOCX Core can no longer continue safely and will quit.</source>
         <translation>A fatal error occurred. BLOCX Core can no longer continue safely and will quit.</translation>
     </message>
     <message>
-        <location filename="../bitcoingui.cpp" line="+1401"/>
-        <source>BLOCX Core</source>
-        <translation>BLOCX Core</translation>
-    </message>
-    <message>
-        <location line="-1260"/>
-        <source>Wallet</source>
-        <translation>Wallet</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Node</source>
-        <translation>Node</translation>
-    </message>
-    <message>
-        <location line="+457"/>
+        <location filename="../bitcoingui.cpp" line="+650"/>
         <source>&amp;Overview</source>
         <translation>&amp;Overview</translation>
     </message>
@@ -430,7 +433,7 @@
         <translation>Show general overview of wallet</translation>
     </message>
     <message>
-        <location line="-215"/>
+        <location line="-306"/>
         <source>&amp;Send</source>
         <translation>&amp;Send</translation>
     </message>
@@ -440,7 +443,7 @@
         <translation>Send coins to a BLOCX address</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>&amp;Receive</source>
         <translation>&amp;Receive</translation>
     </message>
@@ -450,7 +453,62 @@
         <translation>Request payments (generates QR codes and blocx: URIs)</translation>
     </message>
     <message>
-        <location line="+220"/>
+        <location line="+70"/>
+        <source>&amp;Sending addresses</source>
+        <translation>&amp;Sending addresses</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Receiving addresses</source>
+        <translation>&amp;Receiving addresses</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Open Wallet</source>
+        <translation>Open Wallet</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Open a wallet</source>
+        <translation>Open a wallet</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Close Wallet...</source>
+        <translation>Close Wallet...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Close wallet</source>
+        <translation>Close wallet</translation>
+    </message>
+    <message>
+        <location line="+79"/>
+        <source>No wallets available</source>
+        <translation>No wallets available</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>&amp;Window</source>
+        <translation>&amp;Window</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Minimize</source>
+        <translation>Minimize</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Zoom</source>
+        <translation>Zoom</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Main Window</source>
+        <translation>Main Window</translation>
+    </message>
+    <message>
+        <location line="+58"/>
         <source>&amp;Transactions</source>
         <translation>&amp;Transactions</translation>
     </message>
@@ -470,7 +528,7 @@
         <translation>Browse masternodes</translation>
     </message>
     <message>
-        <location line="-221"/>
+        <location line="-309"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
     </message>
@@ -480,12 +538,7 @@
         <translation>Quit application</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Show information about BLOCX Core</source>
-        <translation>Show information about BLOCX Core</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+7"/>
         <source>About &amp;Qt</source>
         <translation>About &amp;Qt</translation>
     </message>
@@ -505,12 +558,12 @@
         <translation>&amp;About %1</translation>
     </message>
     <message>
-        <location line="-20"/>
+        <location line="-22"/>
         <source>Send %1 funds to a BLOCX address</source>
         <translation>Send %1 funds to a BLOCX address</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+30"/>
         <source>Modify configuration options for %1</source>
         <translation>Modify configuration options for %1</translation>
     </message>
@@ -605,12 +658,7 @@
         <translation>&amp;Debug console</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Open debugging console</source>
-        <translation>Open debugging console</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>&amp;Network Monitor</source>
         <translation>&amp;Network Monitor</translation>
     </message>
@@ -660,22 +708,12 @@
         <translation>Show automatically created wallet backups</translation>
     </message>
     <message>
-        <location line="+8"/>
-        <source>&amp;Sending addresses...</source>
-        <translation>&amp;Sending addresses...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+10"/>
         <source>Show the list of used sending addresses and labels</source>
         <translation>Show the list of used sending addresses and labels</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>&amp;Receiving addresses...</source>
-        <translation>&amp;Receiving addresses...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Show the list of used receiving addresses and labels</source>
         <translation>Show the list of used receiving addresses and labels</translation>
     </message>
@@ -685,12 +723,7 @@
         <translation>Open &amp;URI...</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Open a blocx: URI or payment request</source>
-        <translation>Open a blocx: URI or payment request</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+15"/>
         <source>&amp;Command-line options</source>
         <translation>&amp;Command-line options</translation>
     </message>
@@ -700,34 +733,59 @@
         <translation>Show the %1 help message to get a list with possible BLOCX command-line options</translation>
     </message>
     <message>
-        <location line="+324"/>
+        <location line="+50"/>
         <source>default wallet</source>
         <translation>default wallet</translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+480"/>
         <source>%1 client</source>
         <translation>%1 client</translation>
     </message>
     <message>
-        <location line="+723"/>
+        <location line="+744"/>
         <source>Wallet: %1
 </source>
         <translation>Wallet: %1
 </translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+75"/>
         <source>Wallet is &lt;b&gt;unencrypted&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;unencrypted&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="-1138"/>
+        <location line="-1250"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location line="-65"/>
+        <location line="-172"/>
+        <source>Show information about %1</source>
+        <translation>Show information about %1</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Open debugging and diagnostic console</source>
+        <translation>Open debugging and diagnostic console</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Open a blocx: URI</source>
+        <translation>Open a blocx: URI</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Create Wallet...</source>
+        <translation>Create Wallet...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Create a new wallet</source>
+        <translation>Create a new wallet</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>%1 &amp;information</source>
         <translation>%1 &amp;information</translation>
     </message>
@@ -737,17 +795,12 @@
         <translation>Show the %1 basic information</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+115"/>
         <source>&amp;Settings</source>
         <translation>&amp;Settings</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>&amp;Tools</source>
-        <translation>&amp;Tools</translation>
-    </message>
-    <message>
-        <location line="+11"/>
+        <location line="+61"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
@@ -756,8 +809,18 @@
         <source>Tabs toolbar</source>
         <translation>Tabs toolbar</translation>
     </message>
+    <message>
+        <location line="+46"/>
+        <source>&amp;Governance</source>
+        <translation>&amp;Governance</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>View Governance Proposals</source>
+        <translation>View Governance Proposals</translation>
+    </message>
     <message numerus="yes">
-        <location line="+540"/>
+        <location line="+547"/>
         <source>%n active connection(s) to BLOCX network</source>
         <translation>
             <numerusform>%n active connection to BLOCX network</numerusform>
@@ -775,7 +838,7 @@
         <translation>Syncing Headers (%1%)...</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+121"/>
         <source>Synchronizing with network...</source>
         <translation>Synchronizing with network...</translation>
     </message>
@@ -808,7 +871,7 @@
         </translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+19"/>
         <source>%1 behind</source>
         <translation>%1 behind</translation>
     </message>
@@ -838,14 +901,24 @@
         <translation>Synchronizing additional data: %p%</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+31"/>
         <source>Error</source>
         <translation>Error</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Error: %1</source>
+        <translation>Error: %1</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Warning</source>
         <translation>Warning</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Warning: %1</source>
+        <translation>Warning: %1</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -932,7 +1005,7 @@
         <translation>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+22"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</translation>
     </message>
@@ -945,6 +1018,16 @@
         <location line="+9"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
+        <translation>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</translation>
+    </message>
+    <message>
+        <location line="+101"/>
+        <source>Original message:</source>
+        <translation>Original message:</translation>
     </message>
 </context>
 <context>
@@ -1121,7 +1204,7 @@
         <translation>(%1 locked)</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+158"/>
         <source>yes</source>
         <translation>yes</translation>
     </message>
@@ -1171,7 +1254,7 @@
         <translation>Show spendable coins only</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+20"/>
         <location line="+75"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
@@ -1190,6 +1273,72 @@
         <location line="+24"/>
         <source>n/a</source>
         <translation>n/a</translation>
+    </message>
+</context>
+<context>
+    <name>CreateWalletActivity</name>
+    <message>
+        <location filename="../walletcontroller.cpp" line="+216"/>
+        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Create wallet failed</source>
+        <translation>Create wallet failed</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Create wallet warning</source>
+        <translation>Create wallet warning</translation>
+    </message>
+</context>
+<context>
+    <name>CreateWalletDialog</name>
+    <message>
+        <location filename="../forms/createwalletdialog.ui" line="+14"/>
+        <source>Create Wallet</source>
+        <translation>Create Wallet</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Wallet Name</source>
+        <translation>Wallet Name</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
+        <translation>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Encrypt Wallet</source>
+        <translation>Encrypt Wallet</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
+        <translation>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Disable Private Keys</source>
+        <translation>Disable Private Keys</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
+        <translation>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Make Blank Wallet</source>
+        <translation>Make Blank Wallet</translation>
+    </message>
+    <message>
+        <location filename="../createwalletdialog.cpp" line="+19"/>
+        <source>Create</source>
+        <translation>Create</translation>
     </message>
 </context>
 <context>
@@ -1240,12 +1389,17 @@
         <translation>The entered address &quot;%1&quot; is not a valid BLOCX address.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>The entered address &quot;%1&quot; is already in the address book.</source>
-        <translation>The entered address &quot;%1&quot; is already in the address book.</translation>
+        <location line="+33"/>
+        <source>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</source>
+        <translation>Address &quot;%1&quot; already exists as a receiving address with label &quot;%2&quot; and so cannot be added as a sending address.</translation>
     </message>
     <message>
         <location line="+5"/>
+        <source>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</source>
+        <translation>The entered address &quot;%1&quot; is already in the address book with label &quot;%2&quot;.</translation>
+    </message>
+    <message>
+        <location line="-28"/>
         <source>Could not unlock wallet.</source>
         <translation>Could not unlock wallet.</translation>
     </message>
@@ -1258,7 +1412,7 @@
 <context>
     <name>FreespaceChecker</name>
     <message>
-        <location filename="../intro.cpp" line="+78"/>
+        <location filename="../intro.cpp" line="+74"/>
         <source>A new data directory will be created.</source>
         <translation>A new data directory will be created.</translation>
     </message>
@@ -1284,20 +1438,47 @@
     </message>
 </context>
 <context>
+    <name>GovernanceList</name>
+    <message>
+        <location filename="../forms/governancelist.ui" line="+14"/>
+        <source>Form</source>
+        <translation>Form</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Filter List:</source>
+        <translation>Filter List:</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Filter proposal list</source>
+        <translation>Filter proposal list</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Proposal Count:</source>
+        <translation>Proposal Count:</translation>
+    </message>
+    <message>
+        <location line="-20"/>
+        <source>Filter by Title</source>
+        <translation>Filter by Title</translation>
+    </message>
+    <message>
+        <location filename="../governancelist.cpp" line="+408"/>
+        <source>Proposal Info: %1</source>
+        <translation>Proposal Info: %1</translation>
+    </message>
+</context>
+<context>
     <name>HelpMessageDialog</name>
     <message>
-        <location filename="../utilitydialog.cpp" line="+44"/>
+        <location filename="../utilitydialog.cpp" line="+40"/>
         <source>version</source>
         <translation>version</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+2"/>
-        <source>(%1-bit)</source>
-        <translation>(%1-bit)</translation>
-    </message>
-    <message>
-        <location line="+5"/>
+        <location line="+4"/>
         <source>About %1</source>
         <translation>About %1</translation>
     </message>
@@ -1360,7 +1541,7 @@
         <translation>Use a custom data directory:</translation>
     </message>
     <message>
-        <location filename="../intro.cpp" line="+26"/>
+        <location filename="../intro.cpp" line="+28"/>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
         <translation>At least %1 GB of data will be stored in this directory, and it will grow over time.</translation>
     </message>
@@ -1380,12 +1561,12 @@
         <translation>The wallet will also be stored in this directory.</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+80"/>
         <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
         <translation>Error: Specified data directory &quot;%1&quot; cannot be created.</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+28"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -1408,17 +1589,12 @@
         <translation>Form</translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+128"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location line="-33"/>
-        <source>0</source>
-        <translation>0</translation>
-    </message>
-    <message>
-        <location line="-44"/>
+        <location line="-85"/>
         <source>Filter List:</source>
         <translation>Filter List:</translation>
     </message>
@@ -1428,7 +1604,7 @@
         <translation>Filter masternode list</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+33"/>
         <source>Node Count:</source>
         <translation>Node Count:</translation>
     </message>
@@ -1446,6 +1622,11 @@
         <location line="+55"/>
         <source>Service</source>
         <translation>Service</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Type</source>
+        <translation>Type</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1503,12 +1684,12 @@
         <translation>Copy Collateral Outpoint</translation>
     </message>
     <message>
-        <location line="+101"/>
+        <location line="+102"/>
         <source>Updating...</source>
         <translation>Updating...</translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+38"/>
         <source>ENABLED</source>
         <translation>ENABLED</translation>
     </message>
@@ -1545,13 +1726,13 @@
         <translation>NONE</translation>
     </message>
     <message>
-        <location line="-161"/>
+        <location filename="../forms/masternodelist.ui" line="-120"/>
         <source>Filter by any property (e.g. address or protx hash)</source>
         <translation>Filter by any property (e.g. address or protx hash)</translation>
     </message>
     <message>
-        <location line="+63"/>
-        <location line="+170"/>
+        <location filename="../masternodelist.cpp" line="-99"/>
+        <location line="+173"/>
         <source>Please wait...</source>
         <translation>Please wait...</translation>
     </message>
@@ -1586,7 +1767,7 @@
     <message>
         <location line="+7"/>
         <location line="+20"/>
-        <location filename="../modaloverlay.cpp" line="+154"/>
+        <location filename="../modaloverlay.cpp" line="+158"/>
         <source>Unknown...</source>
         <translation>Unknown...</translation>
     </message>
@@ -1601,7 +1782,7 @@
         <translation>Progress</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+18"/>
         <source>Progress increase per hour</source>
         <translation>Progress increase per hour</translation>
     </message>
@@ -1622,9 +1803,14 @@
         <translation>Hide</translation>
     </message>
     <message>
-        <location filename="../modaloverlay.cpp" line="-1"/>
-        <source>Unknown. Syncing Headers (%1)...</source>
-        <translation>Unknown. Syncing Headers (%1)...</translation>
+        <location filename="../modaloverlay.cpp" line="-110"/>
+        <source>BLOCX Core is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</source>
+        <translation>BLOCX Core is currently syncing.  It will download headers and blocks from peers and validate them until reaching the tip of the block chain.</translation>
+    </message>
+    <message>
+        <location line="+116"/>
+        <source>Unknown. Syncing Headers (%1, %2%)...</source>
+        <translation>Unknown. Syncing Headers (%1, %2%)...</translation>
     </message>
 </context>
 <context>
@@ -1635,24 +1821,32 @@
         <translation>Open URI</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Open payment request from URI or file</source>
-        <translation>Open payment request from URI or file</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="+8"/>
         <source>URI:</source>
         <translation>URI:</translation>
     </message>
+</context>
+<context>
+    <name>OpenWalletActivity</name>
     <message>
-        <location line="+10"/>
-        <source>Select payment request file</source>
-        <translation>Select payment request file</translation>
+        <location filename="../walletcontroller.cpp" line="+39"/>
+        <source>Open wallet failed</source>
+        <translation>Open wallet failed</translation>
     </message>
     <message>
-        <location filename="../openuridialog.cpp" line="+48"/>
-        <source>Select payment request file to open</source>
-        <translation>Select payment request file to open</translation>
+        <location line="+2"/>
+        <source>Open wallet warning</source>
+        <translation>Open wallet warning</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>default wallet</source>
+        <translation>default wallet</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</translation>
     </message>
 </context>
 <context>
@@ -1673,12 +1867,7 @@
         <translation>Size of &amp;database cache</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>MB</source>
-        <translation>MB</translation>
-    </message>
-    <message>
-        <location line="+27"/>
+        <location line="+43"/>
         <source>Number of script &amp;verification threads</source>
         <translation>Number of script &amp;verification threads</translation>
     </message>
@@ -1698,12 +1887,7 @@
         <translation>&amp;Appearance</translation>
     </message>
     <message>
-        <location line="+80"/>
-        <source>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</source>
-        <translation>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+83"/>
         <source>Prune &amp;block storage to</source>
         <translation>Prune &amp;block storage to</translation>
     </message>
@@ -1718,7 +1902,22 @@
         <translation>Reverting this setting requires re-downloading the entire blockchain.</translation>
     </message>
     <message>
-        <location line="+119"/>
+        <location line="+28"/>
+        <source>MiB</source>
+        <translation>MiB</translation>
+    </message>
+    <message>
+        <location line="+91"/>
+        <source>Whether to keep the specified custom change address or not.</source>
+        <translation>Whether to keep the specified custom change address or not.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Keep custom change &amp;address</source>
+        <translation>Keep custom change &amp;address</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</source>
         <translation>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</translation>
     </message>
@@ -1726,6 +1925,16 @@
         <location line="+3"/>
         <source>Show Masternodes Tab</source>
         <translation>Show Masternodes Tab</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Show additional tab listing governance proposals.</source>
+        <translation>Show additional tab listing governance proposals.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Show Governance Tab</source>
+        <translation>Show Governance Tab</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -1798,7 +2007,12 @@
         <translation>Automatically open the BLOCX Core client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+13"/>
+        <source>Map port using NA&amp;T-PMP</source>
+        <translation>Map port using NA&amp;T-PMP</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Accept connections from outside.</source>
         <translation>Accept connections from outside.</translation>
     </message>
@@ -1830,7 +2044,12 @@
         <translation>Use separate SOCKS&amp;5 proxy to reach peers via Tor hidden services:</translation>
     </message>
     <message>
-        <location line="-544"/>
+        <location line="+272"/>
+        <source>Options set in this dialog are overridden by the command line or in the configuration file:</source>
+        <translation>Options set in this dialog are overridden by the command line or in the configuration file:</translation>
+    </message>
+    <message>
+        <location line="-846"/>
         <source>Hide the icon from the system tray.</source>
         <translation>Hide the icon from the system tray.</translation>
     </message>
@@ -1845,7 +2064,7 @@
         <translation>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</translation>
     </message>
     <message>
-        <location line="+729"/>
+        <location line="+759"/>
         <location line="+13"/>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items.&lt;br/&gt;%s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items.&lt;br/&gt;%s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</translation>
@@ -1856,7 +2075,7 @@
         <translation>&amp;Third party transaction URLs</translation>
     </message>
     <message>
-        <location line="-573"/>
+        <location line="-603"/>
         <source>Whether to show coin control features or not.</source>
         <translation>Whether to show coin control features or not.</translation>
     </message>
@@ -1876,7 +2095,7 @@
         <translation>Enable coin &amp;control features</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+40"/>
         <source>&amp;Spend unconfirmed change</source>
         <translation>&amp;Spend unconfirmed change</translation>
     </message>
@@ -1886,17 +2105,27 @@
         <translation>This setting determines the amount of individual masternodes that an input will be mixed through.&lt;br/&gt;More rounds of mixing gives a higher degree of privacy, but also costs more in fees.</translation>
     </message>
     <message>
-        <location line="-348"/>
+        <location line="-368"/>
         <source>&amp;Network</source>
         <translation>&amp;Network</translation>
     </message>
     <message>
-        <location line="+435"/>
+        <location line="+100"/>
+        <source>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</source>
+        <translation>Enabling pruning significantly reduces the disk space required to store transactions. All blocks are still fully validated. Reverting this setting requires re-downloading the entire blockchain.</translation>
+    </message>
+    <message>
+        <location line="+355"/>
         <source>Map port using &amp;UPnP</source>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+7"/>
+        <source>Automatically open the BLOCX Core client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</source>
+        <translation>Automatically open the BLOCX Core client port on the router. This only works when your router supports NAT-PMP and it is enabled. The external port could be random.</translation>
+    </message>
+    <message>
+        <location line="+32"/>
         <location line="+157"/>
         <source>Proxy &amp;IP:</source>
         <translation>Proxy &amp;IP:</translation>
@@ -1945,7 +2174,7 @@
         <translation>Connect to the BLOCX network through a separate SOCKS5 proxy for Tor hidden services.</translation>
     </message>
     <message>
-        <location line="-531"/>
+        <location line="-561"/>
         <source>Show only a tray icon after minimizing the window.</source>
         <translation>Show only a tray icon after minimizing the window.</translation>
     </message>
@@ -1965,7 +2194,7 @@
         <translation>&amp;Display</translation>
     </message>
     <message>
-        <location line="+709"/>
+        <location line="+739"/>
         <source>User Interface &amp;language:</source>
         <translation>User Interface &amp;language:</translation>
     </message>
@@ -1997,12 +2226,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Decimal digits</translation>
     </message>
     <message>
-        <location line="+78"/>
-        <source>Active command-line options that override above options:</source>
-        <translation>Active command-line options that override above options:</translation>
-    </message>
-    <message>
-        <location line="+46"/>
+        <location line="+127"/>
         <source>Reset all client options to default.</source>
         <translation>Reset all client options to default.</translation>
     </message>
@@ -2022,17 +2246,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>&amp;Cancel</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.cpp" line="+71"/>
+        <location filename="../optionsdialog.cpp" line="+69"/>
         <source>Enable %1 features</source>
         <translation>Enable %1 features</translation>
     </message>
     <message>
-        <location line="+59"/>
+        <location line="+77"/>
         <source>default</source>
         <translation>default</translation>
     </message>
     <message>
-        <location line="+213"/>
+        <location line="+233"/>
         <source>Confirm options reset</source>
         <translation>Confirm options reset</translation>
     </message>
@@ -2198,14 +2422,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</translation>
     </message>
     <message>
-        <location filename="../overviewpage.cpp" line="+151"/>
+        <location filename="../overviewpage.cpp" line="+153"/>
         <location line="+1"/>
         <location line="+1"/>
         <source>out of sync</source>
         <translation>out of sync</translation>
     </message>
     <message>
-        <location line="+291"/>
+        <location line="+301"/>
         <source>Automatic backups are disabled, no mixing available!</source>
         <translation>Automatic backups are disabled, no mixing available!</translation>
     </message>
@@ -2216,12 +2440,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>No inputs detected</translation>
     </message>
     <message>
-        <location line="-181"/>
+        <location line="-189"/>
         <source>%1 Balance</source>
         <translation>%1 Balance</translation>
     </message>
     <message numerus="yes">
-        <location line="+179"/>
+        <location line="+187"/>
         <location line="+20"/>
         <location line="+11"/>
         <source>%n Rounds</source>
@@ -2274,8 +2498,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>keys left: %1</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location line="+132"/>
+        <location line="+14"/>
+        <location line="+133"/>
         <source>Start %1</source>
         <translation>Start %1</translation>
     </message>
@@ -2300,15 +2524,15 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Stop %1</translation>
     </message>
     <message>
-        <location line="-134"/>
+        <location line="-135"/>
         <location line="+54"/>
-        <location line="+116"/>
+        <location line="+117"/>
         <location line="+3"/>
         <source>Disabled</source>
         <translation>Disabled</translation>
     </message>
     <message>
-        <location line="-154"/>
+        <location line="-155"/>
         <source>Very low number of keys left since last automatic backup!</source>
         <translation>Very low number of keys left since last automatic backup!</translation>
     </message>
@@ -2358,139 +2582,60 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>PaymentServer</name>
     <message>
-        <location filename="../paymentserver.cpp" line="+318"/>
-        <location line="+215"/>
-        <location line="+42"/>
-        <location line="+108"/>
-        <location line="+14"/>
-        <location line="+18"/>
+        <location filename="../paymentserver.cpp" line="+175"/>
         <source>Payment request error</source>
         <translation>Payment request error</translation>
     </message>
     <message>
-        <location line="-396"/>
+        <location line="+1"/>
         <source>Cannot start blocx: click-to-pay handler</source>
         <translation>Cannot start blocx: click-to-pay handler</translation>
     </message>
     <message>
-        <location line="+82"/>
-        <location line="+21"/>
+        <location line="+50"/>
         <location line="+13"/>
-        <location line="+7"/>
+        <location line="+5"/>
+        <location line="+8"/>
         <source>URI handling</source>
         <translation>URI handling</translation>
     </message>
     <message>
-        <location line="-41"/>
+        <location line="-26"/>
         <source>&apos;blocx://&apos; is not a valid URI. Use &apos;blocx:&apos; instead.</source>
         <translation>&apos;blocx://&apos; is not a valid URI. Use &apos;blocx:&apos; instead.</translation>
     </message>
     <message>
-        <location line="+22"/>
-        <source>Payment request fetch URL is invalid: %1</source>
-        <translation>Payment request fetch URL is invalid: %1</translation>
+        <location line="+14"/>
+        <location line="+23"/>
+        <source>Cannot process payment request as BIP70 is no longer supported.</source>
+        <translation>Cannot process payment request as BIP70 is no longer supported.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="-22"/>
+        <location line="+23"/>
+        <source>Due to discontinued support, you should request the merchant to provide you with a BIP21 compatible URI or use a wallet that does continue to support BIP70.</source>
+        <translation>Due to discontinued support, you should request the merchant to provide you with a BIP21 compatible URI or use a wallet that does continue to support BIP70.</translation>
+    </message>
+    <message>
+        <location line="-20"/>
         <source>Invalid payment address %1</source>
         <translation>Invalid payment address %1</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>URI cannot be parsed! This can be caused by an invalid BLOCX address or malformed URI parameters.</source>
         <translation>URI cannot be parsed! This can be caused by an invalid BLOCX address or malformed URI parameters.</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+9"/>
         <source>Payment request file handling</source>
         <translation>Payment request file handling</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>Payment request file cannot be read! This can be caused by an invalid payment request file.</translation>
-    </message>
-    <message>
-        <location line="+61"/>
-        <location line="+9"/>
-        <location line="+31"/>
-        <location line="+10"/>
-        <location line="+17"/>
-        <location line="+83"/>
-        <source>Payment request rejected</source>
-        <translation>Payment request rejected</translation>
-    </message>
-    <message>
-        <location line="-150"/>
-        <source>Payment request network doesn&apos;t match client network.</source>
-        <translation>Payment request network doesn&apos;t match client network.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Payment request expired.</source>
-        <translation>Payment request expired.</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Payment request is not initialized.</source>
-        <translation>Payment request is not initialized.</translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Unverified payment requests to custom payment scripts are unsupported.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+17"/>
-        <source>Invalid payment request.</source>
-        <translation>Invalid payment request.</translation>
-    </message>
-    <message>
-        <location line="-10"/>
-        <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Requested payment amount of %1 is too small (considered dust).</translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>Refund from %1</source>
-        <translation>Refund from %1</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Error communicating with %1: %2</source>
-        <translation>Error communicating with %1: %2</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Payment request cannot be parsed!</source>
-        <translation>Payment request cannot be parsed!</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Bad response from server %1</source>
-        <translation>Bad response from server %1</translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Network request error</source>
-        <translation>Network request error</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Payment acknowledged</source>
-        <translation>Payment acknowledged</translation>
     </message>
 </context>
 <context>
     <name>PeerTableModel</name>
     <message>
-        <location filename="../peertablemodel.cpp" line="+110"/>
+        <location filename="../peertablemodel.cpp" line="+108"/>
         <source>NodeId</source>
         <translation>NodeId</translation>
     </message>
@@ -2521,9 +2666,70 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
 </context>
 <context>
+    <name>Proposal</name>
+    <message>
+        <location filename="../governancelist.cpp" line="-323"/>
+        <source>Passing +%1</source>
+        <translation>Passing +%1</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Needs additional %1 votes</source>
+        <translation>Needs additional %1 votes</translation>
+    </message>
+</context>
+<context>
+    <name>ProposalModel</name>
+    <message>
+        <location line="+54"/>
+        <source>Yes</source>
+        <translation>Yes</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Hash</source>
+        <translation>Hash</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Title</source>
+        <translation>Title</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>End</source>
+        <translation>End</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Amount</source>
+        <translation>Amount</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Active</source>
+        <translation>Active</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Status</source>
+        <translation>Status</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
-        <location filename="../blocx.cpp" line="+17"/>
+        <location filename="../bitcoin.cpp" line="+14"/>
         <source>Choose data directory on startup (default: %u)</source>
         <translation>Choose data directory on startup (default: %u)</translation>
     </message>
@@ -2564,16 +2770,66 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Set SSL root certificates for payment request (default: -system-)</source>
-        <translation>Set SSL root certificates for payment request (default: -system-)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Show splash screen on startup (default: %u)</source>
         <translation>Show splash screen on startup (default: %u)</translation>
     </message>
     <message>
-        <location line="+259"/>
+        <location line="+108"/>
+        <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
+        <translation>Error: Specified data directory &quot;%1&quot; does not exist.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Error: Cannot parse configuration file: %1.</source>
+        <translation>Error: Cannot parse configuration file: %1.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Error: %1</source>
+        <translation>Error: %1</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Error initializing settings: %1</source>
+        <translation>Error initializing settings: %1</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Error: Failed to load application fonts.</source>
+        <translation>Error: Failed to load application fonts.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Error: Specified font-family invalid. Valid values: %1.</source>
+        <translation>Error: Specified font-family invalid. Valid values: %1.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Error: Specified font-weight-normal invalid. Valid range %1 to %2.</source>
+        <translation>Error: Specified font-weight-normal invalid. Valid range %1 to %2.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Error: Specified font-weight-bold invalid. Valid range %1 to %2.</source>
+        <translation>Error: Specified font-weight-bold invalid. Valid range %1 to %2.</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Error: Specified font-scale invalid. Valid range %1 to %2.</source>
+        <translation>Error: Specified font-scale invalid. Valid range %1 to %2.</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Error: Invalid -custom-css-dir path.</source>
+        <translation>Error: Invalid -custom-css-dir path.</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Error: %1 CSS file(s) missing in -custom-css-dir path.</source>
+        <translation>Error: %1 CSS file(s) missing in -custom-css-dir path.</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>%1 didn&apos;t yet exit safely...</source>
         <translation>%1 didn&apos;t yet exit safely...</translation>
     </message>
@@ -2583,12 +2839,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Amount</translation>
     </message>
     <message>
-        <location filename="../guiutil.cpp" line="+284"/>
+        <location filename="../guiutil.cpp" line="+280"/>
         <source>Enter a BLOCX address (e.g. %1)</source>
         <translation>Enter a BLOCX address (e.g. %1)</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+12"/>
         <source>Appearance Setup</source>
         <translation>Appearance Setup</translation>
     </message>
@@ -2603,7 +2859,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>This can also be adjusted later in the &quot;Appearance&quot; tab of the preferences.</translation>
     </message>
     <message>
-        <location line="+1462"/>
+        <location line="+1451"/>
         <source>%1 d</source>
         <translation>%1 d</translation>
     </message>
@@ -2619,7 +2875,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location line="+47"/>
+        <location line="+26"/>
         <source>%1 s</source>
         <translation>%1 s</translation>
     </message>
@@ -2713,62 +2969,9 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>%1 GB</translation>
     </message>
     <message>
-        <location filename="../modaloverlay.cpp" line="-29"/>
+        <location filename="../modaloverlay.cpp" line="-35"/>
         <source>unknown</source>
         <translation>unknown</translation>
-    </message>
-</context>
-<context>
-    <name>QObject::QObject</name>
-    <message>
-        <location filename="../blocx.cpp" line="-171"/>
-        <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
-        <translation>Error: Specified data directory &quot;%1&quot; does not exist.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Error: Cannot parse configuration file: %1. Only use key=value syntax.</source>
-        <translation>Error: Cannot parse configuration file: %1. Only use key=value syntax.</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Error: %1</source>
-        <translation>Error: %1</translation>
-    </message>
-    <message>
-        <location line="+46"/>
-        <source>Error: Failed to load application fonts.</source>
-        <translation>Error: Failed to load application fonts.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Error: Specified font-family invalid. Valid values: %1.</source>
-        <translation>Error: Specified font-family invalid. Valid values: %1.</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Error: Specified font-weight-normal invalid. Valid range %1 to %2.</source>
-        <translation>Error: Specified font-weight-normal invalid. Valid range %1 to %2.</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Error: Specified font-weight-bold invalid. Valid range %1 to %2.</source>
-        <translation>Error: Specified font-weight-bold invalid. Valid range %1 to %2.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Error: Specified font-scale invalid. Valid range %1 to %2.</source>
-        <translation>Error: Specified font-scale invalid. Valid range %1 to %2.</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Error: Invalid -custom-css-dir path.</source>
-        <translation>Error: Invalid -custom-css-dir path.</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Error: %1 CSS file(s) missing in -custom-css-dir path.</source>
-        <translation>Error: %1 CSS file(s) missing in -custom-css-dir path.</translation>
     </message>
 </context>
 <context>
@@ -2788,39 +2991,11 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <source>&amp;Save Image...</source>
         <translation>&amp;Save Image...</translation>
     </message>
-    <message>
-        <location filename="../qrdialog.cpp" line="+141"/>
-        <source>Error creating QR Code.</source>
-        <translation>Error creating QR Code.</translation>
-    </message>
-</context>
-<context>
-    <name>QRGeneralImageWidget</name>
-    <message>
-        <location line="-106"/>
-        <source>&amp;Save Image...</source>
-        <translation>&amp;Save Image...</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Copy Image</source>
-        <translation>&amp;Copy Image</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Save QR Code</source>
-        <translation>Save QR Code</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>PNG Image (*.png)</source>
-        <translation>PNG Image (*.png)</translation>
-    </message>
 </context>
 <context>
     <name>QRImageWidget</name>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+32"/>
+        <location filename="../qrimagewidget.cpp" line="+29"/>
         <source>&amp;Save Image...</source>
         <translation>&amp;Save Image...</translation>
     </message>
@@ -2828,6 +3003,21 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <location line="+3"/>
         <source>&amp;Copy Image</source>
         <translation>&amp;Copy Image</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Resulting URI too long, try to reduce the text for label / message.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Error encoding URI into QR Code.</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>QR code support not available.</source>
+        <translation>QR code support not available.</translation>
     </message>
     <message>
         <location line="+32"/>
@@ -2858,32 +3048,34 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>General</translation>
     </message>
     <message>
-        <location line="+138"/>
+        <location line="+144"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location line="-121"/>
+        <location line="-127"/>
         <location line="+26"/>
         <location line="+26"/>
-        <location line="+23"/>
+        <location line="+29"/>
         <location line="+26"/>
         <location line="+30"/>
         <location line="+23"/>
         <location line="+23"/>
+        <location line="+27"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
         <location line="+30"/>
         <location line="+23"/>
-        <location line="+23"/>
-        <location line="+30"/>
-        <location line="+23"/>
-        <location line="+76"/>
-        <location line="+323"/>
+        <location line="+63"/>
+        <location line="+385"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
-        <location line="+23"/>
+        <location line="+26"/>
         <location line="+23"/>
         <location line="+23"/>
         <location line="+23"/>
@@ -2897,22 +3089,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <location line="+26"/>
         <location line="+23"/>
         <location line="+23"/>
-        <location filename="../rpcconsole.cpp" line="+1258"/>
+        <location filename="../rpcconsole.cpp" line="+1247"/>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
     <message>
-        <location line="-1001"/>
+        <location line="-1096"/>
         <source>Number of connections</source>
         <translation>Number of connections</translation>
     </message>
     <message>
-        <location line="+203"/>
+        <location line="+246"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
     <message>
-        <location line="-256"/>
+        <location line="-299"/>
         <source>Startup time</source>
         <translation>Startup time</translation>
     </message>
@@ -2922,42 +3114,32 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Network</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+103"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
     <message>
-        <location line="+117"/>
+        <location line="+163"/>
         <source>Debug log file</source>
         <translation>Debug log file</translation>
     </message>
     <message>
-        <location line="-140"/>
-        <source>Current number of blocks</source>
-        <translation>Current number of blocks</translation>
-    </message>
-    <message>
-        <location line="-207"/>
+        <location line="-396"/>
         <source>Client version</source>
         <translation>Client version</translation>
     </message>
     <message>
-        <location line="+49"/>
-        <source>Using BerkeleyDB version</source>
-        <translation>Using BerkeleyDB version</translation>
-    </message>
-    <message>
-        <location line="+151"/>
+        <location line="+203"/>
         <source>Block chain</source>
         <translation>Block chain</translation>
     </message>
     <message>
-        <location line="-23"/>
+        <location line="-20"/>
         <source>Number of Masternodes</source>
         <translation>Number of Masternodes</translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+142"/>
         <source>Memory Pool</source>
         <translation>Memory Pool</translation>
     </message>
@@ -2972,22 +3154,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Memory usage</translation>
     </message>
     <message>
-        <location line="-371"/>
+        <location line="-420"/>
         <source>&amp;Console</source>
         <translation>&amp;Console</translation>
     </message>
     <message>
-        <location line="+528"/>
+        <location line="+580"/>
         <source>Clear console</source>
         <translation>Clear console</translation>
     </message>
     <message>
-        <location line="-518"/>
+        <location line="-570"/>
         <source>&amp;Network Traffic</source>
         <translation>&amp;Network Traffic</translation>
     </message>
     <message>
-        <location line="+1105"/>
+        <location line="+1206"/>
         <source>Received</source>
         <translation>Received</translation>
     </message>
@@ -2997,29 +3179,29 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Sent</translation>
     </message>
     <message>
-        <location line="-1072"/>
+        <location line="-1173"/>
         <source>&amp;Peers</source>
         <translation>&amp;Peers</translation>
     </message>
     <message>
-        <location line="+465"/>
+        <location line="+514"/>
         <source>Wallet:</source>
         <translation>Wallet:</translation>
     </message>
     <message>
-        <location line="+205"/>
+        <location line="+234"/>
         <source>Banned peers</source>
         <translation>Banned peers</translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location filename="../rpcconsole.cpp" line="-726"/>
-        <location line="+893"/>
+        <location line="+63"/>
+        <location filename="../rpcconsole.cpp" line="-734"/>
+        <location line="+901"/>
         <source>Select a peer to view detailed information.</source>
         <translation>Select a peer to view detailed information.</translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location line="+83"/>
         <source>Whitelisted</source>
         <translation>Whitelisted</translation>
     </message>
@@ -3034,7 +3216,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Version</translation>
     </message>
     <message>
-        <location line="+69"/>
+        <location line="+72"/>
         <source>Starting Block</source>
         <translation>Starting Block</translation>
     </message>
@@ -3049,45 +3231,75 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Synced Blocks</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+314"/>
         <source>Rescan blockchain files 1</source>
         <translation>Rescan blockchain files 1</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+23"/>
         <source>Rescan blockchain files 2</source>
         <translation>Rescan blockchain files 2</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="-43"/>
+        <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockchain files or missing/obsolete transactions.</source>
+        <translation>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockchain files or missing/obsolete transactions.</translation>
+    </message>
+    <message>
+        <location line="+27"/>
         <source>-rescan=1: Rescan the block chain for missing wallet transactions starting from wallet creation time.</source>
         <translation>-rescan=1: Rescan the block chain for missing wallet transactions starting from wallet creation time.</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+23"/>
         <source>-rescan=2: Rescan the block chain for missing wallet transactions starting from genesis block.</source>
         <translation>-rescan=2: Rescan the block chain for missing wallet transactions starting from genesis block.</translation>
     </message>
     <message>
-        <location line="+109"/>
-        <source>Wallet Path</source>
-        <translation>Wallet Path</translation>
-    </message>
-    <message>
-        <location line="-1442"/>
-        <location line="+797"/>
+        <location line="-1334"/>
+        <location line="+895"/>
         <source>User Agent</source>
         <translation>User Agent</translation>
     </message>
     <message>
-        <location line="-745"/>
+        <location line="-869"/>
         <source>Datadir</source>
         <translation>Datadir</translation>
     </message>
     <message>
-        <location line="+178"/>
+        <location line="+10"/>
+        <source>To specify a non-default location of the data directory use the &apos;%1&apos; option.</source>
+        <translation>To specify a non-default location of the data directory use the &apos;%1&apos; option.</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Blocksdir</source>
+        <translation>Blocksdir</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</source>
+        <translation>To specify a non-default location of the blocks directory use the &apos;%1&apos; option.</translation>
+    </message>
+    <message>
+        <location line="+122"/>
+        <source>Current block height</source>
+        <translation>Current block height</translation>
+    </message>
+    <message>
+        <location line="+46"/>
         <source>Last block hash</source>
         <translation>Last block hash</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Latest ChainLocked block hash</source>
+        <translation>Latest ChainLocked block hash</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Latest ChainLocked block height</source>
+        <translation>Latest ChainLocked block height</translation>
     </message>
     <message>
         <location line="+101"/>
@@ -3095,12 +3307,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Open the %1 debug log file from the current data directory. This can take a few seconds for large log files.</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+15"/>
         <source>InstantSend locks</source>
         <translation>InstantSend locks</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+62"/>
         <source>(none)</source>
         <translation>(none)</translation>
     </message>
@@ -3115,12 +3327,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Increase font size</translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+112"/>
         <source>&amp;Reset</source>
         <translation>&amp;Reset</translation>
     </message>
     <message>
-        <location line="+140"/>
+        <location line="+183"/>
         <source>Node Type</source>
         <translation>Node Type</translation>
     </message>
@@ -3130,7 +3342,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>PoSe Score</translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+118"/>
         <source>Services</source>
         <translation>Services</translation>
     </message>
@@ -3180,72 +3392,37 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Time Offset</translation>
     </message>
     <message>
-        <location line="-1180"/>
+        <location line="-1281"/>
         <source>&amp;Wallet Repair</source>
         <translation>&amp;Wallet Repair</translation>
     </message>
     <message>
-        <location line="+1235"/>
-        <source>Salvage wallet</source>
-        <translation>Salvage wallet</translation>
-    </message>
-    <message>
-        <location line="+57"/>
-        <source>Recover transactions 1</source>
-        <translation>Recover transactions 1</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Recover transactions 2</source>
-        <translation>Recover transactions 2</translation>
-    </message>
-    <message>
-        <location line="+19"/>
+        <location line="+1408"/>
         <source>Upgrade wallet format</source>
         <translation>Upgrade wallet format</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</source>
-        <translation>The buttons below will restart the wallet with command-line options to repair the wallet, fix issues with corrupt blockhain files or missing/obsolete transactions.</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>-salvagewallet: Attempt to recover private keys from a corrupt wallet.dat.</source>
-        <translation>-salvagewallet: Attempt to recover private keys from a corrupt wallet.dat.</translation>
-    </message>
-    <message>
-        <location line="+48"/>
-        <source>-zapwallettxes=1: Recover transactions from blockchain (keep meta-data, e.g. account owner).</source>
-        <translation>-zapwallettxes=1: Recover transactions from blockchain (keep meta-data, e.g. account owner).</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>-zapwallettxes=2: Recover transactions from blockchain (drop meta-data).</source>
-        <translation>-zapwallettxes=2: Recover transactions from blockchain (drop meta-data).</translation>
-    </message>
-    <message>
-        <location line="+16"/>
+        <location line="+7"/>
         <source>-upgradewallet: Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</source>
         <translation>-upgradewallet: Upgrade wallet to latest format on startup. (Note: this is NOT an update of the wallet itself!)</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-83"/>
         <source>Wallet repair options.</source>
         <translation>Wallet repair options.</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+93"/>
         <source>Rebuild index</source>
         <translation>Rebuild index</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+7"/>
         <source>-reindex: Rebuild block chain index from current blk000??.dat files.</source>
         <translation>-reindex: Rebuild block chain index from current blk000??.dat files.</translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-786"/>
+        <location filename="../rpcconsole.cpp" line="-793"/>
         <source>&amp;Disconnect</source>
         <translation>&amp;Disconnect</translation>
     </message>
@@ -3278,17 +3455,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>1 &amp;year</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+37"/>
         <source>&amp;Unban</source>
         <translation>&amp;Unban</translation>
     </message>
     <message>
-        <location line="+56"/>
-        <source>default wallet</source>
-        <translation>default wallet</translation>
-    </message>
-    <message>
-        <location line="+161"/>
+        <location line="+232"/>
         <source>Welcome to the %1 RPC console.</source>
         <translation>Welcome to the %1 RPC console.</translation>
     </message>
@@ -3328,22 +3500,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Network activity disabled</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+40"/>
         <source>Total: %1 (Enabled: %2)</source>
         <translation>Total: %1 (Enabled: %2)</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+68"/>
         <source>Executing command without any wallet</source>
         <translation>Executing command without any wallet</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-2"/>
         <source>Executing command using &quot;%1&quot; wallet</source>
         <translation>Executing command using &quot;%1&quot; wallet</translation>
     </message>
     <message>
-        <location line="+182"/>
+        <location line="+181"/>
         <source>(node id: %1)</source>
         <translation>(node id: %1)</translation>
     </message>
@@ -3359,14 +3531,19 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>never</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>Inbound</source>
         <translation>Inbound</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Outbound</source>
         <translation>Outbound</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Outbound block-relay</source>
+        <translation>Outbound block-relay</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -3413,18 +3590,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>&amp;Message:</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location line="+21"/>
+        <location line="+40"/>
         <source>An optional label to associate with the new receiving address.</source>
         <translation>An optional label to associate with the new receiving address.</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-17"/>
         <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the BLOCX network.</source>
         <translation>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the BLOCX network.</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-10"/>
+        <source>An optional label to associate with the new receiving address (used by you to identify an invoice).  It is also attached to the payment request.</source>
+        <translation>An optional label to associate with the new receiving address (used by you to identify an invoice).  It is also attached to the payment request.</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
         <translation>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</translation>
     </message>
@@ -3435,22 +3616,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location line="+80"/>
+        <location line="+86"/>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation>An optional amount to request. Leave this empty or zero to not request a specific amount.</translation>
     </message>
     <message>
-        <location line="-77"/>
+        <location line="-83"/>
         <source>&amp;Amount:</source>
         <translation>&amp;Amount:</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>&amp;Request payment</source>
-        <translation>&amp;Request payment</translation>
+        <source>&amp;Create new receiving address</source>
+        <translation>&amp;Create new receiving address</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+19"/>
         <source>Clear all fields of the form.</source>
         <translation>Clear all fields of the form.</translation>
     </message>
@@ -3485,19 +3666,24 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../receivecoinsdialog.cpp" line="+36"/>
+        <location line="-225"/>
         <source>Enter a label to associate with the new receiving address</source>
         <translation>Enter a label to associate with the new receiving address</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+10"/>
         <source>Enter a message to attach to the payment request</source>
         <translation>Enter a message to attach to the payment request</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location filename="../receivecoinsdialog.cpp" line="+35"/>
         <source>Copy URI</source>
         <translation>Copy URI</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy address</source>
+        <translation>Copy address</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3538,7 +3724,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>&amp;Save Image...</translation>
     </message>
     <message>
-        <location filename="../receiverequestdialog.cpp" line="+67"/>
+        <location filename="../receiverequestdialog.cpp" line="+66"/>
         <source>Request payment to %1</source>
         <translation>Request payment to %1</translation>
     </message>
@@ -3577,21 +3763,11 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <source>Wallet</source>
         <translation>Wallet</translation>
     </message>
-    <message>
-        <location line="+11"/>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>Resulting URI too long, try to reduce the text for label / message.</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Error encoding URI into QR Code.</translation>
-    </message>
 </context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
-        <location filename="../recentrequeststablemodel.cpp" line="+27"/>
+        <location filename="../recentrequeststablemodel.cpp" line="+26"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -3606,7 +3782,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Message</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+41"/>
         <source>(no label)</source>
         <translation>(no label)</translation>
     </message>
@@ -3630,7 +3806,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <name>SendCoinsDialog</name>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="+14"/>
-        <location filename="../sendcoinsdialog.cpp" line="+682"/>
+        <location filename="../sendcoinsdialog.cpp" line="+706"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
     </message>
@@ -3710,28 +3886,27 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Choose...</translation>
     </message>
     <message>
-        <location line="+63"/>
-        <source>collapse fee-settings</source>
-        <translation>collapse fee-settings</translation>
+        <location line="+150"/>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for blocx transactions than the network can process.</source>
+        <translation>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for blocx transactions than the network can process.</translation>
     </message>
     <message>
-        <location line="+252"/>
+        <location line="+3"/>
+        <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
+        <translation>A too low fee might result in a never confirming transaction (read the tooltip)</translation>
+    </message>
+    <message>
+        <location line="+143"/>
         <source>Confirmation time target:</source>
         <translation>Confirmation time target:</translation>
     </message>
     <message>
-        <location line="-198"/>
-        <source>If the custom fee is set to 1000 XBLOCX and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 XBLOCX in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 XBLOCX. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>If the custom fee is set to 1000 XBLOCX and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 XBLOCX in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 XBLOCX. For transactions bigger than a kilobyte both pay by kilobyte.</translation>
+        <location line="-179"/>
+        <source>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 duffs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 duffs in fee,&lt;br /&gt;while &quot;at least&quot; pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</translation>
     </message>
     <message>
-        <location line="+30"/>
-        <location line="+13"/>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for blocx transactions than the network can process.</source>
-        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for blocx transactions than the network can process.</translation>
-    </message>
-    <message>
-        <location line="-40"/>
+        <location line="+3"/>
         <source>per kilobyte</source>
         <translation>per kilobyte</translation>
     </message>
@@ -3746,17 +3921,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Note: Not enough data for fee estimation, using the fallback fee instead.</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+38"/>
+        <source>Hide transaction fee settings</source>
+        <translation>Hide transaction fee settings</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Hide</source>
         <translation>Hide</translation>
     </message>
     <message>
-        <location line="+97"/>
-        <source>(read the tooltip)</source>
-        <translation>(read the tooltip)</translation>
-    </message>
-    <message>
-        <location line="+35"/>
+        <location line="+119"/>
         <source>Recommended:</source>
         <translation>Recommended:</translation>
     </message>
@@ -3766,13 +3941,13 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Custom:</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+52"/>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
         <translation>(Smart fee not initialized yet. This usually takes a few blocks...)</translation>
     </message>
     <message>
-        <location line="+119"/>
-        <location filename="../sendcoinsdialog.cpp" line="-518"/>
+        <location line="+113"/>
+        <location filename="../sendcoinsdialog.cpp" line="-556"/>
         <source>Confirm the send action</source>
         <translation>Confirm the send action</translation>
     </message>
@@ -3808,7 +3983,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Balance:</translation>
     </message>
     <message>
-        <location filename="../sendcoinsdialog.cpp" line="-47"/>
+        <location filename="../sendcoinsdialog.cpp" line="-45"/>
         <source>Copy quantity</source>
         <translation>Copy quantity</translation>
     </message>
@@ -3843,51 +4018,33 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Copy change</translation>
     </message>
     <message>
-        <location line="+86"/>
+        <location line="+94"/>
         <source>%1 (%2 blocks)</source>
         <translation>%1 (%2 blocks)</translation>
     </message>
     <message>
-        <location line="+120"/>
-        <source>from wallet %1</source>
-        <translation>from wallet %1</translation>
-    </message>
-    <message>
-        <location line="+53"/>
+        <location line="+173"/>
         <location line="+2"/>
         <source>using</source>
         <translation>using</translation>
     </message>
     <message>
-        <location line="-42"/>
-        <location line="+5"/>
-        <location line="+5"/>
-        <location line="+4"/>
+        <location line="-32"/>
         <source>%1 to %2</source>
         <translation>%1 to %2</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+16"/>
         <source>Are you sure you want to send?</source>
         <translation>Are you sure you want to send?</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>are added as transaction fee</source>
-        <translation>are added as transaction fee</translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <source>Total Amount = &lt;b&gt;%1&lt;/b&gt;&lt;br /&gt;= %2</source>
-        <translation>Total Amount = &lt;b&gt;%1&lt;/b&gt;&lt;br /&gt;= %2</translation>
-    </message>
-    <message>
-        <location line="-53"/>
+        <location line="+25"/>
         <source>&lt;b&gt;(%1 of %2 entries displayed)&lt;/b&gt;</source>
         <translation>&lt;b&gt;(%1 of %2 entries displayed)&lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="-229"/>
+        <location line="-242"/>
         <source>S&amp;end mixed funds</source>
         <translation>S&amp;end mixed funds</translation>
     </message>
@@ -3897,7 +4054,37 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Confirm the %1 send action</translation>
     </message>
     <message>
-        <location line="+220"/>
+        <location line="+73"/>
+        <source>Cr&amp;eate Unsigned</source>
+        <translation>Cr&amp;eate Unsigned</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source> from wallet &apos;%1&apos;</source>
+        <translation> from wallet &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>%1 to &apos;%2&apos;</source>
+        <translation>%1 to &apos;%2&apos;</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Do you want to draft this transaction?</source>
+        <translation>Do you want to draft this transaction?</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>This will produce a Partially Signed Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation>This will produce a Partially Signed Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>%1 funds only</source>
         <translation>%1 funds only</translation>
     </message>
@@ -3907,7 +4094,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>any available funds</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+19"/>
+        <source>Transaction fee</source>
+        <translation>Transaction fee</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>(%1 transactions have higher fees usually due to no change output being allowed)</source>
         <translation>(%1 transactions have higher fees usually due to no change output being allowed)</translation>
     </message>
@@ -3935,12 +4127,52 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Warning: Using %1 with %2 or more inputs can harm your privacy and is not recommended</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+2"/>
+        <source>Click to learn more</source>
+        <translation>Click to learn more</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Total Amount</source>
+        <translation>Total Amount</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>or</source>
+        <translation>or</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>To review recipient list click &quot;Show Details...&quot;</source>
+        <translation>To review recipient list click &quot;Show Details...&quot;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Confirm send coins</source>
         <translation>Confirm send coins</translation>
     </message>
     <message>
-        <location line="+200"/>
+        <location line="+0"/>
+        <source>Confirm transaction proposal</source>
+        <translation>Confirm transaction proposal</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Copy PSBT to clipboard</source>
+        <translation>Copy PSBT to clipboard</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Send</source>
+        <translation>Send</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>PSBT copied</source>
+        <translation>PSBT copied</translation>
+    </message>
+    <message>
+        <location line="+195"/>
         <source>The recipient address is not valid. Please recheck.</source>
         <translation>The recipient address is not valid. Please recheck.</translation>
     </message>
@@ -3971,11 +4203,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>The transaction was rejected with the following reason: %1</source>
-        <translation>The transaction was rejected with the following reason: %1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
         <source>A fee higher than %1 is considered an absurdly high fee.</source>
         <translation>A fee higher than %1 is considered an absurdly high fee.</translation>
     </message>
@@ -3984,13 +4211,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <source>Payment request expired.</source>
         <translation>Payment request expired.</translation>
     </message>
-    <message>
-        <location line="+85"/>
-        <source>Pay only the required fee of %1</source>
-        <translation>Pay only the required fee of %1</translation>
-    </message>
     <message numerus="yes">
-        <location line="+37"/>
+        <location line="+113"/>
         <source>Estimated to begin confirmation within %n block(s).</source>
         <translation>
             <numerusform>Estimated to begin confirmation within %n block.</numerusform>
@@ -4026,12 +4248,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>SendCoinsEntry</name>
     <message>
-        <location filename="../forms/sendcoinsentry.ui" line="+21"/>
-        <source>This is a normal payment.</source>
-        <translation>This is a normal payment.</translation>
-    </message>
-    <message>
-        <location line="+21"/>
+        <location filename="../forms/sendcoinsentry.ui" line="+39"/>
         <source>Pay &amp;To:</source>
         <translation>Pay &amp;To:</translation>
     </message>
@@ -4062,30 +4279,36 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+551"/>
+        <location line="+558"/>
         <location line="+529"/>
         <source>Remove this entry</source>
         <translation>Remove this entry</translation>
     </message>
     <message>
-        <location line="-1062"/>
+        <location line="-1069"/>
         <source>&amp;Label:</source>
         <translation>&amp;Label:</translation>
     </message>
     <message>
         <location line="+13"/>
+        <location line="+3"/>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>Enter a label for this address to add it to the list of used addresses</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+542"/>
+        <location line="+546"/>
         <location line="+529"/>
         <source>A&amp;mount:</source>
         <translation>A&amp;mount:</translation>
     </message>
     <message>
-        <location line="-1053"/>
+        <location line="-1060"/>
+        <source>The amount to send in the selected unit</source>
+        <translation>The amount to send in the selected unit</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of BLOCX than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of BLOCX than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
     </message>
@@ -4131,20 +4354,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <source>Memo:</source>
         <translation>Memo:</translation>
     </message>
-    <message>
-        <location filename="../sendcoinsentry.cpp" line="+28"/>
-        <source>Enter a label for this address to add it to your address book</source>
-        <translation>Enter a label for this address to add it to your address book</translation>
-    </message>
-</context>
-<context>
-    <name>SendConfirmationDialog</name>
-    <message>
-        <location filename="../sendcoinsdialog.cpp" line="+84"/>
-        <location line="+5"/>
-        <source>Yes</source>
-        <translation>Yes</translation>
-    </message>
 </context>
 <context>
     <name>ShutdownWindow</name>
@@ -4183,18 +4392,18 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+167"/>
+        <location line="+173"/>
         <source>Choose previously used address</source>
         <translation>Choose previously used address</translation>
     </message>
     <message>
-        <location line="-161"/>
-        <location line="+167"/>
+        <location line="-167"/>
+        <location line="+173"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location line="-160"/>
+        <location line="-166"/>
         <source>Paste address from clipboard</source>
         <translation>Paste address from clipboard</translation>
     </message>
@@ -4209,12 +4418,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Enter the message you want to sign here</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+10"/>
         <source>Signature</source>
         <translation>Signature</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+25"/>
         <source>Copy the current signature to the system clipboard</source>
         <translation>Copy the current signature to the system clipboard</translation>
     </message>
@@ -4235,17 +4444,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+119"/>
+        <location line="+133"/>
         <source>Clear &amp;All</source>
         <translation>Clear &amp;All</translation>
     </message>
     <message>
-        <location line="-256"/>
+        <location line="-276"/>
         <source>&amp;Verify Message</source>
         <translation>&amp;Verify Message</translation>
     </message>
     <message>
-        <location line="+189"/>
+        <location line="+195"/>
         <source>Enter the receiver&apos;s address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
         <translation>Enter the receiver&apos;s address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</translation>
     </message>
@@ -4255,7 +4464,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>The BLOCX address the message was signed with</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+22"/>
+        <source>The signed message to verify</source>
+        <translation>The signed message to verify</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>The signature given when the message was signed</source>
+        <translation>The signature given when the message was signed</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Verify the message to ensure it was signed with the specified BLOCX address</source>
         <translation>Verify the message to ensure it was signed with the specified BLOCX address</translation>
     </message>
@@ -4270,47 +4489,47 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Reset all verify message fields</translation>
     </message>
     <message>
-        <location filename="../signverifymessagedialog.cpp" line="+37"/>
+        <location line="-192"/>
         <source>Enter a message to be signed</source>
         <translation>Enter a message to be signed</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+22"/>
         <source>Click &quot;Sign Message&quot; to generate signature</source>
         <translation>Click &quot;Sign Message&quot; to generate signature</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+138"/>
         <source>Enter a message to be verified</source>
         <translation>Enter a message to be verified</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+10"/>
         <source>Enter a signature for the message to be verified</source>
         <translation>Enter a signature for the message to be verified</translation>
     </message>
     <message>
-        <location line="+111"/>
-        <location line="+78"/>
+        <location filename="../signverifymessagedialog.cpp" line="+145"/>
+        <location line="+92"/>
         <source>The entered address is invalid.</source>
         <translation>The entered address is invalid.</translation>
     </message>
     <message>
-        <location line="-78"/>
+        <location line="-92"/>
         <location line="+7"/>
-        <location line="+71"/>
-        <location line="+6"/>
+        <location line="+86"/>
+        <location line="+7"/>
         <source>Please check the address and try again.</source>
         <translation>Please check the address and try again.</translation>
     </message>
     <message>
-        <location line="-77"/>
-        <location line="+77"/>
+        <location line="-93"/>
+        <location line="+92"/>
         <source>The entered address does not refer to a key.</source>
         <translation>The entered address does not refer to a key.</translation>
     </message>
     <message>
-        <location line="-69"/>
+        <location line="-84"/>
         <source>Wallet unlock was cancelled.</source>
         <translation>Wallet unlock was cancelled.</translation>
     </message>
@@ -4320,7 +4539,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Private key for the entered address is not available.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+9"/>
         <source>Message signing failed.</source>
         <translation>Message signing failed.</translation>
     </message>
@@ -4330,18 +4549,18 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Message signed.</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+69"/>
         <source>The signature could not be decoded.</source>
         <translation>The signature could not be decoded.</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <location line="+13"/>
+        <location line="+1"/>
+        <location line="+7"/>
         <source>Please check the signature and try again.</source>
         <translation>Please check the signature and try again.</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-1"/>
         <source>The signature did not match the message digest.</source>
         <translation>The signature did not match the message digest.</translation>
     </message>
@@ -4351,7 +4570,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Message verification failed.</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-32"/>
         <source>Message verified.</source>
         <translation>Message verified.</translation>
     </message>
@@ -4367,12 +4586,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>TrafficGraphWidget</name>
     <message>
-        <location filename="../trafficgraphwidget.cpp" line="+102"/>
+        <location filename="../trafficgraphwidget.cpp" line="+101"/>
         <source>KB/s</source>
         <translation>KB/s</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+65"/>
         <source>Total</source>
         <translation>Total</translation>
     </message>
@@ -4390,7 +4609,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>TransactionDesc</name>
     <message numerus="yes">
-        <location filename="../transactiondesc.cpp" line="+29"/>
+        <location filename="../transactiondesc.cpp" line="+33"/>
         <source>Open for %n more block(s)</source>
         <translation>
             <numerusform>Open for %n more block</numerusform>
@@ -4448,7 +4667,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>verified via InstantSend</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+25"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
@@ -4470,49 +4689,49 @@ https://www.transifex.com/projects/p/blocx/</translation>
     <message>
         <location line="+5"/>
         <location line="+14"/>
-        <location line="+71"/>
+        <location line="+72"/>
         <source>From</source>
         <translation>From</translation>
     </message>
     <message>
-        <location line="-71"/>
+        <location line="-72"/>
         <source>unknown</source>
         <translation>unknown</translation>
     </message>
     <message>
         <location line="+1"/>
         <location line="+20"/>
-        <location line="+69"/>
+        <location line="+70"/>
         <source>To</source>
         <translation>To</translation>
     </message>
     <message>
-        <location line="-87"/>
+        <location line="-88"/>
         <source>own address</source>
         <translation>own address</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+68"/>
+        <location line="+69"/>
         <source>watch-only</source>
         <translation>watch-only</translation>
     </message>
     <message>
-        <location line="-66"/>
+        <location line="-67"/>
         <source>label</source>
         <translation>label</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+36"/>
         <location line="+12"/>
-        <location line="+53"/>
+        <location line="+54"/>
         <location line="+30"/>
-        <location line="+57"/>
+        <location line="+43"/>
         <source>Credit</source>
         <translation>Credit</translation>
     </message>
     <message numerus="yes">
-        <location line="-150"/>
+        <location line="-137"/>
         <source>matures in %n more block(s)</source>
         <translation>
             <numerusform>matures in %n more block</numerusform>
@@ -4525,14 +4744,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>not accepted</translation>
     </message>
     <message>
-        <location line="+59"/>
-        <location line="+26"/>
         <location line="+60"/>
+        <location line="+26"/>
+        <location line="+46"/>
         <source>Debit</source>
         <translation>Debit</translation>
     </message>
     <message>
-        <location line="-76"/>
+        <location line="-62"/>
         <source>Total debit</source>
         <translation>Total debit</translation>
     </message>
@@ -4578,12 +4797,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Transaction total size</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>Merchant</source>
-        <translation>Merchant</translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+11"/>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</translation>
     </message>
@@ -4636,7 +4850,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>TransactionTableModel</name>
     <message>
-        <location filename="../transactiontablemodel.cpp" line="+236"/>
+        <location filename="../transactiontablemodel.cpp" line="+231"/>
         <source>Date</source>
         <translation>Date</translation>
     </message>
@@ -4651,7 +4865,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Address / Label</translation>
     </message>
     <message numerus="yes">
-        <location line="+74"/>
+        <location line="+78"/>
         <source>Open for %n more block(s)</source>
         <translation>
             <numerusform>Open for %n more block</numerusform>
@@ -4769,7 +4983,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>watch-only</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+18"/>
         <source>(n/a)</source>
         <translation>(n/a)</translation>
     </message>
@@ -4812,13 +5026,13 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>TransactionView</name>
     <message>
-        <location filename="../transactionview.cpp" line="+68"/>
-        <location line="+12"/>
+        <location filename="../transactionview.cpp" line="+67"/>
+        <location line="+13"/>
         <source>All</source>
         <translation>All</translation>
     </message>
     <message>
-        <location line="-11"/>
+        <location line="-12"/>
         <source>Today</source>
         <translation>Today</translation>
     </message>
@@ -4848,7 +5062,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Range...</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+8"/>
         <source>Most Common</source>
         <translation>Most Common</translation>
     </message>
@@ -4913,9 +5127,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Min amount</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+46"/>
         <source>Abandon transaction</source>
         <translation>Abandon transaction</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Resend transaction</source>
+        <translation>Resend transaction</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4949,8 +5168,8 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Edit label</source>
-        <translation>Edit label</translation>
+        <source>Edit address label</source>
+        <translation>Edit address label</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4963,7 +5182,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Show address QR code</translation>
     </message>
     <message>
-        <location line="+222"/>
+        <location line="+224"/>
         <source>Export Transaction History</source>
         <translation>Export Transaction History</translation>
     </message>
@@ -5028,7 +5247,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>The transaction history was successfully saved to %1.</translation>
     </message>
     <message>
-        <location line="+143"/>
+        <location line="+160"/>
         <source>QR code</source>
         <translation>QR code</translation>
     </message>
@@ -5046,25 +5265,57 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>UnitDisplayStatusBarControl</name>
     <message>
-        <location filename="../bitcoingui.cpp" line="+136"/>
+        <location filename="../bitcoingui.cpp" line="+41"/>
         <source>Unit to show amounts in. Click to select another unit.</source>
         <translation>Unit to show amounts in. Click to select another unit.</translation>
     </message>
 </context>
 <context>
+    <name>WalletController</name>
+    <message>
+        <location filename="../walletcontroller.cpp" line="-218"/>
+        <source>Close wallet</source>
+        <translation>Close wallet</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
+        <translation>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
+        <translation>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</translation>
+    </message>
+</context>
+<context>
     <name>WalletFrame</name>
     <message>
-        <location filename="../walletframe.cpp" line="+28"/>
-        <source>No wallet has been loaded.</source>
-        <translation>No wallet has been loaded.</translation>
+        <location filename="../walletframe.cpp" line="+38"/>
+        <source>No wallet has been loaded.
+Go to File &gt; Open Wallet to load a wallet.
+- OR -</source>
+        <translation>No wallet has been loaded.
+Go to File &gt; Open Wallet to load a wallet.
+- OR -</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Create a new wallet</source>
+        <translation>Create a new wallet</translation>
     </message>
 </context>
 <context>
     <name>WalletModel</name>
     <message>
-        <location filename="../walletmodel.cpp" line="+256"/>
+        <location filename="../walletmodel.cpp" line="+244"/>
         <source>Send Coins</source>
         <translation>Send Coins</translation>
+    </message>
+    <message>
+        <location line="+360"/>
+        <source>default wallet</source>
+        <translation>default wallet</translation>
     </message>
 </context>
 <context>
@@ -5085,7 +5336,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Selected amount:</translation>
     </message>
     <message>
-        <location line="+270"/>
+        <location line="+265"/>
         <source>Backup Wallet</source>
         <translation>Backup Wallet</translation>
     </message>
@@ -5115,7 +5366,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>The wallet data was successfully saved to %1.</translation>
     </message>
     <message>
-        <location line="+59"/>
+        <location line="+53"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
@@ -5123,22 +5374,32 @@ https://www.transifex.com/projects/p/blocx/</translation>
 <context>
     <name>blocx-core</name>
     <message>
-        <location filename="../blocxstrings.cpp" line="+39"/>
+        <location filename="../blocxstrings.cpp" line="+41"/>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
         <translation>Error: Listening for incoming connections failed (listen returned error %s)</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+6"/>
+        <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
+        <translation>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</source>
+        <translation>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
         <translation>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+25"/>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
         <translation>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+3"/>
         <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
         <translation>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</translation>
     </message>
@@ -5153,17 +5414,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Cannot downgrade wallet</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>Collateral not valid.</source>
         <translation>Collateral not valid.</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Corrupted block database detected</source>
         <translation>Corrupted block database detected</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Do you want to rebuild the block database now?</source>
         <translation>Do you want to rebuild the block database now?</translation>
     </message>
@@ -5188,12 +5449,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Error initializing wallet database environment %s!</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>Error loading block database</source>
         <translation>Error loading block database</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>Error opening block database</source>
         <translation>Error opening block database</translation>
     </message>
@@ -5203,32 +5464,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Error reading from database, shutting down.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Error: Disk space is low!</source>
-        <translation>Error: Disk space is low!</translation>
-    </message>
-    <message>
-        <location line="+12"/>
+        <location line="+15"/>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>Failed to listen on any port. Use -listen=0 if you want this.</translation>
     </message>
     <message>
-        <location line="-164"/>
+        <location line="-162"/>
         <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
         <translation>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+8"/>
         <source>Cannot provide specific connections and have addrman find outgoing connections at the same.</source>
         <translation>Cannot provide specific connections and have addrman find outgoing connections at the same.</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+20"/>
         <source>Found unconfirmed denominated outputs, will wait till they confirm to continue.</source>
         <translation>Found unconfirmed denominated outputs, will wait till they confirm to continue.</translation>
     </message>
@@ -5243,37 +5494,27 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+17"/>
+        <source>SQLiteDatabase: Unknown sqlite wallet schema version %d. Only version %d is supported</source>
+        <translation>SQLiteDatabase: Unknown sqlite wallet schema version %d. Only version %d is supported</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>Transaction index can&apos;t be disabled with governance validation enabled. Either start with -disablegovernance command line switch or enable transaction index.</source>
         <translation>Transaction index can&apos;t be disabled with governance validation enabled. Either start with -disablegovernance command line switch or enable transaction index.</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+42"/>
         <source>Can&apos;t mix: no compatible inputs found!</source>
         <translation>Can&apos;t mix: no compatible inputs found!</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+17"/>
         <source>Entry exceeds maximum size.</source>
         <translation>Entry exceeds maximum size.</translation>
     </message>
     <message>
-        <location line="+28"/>
-        <source>Failed to load fulfilled requests cache from</source>
-        <translation>Failed to load fulfilled requests cache from</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to load governance cache from</source>
-        <translation>Failed to load governance cache from</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to load masternode cache from</source>
-        <translation>Failed to load masternode cache from</translation>
-    </message>
-    <message>
-        <location line="+4"/>
+        <location line="+33"/>
         <source>Found enough users, signing ( waiting %s )</source>
         <translation>Found enough users, signing ( waiting %s )</translation>
     </message>
@@ -5283,7 +5524,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Found enough users, signing ...</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Importing...</source>
         <translation>Importing...</translation>
     </message>
@@ -5303,11 +5544,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Incorrect or no genesis block found. Wrong datadir for network?</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Information</source>
-        <translation>Information</translation>
-    </message>
-    <message>
         <location line="+2"/>
         <source>Input is not valid.</source>
         <translation>Input is not valid.</translation>
@@ -5318,7 +5554,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Insufficient funds.</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>Invalid amount for -discardfee=&lt;amount&gt;: &apos;%s&apos;</source>
         <translation>Invalid amount for -discardfee=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
@@ -5333,7 +5569,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Invalid minimum number of spork signers specified with -minsporkkeys</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <source>Keypool ran out, please call keypoolrefill first</source>
         <translation>Keypool ran out, please call keypoolrefill first</translation>
     </message>
@@ -5388,7 +5624,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Not in the Masternode list.</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+22"/>
         <source>Submitted to masternode, waiting in queue %s</source>
         <translation>Submitted to masternode, waiting in queue %s</translation>
     </message>
@@ -5398,32 +5634,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Synchronization finished</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>Unable to start HTTP server. See debug log for details.</source>
         <translation>Unable to start HTTP server. See debug log for details.</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Unknown response.</source>
         <translation>Unknown response.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Unsupported argument -benchmark ignored, use -debug=bench.</source>
-        <translation>Unsupported argument -benchmark ignored, use -debug=bench.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unsupported argument -debugnet ignored, use -debug=net.</source>
-        <translation>Unsupported argument -debugnet ignored, use -debug=net.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Unsupported argument -tor found, use -onion.</source>
-        <translation>Unsupported argument -tor found, use -onion.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+5"/>
         <source>User Agent comment (%s) contains unsafe characters.</source>
         <translation>User Agent comment (%s) contains unsafe characters.</translation>
     </message>
@@ -5433,12 +5654,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Verifying wallet(s)...</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+8"/>
         <source>Will retry...</source>
         <translation>Will retry...</translation>
     </message>
     <message>
-        <location line="-163"/>
+        <location line="-169"/>
         <source>Can&apos;t find random Masternode.</source>
         <translation>Can&apos;t find random Masternode.</translation>
     </message>
@@ -5448,22 +5669,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>%s can&apos;t be lower than %s</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <source>%s is idle.</source>
         <translation>%s is idle.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>%s request incomplete: %s</source>
-        <translation>%s request incomplete: %s</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="+13"/>
         <source>Can&apos;t mix while sync in progress.</source>
         <translation>Can&apos;t mix while sync in progress.</translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+72"/>
         <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
         <translation>Invalid netmask specified in -whitelist: &apos;%s&apos;</translation>
     </message>
@@ -5473,22 +5689,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Invalid script detected.</translation>
     </message>
     <message>
-        <location line="-201"/>
+        <location line="-198"/>
         <source>%s file contains all private keys from this wallet. Do not share it with anyone!</source>
         <translation>%s file contains all private keys from this wallet. Do not share it with anyone!</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>-masternode option is deprecated and ignored, specifying -masternodeblsprivkey is enough to start this node as a masternode.</source>
-        <translation>-masternode option is deprecated and ignored, specifying -masternodeblsprivkey is enough to start this node as a masternode.</translation>
-    </message>
-    <message>
-        <location line="+21"/>
+        <location line="+27"/>
         <source>Failed to create backup, file already exists! This could happen if you restarted wallet in less than 60 seconds. You can continue if you are ok with this.</source>
         <translation>Failed to create backup, file already exists! This could happen if you restarted wallet in less than 60 seconds. You can continue if you are ok with this.</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+18"/>
         <source>Make sure to encrypt your wallet and delete all non-encrypted backups after you have verified that the wallet works!</source>
         <translation>Make sure to encrypt your wallet and delete all non-encrypted backups after you have verified that the wallet works!</translation>
     </message>
@@ -5503,12 +5714,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again.</source>
-        <translation>Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer&apos;s date and time being set incorrectly. Only rebuild the block database if you are sure that your computer&apos;s date and time are correct</source>
         <translation>The block database contains a block which appears to be from the future. This may be due to your computer&apos;s date and time being set incorrectly. Only rebuild the block database if you are sure that your computer&apos;s date and time are correct</translation>
     </message>
@@ -5524,16 +5730,6 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
-        <translation>Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unsupported argument -whitelistalwaysrelay ignored, use -whitelistrelay and/or -whitelistforcerelay.</source>
-        <translation>Unsupported argument -whitelistalwaysrelay ignored, use -whitelistrelay and/or -whitelistforcerelay.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>WARNING! Failed to replenish keypool, please unlock your wallet to do so.</source>
         <translation>WARNING! Failed to replenish keypool, please unlock your wallet to do so.</translation>
     </message>
@@ -5543,12 +5739,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Wallet is locked, can&apos;t replenish keypool! Automatic backups and mixing are disabled, please unlock your wallet to replenish keypool.</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Warning: Unknown block versions being mined! It&apos;s possible unknown rules are in effect</source>
-        <translation>Warning: Unknown block versions being mined! It&apos;s possible unknown rules are in effect</translation>
-    </message>
-    <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>You need to rebuild the database using -reindex to change -timestampindex</source>
         <translation>You need to rebuild the database using -reindex to change -timestampindex</translation>
     </message>
@@ -5558,42 +5749,62 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+5"/>
         <source>%s failed</source>
         <translation>%s failed</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>-litemode is deprecated.</source>
-        <translation>-litemode is deprecated.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+7"/>
         <source>-maxmempool must be at least %d MB</source>
         <translation>-maxmempool must be at least %d MB</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>Automatic backups disabled</source>
         <translation>Automatic backups disabled</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+6"/>
+        <source>Cannot set -peerblockfilters without -blockfilterindex.</source>
+        <translation>Cannot set -peerblockfilters without -blockfilterindex.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Config setting for %s only applied on %s network when in [%s] section.</source>
+        <translation>Config setting for %s only applied on %s network when in [%s] section.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Could not find asmap file %s</source>
+        <translation>Could not find asmap file %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Could not parse asmap file %s</source>
+        <translation>Could not parse asmap file %s</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>ERROR! Failed to create automatic backup</source>
         <translation>ERROR! Failed to create automatic backup</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+6"/>
+        <source>Error loading %s: Private keys can only be disabled during creation</source>
+        <translation>Error loading %s: Private keys can only be disabled during creation</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Error upgrading evo database</source>
         <translation>Error upgrading evo database</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Error: A fatal internal error occurred, see debug.log for details</source>
-        <translation>Error: A fatal internal error occurred, see debug.log for details</translation>
+        <location line="+1"/>
+        <source>Error: Disk space is low for %s</source>
+        <translation>Error: Disk space is low for %s</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>Error: failed to add socket to epollfd (epoll_ctl returned error %s)</source>
         <translation>Error: failed to add socket to epollfd (epoll_ctl returned error %s)</translation>
     </message>
@@ -5603,22 +5814,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Exceeded max tries.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Failed to clear fulfilled requests cache at</source>
-        <translation>Failed to clear fulfilled requests cache at</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to clear governance cache at</source>
-        <translation>Failed to clear governance cache at</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Failed to clear masternode cache at</source>
-        <translation>Failed to clear masternode cache at</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Failed to commit EvoDB</source>
         <translation>Failed to commit EvoDB</translation>
     </message>
@@ -5638,17 +5834,27 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Failed to delete backup, error: %s</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Failed to load sporks cache from</source>
-        <translation>Failed to load sporks cache from</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+7"/>
         <source>Failed to rescan the wallet during initialization</source>
         <translation>Failed to rescan the wallet during initialization</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+2"/>
+        <source>Failed to verify database</source>
+        <translation>Failed to verify database</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ignoring duplicate -wallet %s.</source>
+        <translation>Ignoring duplicate -wallet %s.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Invalid P2P permission: &apos;%s&apos;</source>
+        <translation>Invalid P2P permission: &apos;%s&apos;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>Invalid amount for -fallbackfee=&lt;amount&gt;: &apos;%s&apos;</source>
         <translation>Invalid amount for -fallbackfee=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
@@ -5658,17 +5864,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Invalid masternodeblsprivkey. Please see documentation.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>It has been replaced by -disablegovernance.</source>
-        <translation>It has been replaced by -disablegovernance.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Its replacement -disablegovernance has been forced instead.</source>
-        <translation>Its replacement -disablegovernance has been forced instead.</translation>
-    </message>
-    <message>
-        <location line="+6"/>
+        <location line="+10"/>
         <source>Loading block index...</source>
         <translation>Loading block index...</translation>
     </message>
@@ -5734,6 +5930,11 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Prune mode is incompatible with -blockfilterindex.</source>
+        <translation>Prune mode is incompatible with -blockfilterindex.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Prune mode is incompatible with -disablegovernance=false.</source>
         <translation>Prune mode is incompatible with -disablegovernance=false.</translation>
     </message>
@@ -5748,7 +5949,32 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Pruning blockstore...</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+4"/>
+        <source>SQLiteDatabase: Failed to execute statement to verify database: %s</source>
+        <translation>SQLiteDatabase: Failed to execute statement to verify database: %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SQLiteDatabase: Failed to prepare statement to verify database: %s</source>
+        <translation>SQLiteDatabase: Failed to prepare statement to verify database: %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SQLiteDatabase: Failed to read database verification error: %s</source>
+        <translation>SQLiteDatabase: Failed to read database verification error: %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SQLiteDatabase: Unexpected application id. Expected %u, got %u</source>
+        <translation>SQLiteDatabase: Unexpected application id. Expected %u, got %u</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Section [%s] is not recognized.</source>
+        <translation>Section [%s] is not recognized.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Specified -walletdir &quot;%s&quot; does not exist</source>
         <translation>Specified -walletdir &quot;%s&quot; does not exist</translation>
     </message>
@@ -5768,7 +5994,14 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Synchronizing blockchain...</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
+        <source>The specified config file %s does not exist
+</source>
+        <translation>The specified config file %s does not exist
+</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>The wallet will avoid paying less than the minimum relay fee.</source>
         <translation>The wallet will avoid paying less than the minimum relay fee.</translation>
     </message>
@@ -5803,7 +6036,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Transaction must have at least one recipient</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <source>Transaction too large</source>
         <translation>Transaction too large</translation>
     </message>
@@ -5819,26 +6052,31 @@ https://www.transifex.com/projects/p/blocx/</translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Unable to create the PID file &apos;%s&apos;: %s</source>
+        <translation>Unable to create the PID file &apos;%s&apos;: %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Unable to generate initial keys</source>
         <translation>Unable to generate initial keys</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+5"/>
+        <source>Unknown -blockfilterindex value %s.</source>
+        <translation>Unknown -blockfilterindex value %s.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>Upgrading UTXO database</source>
         <translation>Upgrading UTXO database</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Wallet %s resides outside wallet directory %s</source>
-        <translation>Wallet %s resides outside wallet directory %s</translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+7"/>
         <source>Wallet needed to be rewritten: restart %s to complete</source>
         <translation>Wallet needed to be rewritten: restart %s to complete</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+3"/>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
         <translation>Warning: unknown new rules activated (versionbit %i)</translation>
     </message>
@@ -5863,12 +6101,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>You need to rebuild the database using -reindex to change -spentindex</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation>You need to rebuild the database using -reindex to change -txindex</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <source>no mixing available.</source>
         <translation>no mixing available.</translation>
     </message>
@@ -5878,17 +6111,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>see debug.log for details.</translation>
     </message>
     <message>
-        <location line="-307"/>
-        <source>BLOCX Core</source>
-        <translation>BLOCX Core</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="-305"/>
         <source>The %s developers</source>
         <translation>The %s developers</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+7"/>
         <source>%s uses exact denominated amounts to send funds, you might simply need to mix some more coins.</source>
         <translation>%s uses exact denominated amounts to send funds, you might simply need to mix some more coins.</translation>
     </message>
@@ -5913,7 +6141,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+15"/>
         <source>Incorrect or no devnet genesis block found. Wrong datadir for devnet specified?</source>
         <translation>Incorrect or no devnet genesis block found. Wrong datadir for devnet specified?</translation>
     </message>
@@ -5928,7 +6156,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Please contribute if you find %s useful. Visit %s for further information about the software.</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+25"/>
         <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
         <translation>This is the transaction fee you may discard if change is smaller than dust at this level</translation>
     </message>
@@ -5938,34 +6166,29 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>This is the transaction fee you may pay when fee estimates are not available.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
+        <location line="+9"/>
         <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
         <translation>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</translation>
     </message>
     <message>
-        <location line="+20"/>
-        <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</translation>
+        <location line="+8"/>
+        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
+        <translation>Warning: Private keys detected in wallet {%s} with disabled private keys</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>%d of last 100 blocks have unexpected version</source>
         <translation>%d of last 100 blocks have unexpected version</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>%s corrupt, salvage failed</source>
-        <translation>%s corrupt, salvage failed</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>%s is not a valid backup folder!</source>
         <translation>%s is not a valid backup folder!</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%s is only allowed with a single wallet file</source>
+        <translation>%s is only allowed with a single wallet file</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5973,12 +6196,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>%s is set very high!</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
+        <source>%s request incomplete:</source>
+        <translation>%s request incomplete:</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>-devnet can only be specified once</source>
         <translation>-devnet can only be specified once</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <source>-port must be specified when -devnet and -listen are specified</source>
         <translation>-port must be specified when -devnet and -listen are specified</translation>
     </message>
@@ -5988,12 +6216,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>-rpcport must be specified when -devnet and -server are specified</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>A fatal internal error occurred, see debug.log for details</source>
+        <translation>A fatal internal error occurred, see debug.log for details</translation>
+    </message>
+    <message>
         <location line="+7"/>
         <source>Cannot resolve -%s address: &apos;%s&apos;</source>
         <translation>Cannot resolve -%s address: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Cannot write to data directory &apos;%s&apos;; check permissions.</source>
         <translation>Cannot write to data directory &apos;%s&apos;; check permissions.</translation>
     </message>
@@ -6003,17 +6236,22 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Change index out of range</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Copyright (C)</source>
         <translation>Copyright (C)</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+4"/>
+        <source>Disk space is too low!</source>
+        <translation>Disk space is too low!</translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Error loading %s</source>
         <translation>Error loading %s</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Error loading %s: Wallet corrupted</source>
         <translation>Error loading %s: Wallet corrupted</translation>
     </message>
@@ -6028,37 +6266,67 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Error loading %s: You can&apos;t disable HD on an already existing HD wallet</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
-        <translation>Error loading wallet %s. Duplicate -wallet filename specified.</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Error upgrading chainstate database</source>
         <translation>Error upgrading chainstate database</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <source>Error: failed to add socket to kqueuefd (kevent returned error %s)</source>
         <translation>Error: failed to add socket to kqueuefd (kevent returned error %s)</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+2"/>
+        <source>Failed to clear fulfilled requests cache at %s</source>
+        <translation>Failed to clear fulfilled requests cache at %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to clear governance cache at %s</source>
+        <translation>Failed to clear governance cache at %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to clear masternode cache at %s</source>
+        <translation>Failed to clear masternode cache at %s</translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>Failed to find mixing queue to join</source>
         <translation>Failed to find mixing queue to join</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+2"/>
+        <source>Failed to load fulfilled requests cache from %s</source>
+        <translation>Failed to load fulfilled requests cache from %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to load governance cache from %s</source>
+        <translation>Failed to load governance cache from %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to load masternode cache from %s</source>
+        <translation>Failed to load masternode cache from %s</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Failed to load sporks cache from %s</source>
+        <translation>Failed to load sporks cache from %s</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Failed to start a new mixing queue</source>
         <translation>Failed to start a new mixing queue</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+8"/>
         <source>Incorrect -rescan mode, falling back to default value</source>
         <translation>Incorrect -rescan mode, falling back to default value</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <source>Initialization sanity check failed. %s is shutting down.</source>
         <translation>Initialization sanity check failed. %s is shutting down.</translation>
     </message>
@@ -6078,7 +6346,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Invalid -proxy address or hostname: &apos;%s&apos;</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Invalid amount for -%s=&lt;amount&gt;: &apos;%s&apos;</source>
         <translation>Invalid amount for -%s=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
@@ -6088,12 +6356,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Invalid spork address specified with -sporkaddr</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+4"/>
         <source>Loading P2P addresses...</source>
         <translation>Loading P2P addresses...</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+28"/>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation>Reducing -maxconnections from %d to %d, because of system limitations.</translation>
     </message>
@@ -6108,7 +6376,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Rescanning...</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+6"/>
         <source>Session not complete!</source>
         <translation>Session not complete!</translation>
     </message>
@@ -6128,17 +6396,27 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Specified blocks directory &quot;%s&quot; does not exist.</translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="-44"/>
         <source>Last queue was created too recently.</source>
         <translation>Last queue was created too recently.</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-204"/>
+        <source>%s corrupt. Try using the wallet tool blocx-wallet to salvage or restoring a backup.</source>
+        <translation>%s corrupt. Try using the wallet tool blocx-wallet to salvage or restoring a backup.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Can&apos;t generate a change-address key. No keys in the internal keypool and can&apos;t generate any keys.</source>
+        <translation>Can&apos;t generate a change-address key. No keys in the internal keypool and can&apos;t generate any keys.</translation>
+    </message>
+    <message>
+        <location line="+193"/>
         <source>Last successful action was too recent.</source>
         <translation>Last successful action was too recent.</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+44"/>
         <source>Starting network threads...</source>
         <translation>Starting network threads...</translation>
     </message>
@@ -6153,7 +6431,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>The source code is available from %s.</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>The transaction amount is too small to pay the fee</source>
         <translation>The transaction amount is too small to pay the fee</translation>
     </message>
@@ -6183,17 +6461,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Transaction not valid.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Transaction too large for fee policy</source>
-        <translation>Transaction too large for fee policy</translation>
-    </message>
-    <message>
         <location line="+3"/>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
         <translation>Unable to bind to %s on this computer (bind returned error %s)</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Unable to locate enough mixed funds for this transaction.</source>
         <translation>Unable to locate enough mixed funds for this transaction.</translation>
     </message>
@@ -6208,7 +6481,7 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Unable to sign spork message, wrong key?</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
         <translation>Unknown network specified in -onlynet: &apos;%s&apos;</translation>
     </message>
@@ -6218,12 +6491,17 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Unknown state: id = %u</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+1"/>
         <source>Unsupported logging category %s=%s.</source>
         <translation>Unsupported logging category %s=%s.</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+2"/>
+        <source>Upgrading txindex database</source>
+        <translation>Upgrading txindex database</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Verifying blocks...</source>
         <translation>Verifying blocks...</translation>
     </message>
@@ -6233,22 +6511,12 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>Very low number of keys left: %d</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>Wallet is locked.</source>
         <translation>Wallet is locked.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Warning</source>
-        <translation>Warning</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Warning: %s is deprecated, please use %s instead</source>
-        <translation>Warning: %s is deprecated, please use %s instead</translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Warning: can&apos;t use %s and %s together, will prefer %s</source>
         <translation>Warning: can&apos;t use %s and %s together, will prefer %s</translation>
     </message>
@@ -6268,14 +6536,9 @@ https://www.transifex.com/projects/p/blocx/</translation>
         <translation>You can not disable governance validation on a masternode.</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+4"/>
         <source>Your entries added successfully.</source>
         <translation>Your entries added successfully.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Zapping all transactions from wallet...</source>
-        <translation>Zapping all transactions from wallet...</translation>
     </message>
 </context>
 </TS>

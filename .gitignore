@@ -10,8 +10,10 @@ src/blocx
 src/blocxd
 src/blocx-cli
 src/blocx-tx
+src/blocx-wallet
+src/test/fuzz/*
+!src/test/fuzz/*.*
 src/test/test_blocx
-src/test/test_blocx_fuzzy
 src/qt/test/test_blocx-qt
 src/qt/res/css/colors/*
 src/bench/bench_blocx
@@ -33,13 +35,15 @@ build-aux/m4/ltversion.m4
 build-aux/missing
 build-aux/compile
 build-aux/test-driver
+config.cache
 config.log
 config.status
 configure
 libtool
-src/config/blocx-config.h
-src/config/blocx-config.h.in
+src/config/bitcoin-config.h
+src/config/bitcoin-config.h.in
 src/config/stamp-h1
+src/obj
 share/setup.nsi
 share/qt/Info.plist
 
@@ -56,7 +60,7 @@ libconftest.dylib*
 .dirstamp
 .libs
 .*.swp
-*.*~*
+*~
 *.bak
 *.rej
 *.orig
@@ -66,16 +70,19 @@ libconftest.dylib*
 *.a
 *.pb.cc
 *.pb.h
+*.dat
 
 *.log
 *.trs
 *.dmg
+*.iso
 
 *.json.h
 *.raw.h
 
 # Only ignore unexpected patches
 *.patch
+!contrib/guix/patches/*.patch
 !depends/patches/**/*.patch
 
 #libtool object files
@@ -85,10 +92,14 @@ libconftest.dylib*
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
+!depends/Makefile
 blocx-qt
 BLOCX-Qt.app
 background.tiff*
 !/depends/Makefile
+
+# Qt Creator
+Makefile.am.user
 
 # Unit-tests
 Makefile.test
@@ -140,3 +151,18 @@ make
 # CLion
 .idea
 cmake-build-debug
+
+# clang-check
+*.plist
+
+osx_volname
+dist/
+*.background.tiff
+
+/guix-build-*
+
+# cppcheck cache-directory
+.cppcheck/*
+
+# flake8 cache location
+.cache/*

@@ -1176,7 +1176,7 @@ QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget::branch:checked { /*
     background-position: center;
 }
 
-QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget::seperator {
+QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget::separator {
 
 }
 
@@ -1512,13 +1512,13 @@ QWidget .QFrame#frameCoinJoin .QWidget#layoutWidgetLastMessageAndButtons {
     max-width: 451px;
 }
 
-QWidget .QFrame#frameCoinJoin .QPushButton#toggleCoinJoin { /* Start CoinJoin Mixing */
+/* QWidget .QFrame#frameCoinJoin .QPushButton#toggleCoinJoin { /* Start CoinJoin Mixing
     margin-top: 5px;
 }
 
 QWidget .QFrame#frameCoinJoin .QPushButton#toggleCoinJoin:hover {
 
-}
+} */
 
 /******************************************************
 OverviewPage RecentTransactions

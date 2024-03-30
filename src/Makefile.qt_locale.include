@@ -1,0 +1,22 @@
+QT_TS = \
+  qt/locale/blocx_ar.ts \
+  qt/locale/blocx_bg.ts \
+  qt/locale/blocx_de.ts \
+  qt/locale/blocx_en.ts \
+  qt/locale/blocx_es.ts \
+  qt/locale/blocx_fi.ts \
+  qt/locale/blocx_fr.ts \
+  qt/locale/blocx_it.ts \
+  qt/locale/blocx_ja.ts \
+  qt/locale/blocx_ko.ts \
+  qt/locale/blocx_nl.ts \
+  qt/locale/blocx_pl.ts \
+  qt/locale/blocx_pt.ts \
+  qt/locale/blocx_ro.ts \
+  qt/locale/blocx_ru.ts \
+  qt/locale/blocx_sk.ts \
+  qt/locale/blocx_th.ts \
+  qt/locale/blocx_tr.ts \
+  qt/locale/blocx_vi.ts \
+  qt/locale/blocx_zh_CN.ts \
+  qt/locale/blocx_zh_TW.ts

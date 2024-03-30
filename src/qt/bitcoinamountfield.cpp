@@ -18,7 +18,7 @@
  * return validity.
  * @note Must return 0 if !valid.
  */
-static CAmount parse(const QString &text, int nUnit, bool *valid_out=0)
+static CAmount parse(const QString &text, int nUnit, bool *valid_out= nullptr)
 {
     CAmount val = 0;
     bool valid = BitcoinUnits::parse(nUnit, text, &val);
@@ -43,7 +43,7 @@ public:
         QValidator(parent),
         currentUnit(BitcoinUnits::BLOCX) {}
 
-    State validate(QString &input, int &pos) const
+    State validate(QString &input, int &pos) const override
     {
         if(input.isEmpty())
             return QValidator::Intermediate;
@@ -74,20 +74,29 @@ public:
         setAlignment(Qt::AlignLeft);
         amountValidator = new AmountValidator(this);
         setValidator(amountValidator);
-        connect(this, SIGNAL(textEdited(QString)), this, SIGNAL(valueChanged()));
+        connect(this, &QLineEdit::textEdited, this, &AmountLineEdit::valueChanged);
     }
 
     void fixup(const QString &input)
     {
-        bool valid = false;
-        CAmount val = parse(input, currentUnit, &valid);
-        if(valid)
-        {
+        bool valid;
+        CAmount val;
+
+        if (input.isEmpty() && !m_allow_empty) {
+            valid = true;
+            val = m_min_amount;
+        } else {
+            valid = false;
+            val = parse(input, currentUnit, &valid);
+        }
+
+        if (valid) {
+            val = qBound(m_min_amount, val, m_max_amount);
             setText(BitcoinUnits::format(currentUnit, val, false, BitcoinUnits::separatorAlways));
         }
     }
 
-    CAmount value(bool *valid_out=0) const
+    CAmount value(bool *valid_out=nullptr) const
     {
         return parse(text(), currentUnit, valid_out);
     }
@@ -96,6 +105,21 @@ public:
     {
         setText(BitcoinUnits::format(currentUnit, value, false, BitcoinUnits::separatorAlways));
         Q_EMIT valueChanged();
+    }
+
+    void SetAllowEmpty(bool allow)
+    {
+        m_allow_empty = allow;
+    }
+
+    void SetMinValue(const CAmount& value)
+    {
+        m_min_amount = value;
+    }
+
+    void SetMaxValue(const CAmount& value)
+    {
+        m_max_amount = value;
     }
 
     void setDisplayUnit(int unit)
@@ -112,22 +136,25 @@ public:
             clear();
     }
 
-    QSize minimumSizeHint() const
+    QSize minimumSizeHint() const override
     {
         ensurePolished();
         const QFontMetrics fm(fontMetrics());
         int h = 0;
-        int w = fm.width(BitcoinUnits::format(BitcoinUnits::BLOCX, BitcoinUnits::maxMoney(), false, BitcoinUnits::separatorAlways));
+        int w = GUIUtil::TextWidth(fm, BitcoinUnits::format(BitcoinUnits::BLOCX, BitcoinUnits::maxMoney(), false, BitcoinUnits::separatorAlways));
         w += 2; // cursor blinking space
         w += GUIUtil::blocxThemeActive() ? 24 : 0; // counteract padding from css
         return QSize(w, h);
     }
 
 private:
-    int currentUnit;
+    int currentUnit{BitcoinUnits::BLOCX};
+    bool m_allow_empty{true};
+    CAmount m_min_amount{CAmount(0)};
+    CAmount m_max_amount{BitcoinUnits::maxMoney()};
 
 protected:
-    bool event(QEvent *event)
+    bool event(QEvent *event) override
     {
         if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease)
         {
@@ -158,7 +185,7 @@ Q_SIGNALS:
 
 BitcoinAmountField::BitcoinAmountField(QWidget *parent) :
     QWidget(parent),
-    amount(0)
+    amount(nullptr)
 {
     amount = new AmountLineEdit(this);
     amount->setLocale(QLocale::c());
@@ -178,7 +205,7 @@ BitcoinAmountField::BitcoinAmountField(QWidget *parent) :
     setFocusProxy(amount);
 
     // If one if the widgets changes, the combined content changes as well
-    connect(amount, SIGNAL(valueChanged()), this, SIGNAL(valueChanged()));
+    connect(amount, &AmountLineEdit::valueChanged, this, &BitcoinAmountField::valueChanged);
 }
 
 void BitcoinAmountField::clear()
@@ -231,6 +258,21 @@ CAmount BitcoinAmountField::value(bool *valid_out) const
 void BitcoinAmountField::setValue(const CAmount& value)
 {
     amount->setValue(value);
+}
+
+void BitcoinAmountField::SetAllowEmpty(bool allow)
+{
+    amount->SetAllowEmpty(allow);
+}
+
+void BitcoinAmountField::SetMinValue(const CAmount& value)
+{
+    amount->SetMinValue(value);
+}
+
+void BitcoinAmountField::SetMaxValue(const CAmount& value)
+{
+    amount->SetMaxValue(value);
 }
 
 void BitcoinAmountField::setReadOnly(bool fReadOnly)

@@ -1,14 +1,15 @@
 Release Process
 ====================
 
-* Update translations, see [translation_process.md](https://github.com/blocxpay/blocx/blob/master/doc/translation_process.md#synchronising-translations).
+* Update translations, see [translation_process.md](https://github.com/BLOCXTECH/BLOCX/blob/master/doc/translation_process.md#synchronising-translations).
 
-* Update manpages, see [gen-manpages.sh](https://github.com/blocxpay/blocx/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update manpages, see [gen-manpages.sh](https://github.com/BLOCXTECH/BLOCX/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`)
 
 Before every minor and major release:
 
 * Update [bips.md](bips.md) to account for changes since the last release.
-* Update version in `configure.ac` (don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`)
+* Update version in `configure.ac` (don't forget to set `CLIENT_VERSION_IS_RELEASE` to `true`) (don't forget to set `CLIENT_VERSION_RC` to `0`)
 * Write release notes (see below)
 * Update `src/chainparams.cpp` nMinimumChainWork with information from the getblockchaininfo rpc.
 * Update `src/chainparams.cpp` defaultAssumeValid with information from the getblockhash rpc.
@@ -20,7 +21,7 @@ Before every minor and major release:
 Before every major release:
 
 * Update hardcoded [seeds](/contrib/seeds/README.md). TODO: Give example PR for BLOCX
-* Update [`BLOCK_CHAIN_SIZE`](/src/qt/intro.cpp) to the current size plus some overhead.
+* Update [`src/chainparams.cpp`](/src/chainparams.cpp) m_assumed_blockchain_size and m_assumed_chain_state_size with the current size plus some overhead (see [this](#how-to-calculate-m_assumed_blockchain_size-and-m_assumed_chain_state_size) for information on how to calculate them).
 * Update `src/chainparams.cpp` chainTxData with statistics about the transaction count and rate. Use the output of the RPC `getchaintxstats`, see
   [this pull request](https://github.com/bitcoin/bitcoin/pull/12270) for an example. Reviewers can verify the results by running `getchaintxstats <window_block_count> <window_last_block_hash>` with the `window_block_count` and `window_last_block_hash` from your output.
 * Update version of `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
@@ -35,7 +36,7 @@ Check out the source code in the following directory hierarchy.
 	git clone https://github.com/blocxpay/gitian.sigs.git
 	git clone https://github.com/blocxpay/blocx-detached-sigs.git
 	git clone https://github.com/devrandom/gitian-builder.git
-	git clone https://github.com/blocxpay/blocx.git
+	git clone https://github.com/BLOCXTECH/BLOCX.git
 
 ### BLOCX Core maintainers/release engineers, suggestion for writing release notes
 
@@ -85,7 +86,7 @@ Ensure gitian-builder is up-to-date:
     echo '5a60e0a4b3e0b4d655317b2f12a810211c50242138322b16e7e01c6fbb89d92f inputs/osslsigncode-2.0.tar.gz' | sha256sum -c
     popd
 
-Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, and copy it into the inputs directory.
+Create the macOS SDK tarball, see the [macOS build instructions](build-osx.md#deterministic-macos-dmg-notes) for details, and copy it into the inputs directory.
 
 ### Optional: Seed the Gitian sources cache and offline git repositories
 
@@ -107,7 +108,7 @@ NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from 
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign BLOCX Core for Linux, Windows, and OS X:
+### Build and sign BLOCX Core for Linux, Windows, and macOS:
 
     pushd ./gitian-builder
     ./bin/gbuild --num-make 2 --memory 3000 --commit blocx=v${VERSION} ../blocx/contrib/gitian-descriptors/gitian-linux.yml
@@ -130,7 +131,7 @@ Build output expected:
   1. source tarball (`blocx-${VERSION}.tar.gz`)
   2. linux 32-bit and 64-bit dist tarballs (`blocx-${VERSION}-linux[32|64].tar.gz`)
   3. windows 32-bit and 64-bit unsigned installers and dist zips (`blocx-${VERSION}-win[32|64]-setup-unsigned.exe`, `blocx-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`blocx-${VERSION}-osx-unsigned.dmg`, `blocx-${VERSION}-osx64.tar.gz`)
+  4. macOS unsigned installer and dist tarball (`blocx-${VERSION}-osx-unsigned.dmg`, `blocx-${VERSION}-osx64.tar.gz`)
   5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
@@ -160,43 +161,43 @@ Commit your signature to gitian.sigs:
     git push  # Assuming you can push to the gitian.sigs tree
     popd
 
-Codesigner only: Create Windows/OS X detached signatures:
+Codesigner only: Create Windows/macOS detached signatures:
 - Only one person handles codesigning. Everyone else should skip to the next step.
-- Only once the Windows/OS X builds each have 3 matching signatures may they be signed with their respective release keys.
+- Only once the Windows/macOS builds each have 3 matching signatures may they be signed with their respective release keys.
 
-Codesigner only: Sign the osx binary:
+Codesigner only: Sign the macOS binary:
 
-    transfer blocx-osx-unsigned.tar.gz to osx for signing
-    tar xf blocx-osx-unsigned.tar.gz
+    transfer blocxcore-osx-unsigned.tar.gz to macOS for signing
+    tar xf blocxcore-osx-unsigned.tar.gz
     ./detached-sig-create.sh -s "Key ID" -o runtime
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf blocx-win-unsigned.tar.gz
+    tar xf blocxcore-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/blocx-detached-sigs
+    cd ~/blocxcore-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
     tar xf signature-win.tar.gz
-    git add -a
+    git add -A
     git commit -m "point to ${VERSION}"
     git tag -s v${VERSION} HEAD
     git push the current branch and new tag
 
-Non-codesigners: wait for Windows/OS X detached signatures:
+Non-codesigners: wait for Windows/macOS detached signatures:
 
-- Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
+- Once the Windows/macOS builds each have 3 matching signatures, they will be signed with their respective release keys.
 - Detached signatures will then be committed to the [blocx-detached-sigs](https://github.com/blocxpay/blocx-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
-Create (and optionally verify) the signed OS X binary:
+Create (and optionally verify) the signed macOS binary:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../blocx/contrib/gitian-descriptors/gitian-osx-signer.yml
@@ -212,15 +213,14 @@ Create (and optionally verify) the signed Windows binaries:
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../blocx/contrib/gitian-descriptors/gitian-win-signer.yml
     ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../blocx/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/blocx-*win64-setup.exe ../blocx-${VERSION}-win64-setup.exe
-    mv build/out/blocx-*win32-setup.exe ../blocx-${VERSION}-win32-setup.exe
     popd
 
-Commit your signature for the signed OS X/Windows binaries:
+Commit your signature for the signed macOS/Windows binaries:
 
     pushd gitian.sigs
     git add ${VERSION}-osx-signed/"${SIGNER}"
     git add ${VERSION}-win-signed/"${SIGNER}"
-    git commit -a
+    git commit -m "Add ${SIGNER} ${VERSION} signed binaries signatures"
     git push  # Assuming you can push to the gitian.sigs tree
     popd
 
@@ -235,14 +235,11 @@ sha256sum * > SHA256SUMS
 The list of files should be:
 ```
 blocx-${VERSION}-aarch64-linux-gnu.tar.gz
-blocx-${VERSION}-arm-linux-gnueabihf.tar.gz
-blocx-${VERSION}-i686-pc-linux-gnu.tar.gz
+blocx-${VERSION}-riscv64-linux-gnu.tar.gz
 blocx-${VERSION}-x86_64-linux-gnu.tar.gz
 blocx-${VERSION}-osx64.tar.gz
 blocx-${VERSION}-osx.dmg
 blocx-${VERSION}.tar.gz
-blocx-${VERSION}-win32-setup.exe
-blocx-${VERSION}-win32.zip
 blocx-${VERSION}-win64-setup.exe
 blocx-${VERSION}-win64.zip
 ```
@@ -250,7 +247,7 @@ The `*-debug*` files generated by the Gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
 in debugging can run Gitian to generate the files for themselves. To avoid
 end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the blocx.org server*.
+space *do not upload these to the blocx.tech server*.
 
 - GPG-sign it, delete the unsigned file:
 ```
@@ -268,12 +265,30 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - Release on BLOCX forum: https://www.blocx.org/forum/topic/official-announcements.54/
 
-  - Optionally Discord, twitter, reddit /r/BLOCXpay, ... but this will usually sort out itself
-
   - Notify flare so that he can start building [the PPAs](https://launchpad.net/~blocx.org/+archive/ubuntu/blocx)
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/blocxpay/blocx/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/BLOCXTECH/BLOCX/releases) with a link to the archived release notes.
 
   - Celebrate
+
+### Additional information
+
+#### How to calculate `m_assumed_blockchain_size` and `m_assumed_chain_state_size`
+
+Both variables are used as a guideline for how much space the user needs on their drive in total, not just strictly for the blockchain.
+Note that all values should be taken from a **fully synced** node and have an overhead of 5-10% added on top of its base value.
+
+To calculate `m_assumed_blockchain_size`:
+- For `mainnet` -> Take the size of the BLOCX Core data directory, excluding `/regtest` and `/testnet3` directories.
+- For `testnet` -> Take the size of the `/testnet3` directory.
+
+
+To calculate `m_assumed_chain_state_size`:
+- For `mainnet` -> Take the size of the `/chainstate` directory.
+- For `testnet` -> Take the size of the `/testnet3/chainstate` directory.
+
+Notes:
+- When taking the size for `m_assumed_blockchain_size`, there's no need to exclude the `/chainstate` directory since it's a guideline value and an overhead will be added anyway.
+- The expected overhead for growth may change over time, so it may not be the same value as last release; pay attention to that when changing the variables.

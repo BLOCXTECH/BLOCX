@@ -365,14 +365,14 @@
          <layout class="QVBoxLayout" name="VerticalLayout_PS1">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <!--<item>
+            <!-- <item>
              <widget class="QLabel" name="labelCoinJoinHeader">
               <property name="text">
                <string notr="true">CoinJoin</string>
               </property>
              </widget>
-            </item>-->
-            <!--<item>
+            </item>
+            <item>
              <widget class="QLabel" name="labelCoinJoinSyncStatus">
               <property name="toolTip">
                <string>The displayed information may be out of date. Your wallet automatically synchronizes with the BLOCX network after a connection is established, but this process has not completed yet.</string>
@@ -384,7 +384,7 @@
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
               </property>
              </widget>
-            </item>-->
+            </item> -->
             <item>
              <spacer name="horizontalSpacer_4">
               <property name="orientation">
@@ -400,7 +400,7 @@
             </item>
            </layout>
           </item>
-          <!--<item>
+          <!-- <item>
            <layout class="QFormLayout" name="coinJoinFormLayout">
             <property name="fieldGrowthPolicy">
              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
@@ -493,8 +493,8 @@
               </property>
              </widget>
             </item>
-           </layout>
-          </item>-->
+           </layout> 
+          </item> -->
           <item>
            <layout class="QVBoxLayout" name="VerticalLayout_PS">
             <item>
@@ -515,7 +515,7 @@
                 </property>
                </spacer>
               </item>
-              <!--<item>
+              <!-- <item>
                <widget class="QPushButton" name="toggleCoinJoin">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -527,7 +527,7 @@
                  <string>Start/Stop Mixing</string>
                 </property>
                </widget>
-              </item>-->
+              </item> -->
               <item>
                <spacer name="horizontalSpacer_6">
                 <property name="orientation">

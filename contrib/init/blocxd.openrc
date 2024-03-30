@@ -2,18 +2,18 @@
 
 # backward compatibility for existing gentoo layout 
 #
-if [ -d "/var/lib/blocx/.blocx" ]; then
-	BITCOIND_DEFAULT_DATADIR="/var/lib/blocx/.blocx"
+if [ -d "/var/lib/blocxcore/.blocxcore" ]; then
+	BITCOIND_DEFAULT_DATADIR="/var/lib/blocxcore/.blocxcore"
 else
 	BITCOIND_DEFAULT_DATADIR="/var/lib/blocxd"
 fi
 
-BITCOIND_CONFIGFILE=${BITCOIND_CONFIGFILE:-/etc/blocx/blocx.conf}
+BITCOIND_CONFIGFILE=${BITCOIND_CONFIGFILE:-/etc/blocxcore/blocx.conf}
 BITCOIND_PIDDIR=${BITCOIND_PIDDIR:-/var/run/blocxd}
 BITCOIND_PIDFILE=${BITCOIND_PIDFILE:-${BITCOIND_PIDDIR}/blocxd.pid}
 BITCOIND_DATADIR=${BITCOIND_DATADIR:-${BITCOIND_DEFAULT_DATADIR}}
-BITCOIND_USER=${BITCOIND_USER:-${BITCOIN_USER:-blocx}}
-BITCOIND_GROUP=${BITCOIND_GROUP:-blocx}
+BITCOIND_USER=${BITCOIND_USER:-${BITCOIN_USER:-blocxcore}}
+BITCOIND_GROUP=${BITCOIND_GROUP:-blocxcore}
 BITCOIND_BIN=${BITCOIND_BIN:-/usr/bin/blocxd}
 BITCOIND_NICE=${BITCOIND_NICE:-${NICELEVEL:-0}}
 BITCOIND_OPTS="${BITCOIND_OPTS:-${BITCOIN_OPTS}}"
@@ -60,16 +60,17 @@ start_pre() {
 	"${BITCOIND_PIDDIR}"
 
 	checkpath -f \
-	-o ${BITCOIND_USER}:${BITCOIND_GROUP} \
+	-o "${BITCOIND_USER}:${BITCOIND_GROUP}" \
 	-m 0660 \
-	${BITCOIND_CONFIGFILE}
+	"${BITCOIND_CONFIGFILE}"
 
 	checkconfig || return 1
 }
 
 checkconfig()
 {
-	if ! grep -qs '^rpcpassword=' "${BITCOIND_CONFIGFILE}" ; then
+	if grep -qs '^rpcuser=' "${BITCOIND_CONFIGFILE}" && \
+		! grep -qs '^rpcpassword=' "${BITCOIND_CONFIGFILE}" ; then
 		eerror ""
 		eerror "ERROR: You must set a secure rpcpassword to run blocxd."
 		eerror "The setting must appear in ${BITCOIND_CONFIGFILE}"

@@ -1,7 +1,7 @@
 # /etc/conf.d/blocxd: config file for /etc/init.d/blocxd
 
 # Config file location
-#BITCOIND_CONFIGFILE="/etc/blocx/blocx.conf"
+#BITCOIND_CONFIGFILE="/etc/blocxcore/blocx.conf"
 
 # What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
 #BITCOIND_PIDDIR="/var/run/blocxd"
@@ -13,8 +13,8 @@
 #BITCOIND_DATADIR="/var/lib/blocxd"
 
 # User and group to own blocxd process
-#BITCOIND_USER="blocx"
-#BITCOIND_GROUP="blocx"
+#BITCOIND_USER="blocxcore"
+#BITCOIND_GROUP="blocxcore"
 
 # Path to blocxd executable
 #BITCOIND_BIN="/usr/bin/blocxd"

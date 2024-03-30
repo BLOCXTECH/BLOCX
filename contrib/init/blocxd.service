@@ -5,20 +5,45 @@
 # See "man systemd.service" for details.
 
 # Note that almost all daemon options could be specified in
-# /etc/blocx/blocx.conf
+# /etc/blocx/blocx.conf, except for those explicitly specified as arguments
+# in ExecStart=
 
 [Unit]
 Description=BLOCX daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/blocxd -daemon -conf=/etc/blocx/blocx.conf -pid=/run/blocxd/blocxd.pid
-# Creates /run/blocx owned by blocx
-RuntimeDirectory=blocxd
-User=blocx
+ExecStart=/usr/bin/blocxd -daemon \
+                                                            -pid=/run/blocxd/blocxd.pid \
+                                                            -conf=/etc/blocx/blocx.conf  \
+                                                            -datadir=/var/lib/blocxd
+
+# Process management
+####################
+
 Type=forking
 PIDFile=/run/blocxd/blocxd.pid
 Restart=on-failure
+TimeoutStopSec=600
+
+# Directory creation and permissions
+####################################
+
+# Run as blocx:blocx
+User=blocxcore
+Group=blocxcore
+
+# /run/blocxd
+RuntimeDirectory=blocxd
+RuntimeDirectoryMode=0710
+
+# /etc/blocx
+ConfigurationDirectory=blocx
+ConfigurationDirectoryMode=0710
+
+# /var/lib/blocxd
+StateDirectory=blocxd
+StateDirectoryMode=0710
 
 # Hardening measures
 ####################

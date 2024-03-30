@@ -6,12 +6,12 @@ the `HOST` parameter when building the dependencies and then specifying another 
 
 The following instructions are only tested on Debian Stretch and Ubuntu Bionic.
 
-MacOSX Cross-compilation
+macOS Cross-compilation
 ------------------------
-Cross-compiling to MacOSX requires a few additional packages to be installed:
+Cross-compiling to macOS requires a few additional packages to be installed:
 
 ```bash
-$ sudo apt-get install python3-setuptools libcap-dev zlib1g-dev libbz2-dev
+$ sudo apt-get install python3-setuptools libcap-dev zlib1g-dev libbz2-dev cmake
 ```
 
 Additionally, the Mac OSX SDK must be downloaded and extracted manually:
@@ -19,20 +19,20 @@ Additionally, the Mac OSX SDK must be downloaded and extracted manually:
 ```bash
 $ mkdir -p depends/sdk-sources
 $ mkdir -p depends/SDKs
-$ curl https://bitcoincore.org/depends-sources/sdks/MacOSX10.11.sdk.tar.gz -o depends/sdk-sources/MacOSX10.11.sdk.tar.gz
-$ tar -C depends/SDKs -xf depends/sdk-sources/MacOSX10.11.sdk.tar.gz
+$ curl https://bitcoincore.org/depends-sources/sdks/Xcode-12.1-12A7403-extracted-SDK-with-libcxx-headers.tar.gz -o depends/sdk-sources/Xcode-12.1-12A7403-extracted-SDK-with-libcxx-headers.tar.gz
+$ tar -C depends/SDKs -xf depends/sdk-sources/Xcode-12.1-12A7403-extracted-SDK-with-libcxx-headers.tar.gz
 ```
 
 When building the dependencies, as described in [build-generic](build-generic.md), use
 
 ```bash
-$ make HOST=x86_64-apple-darwin14 -j4
+$ make HOST=x86_64-apple-darwin19 -j4
 ```
 
 When building BLOCX Core, use
 
 ```bash
-$ ./configure --prefix=`pwd`/depends/x86_64-apple-darwin14
+$ ./configure --prefix=`pwd`/depends/x86_64-apple-darwin19
 ```
 
 Windows 64bit Cross-compilation
@@ -58,7 +58,7 @@ If you want to build the windows installer with `make deploy` you need [NSIS](ht
 
 Acquire the source in the usual way:
 
-    git clone https://github.com/blocxpay/blocx.git
+    git clone https://github.com/BLOCXTECH/BLOCX.git
     cd blocx
 
 ### Building for 64-bit Windows

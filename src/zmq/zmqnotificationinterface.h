@@ -6,9 +6,8 @@
 #define BITCOIN_ZMQ_ZMQNOTIFICATIONINTERFACE_H
 
 #include <validationinterface.h>
-#include <string>
-#include <map>
 #include <list>
+#include <memory>
 
 class CBlockIndex;
 class CZMQAbstractNotifier;
@@ -28,7 +27,7 @@ protected:
 
     // CValidationInterface
     void TransactionAddedToMempool(const CTransactionRef& tx, int64_t nAcceptTime) override;
-    void BlockConnected(const std::shared_ptr<const CBlock>& pblock, const CBlockIndex* pindexConnected, const std::vector<CTransactionRef>& vtxConflicted) override;
+    void BlockConnected(const std::shared_ptr<const CBlock>& pblock, const CBlockIndex* pindexConnected) override;
     void BlockDisconnected(const std::shared_ptr<const CBlock>& pblock, const CBlockIndex* pindexDisconnected) override;
     void UpdatedBlockTip(const CBlockIndex *pindexNew, const CBlockIndex *pindexFork, bool fInitialDownload) override;
     void NotifyChainLock(const CBlockIndex *pindex, const std::shared_ptr<const llmq::CChainLockSig>& clsig) override;
@@ -42,7 +41,7 @@ private:
     CZMQNotificationInterface();
 
     void *pcontext;
-    std::list<CZMQAbstractNotifier*> notifiers;
+    std::list<std::unique_ptr<CZMQAbstractNotifier>> notifiers;
 };
 
 extern CZMQNotificationInterface* g_zmq_notification_interface;

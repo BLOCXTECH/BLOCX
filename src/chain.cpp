@@ -4,7 +4,6 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <chain.h>
-#include <util.h>
 
 /**
  * CChain implementation
@@ -60,10 +59,11 @@ const CBlockIndex *CChain::FindFork(const CBlockIndex *pindex) const {
     return pindex;
 }
 
-CBlockIndex* CChain::FindEarliestAtLeast(int64_t nTime) const
+CBlockIndex* CChain::FindEarliestAtLeast(int64_t nTime, int height) const
 {
-    std::vector<CBlockIndex*>::const_iterator lower = std::lower_bound(vChain.begin(), vChain.end(), nTime,
-        [](CBlockIndex* pBlock, const int64_t& time) -> bool { return pBlock->GetBlockTimeMax() < time; });
+    std::pair<int64_t, int> blockparams = std::make_pair(nTime, height);
+    std::vector<CBlockIndex*>::const_iterator lower = std::lower_bound(vChain.begin(), vChain.end(), blockparams,
+        [](CBlockIndex* pBlock, const std::pair<int64_t, int>& blockparams) -> bool { return pBlock->GetBlockTimeMax() < blockparams.first || pBlock->nHeight < blockparams.second; });
     return (lower == vChain.end() ? nullptr : *lower);
 }
 
@@ -144,7 +144,6 @@ int64_t GetBlockProofEquivalentTime(const CBlockIndex& to, const CBlockIndex& fr
         r = from.nChainWork - to.nChainWork;
         sign = -1;
     }
-    
     int64_t blockTime = params.GetCurrentPowTargetSpacing(tip.nHeight);
     r = r * arith_uint256(blockTime) / GetBlockProof(tip);
     if (r.bits() > 63) {

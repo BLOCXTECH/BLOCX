@@ -7,8 +7,7 @@
 #include <primitives/transaction.h>
 #include <evo/specialtx.h>
 #include <evo/providertx.h>
-#include <evo/cbtx.h>
-#include <llmq/quorums_commitment.h>
+#include <logging.h>
 #include <hash.h>
 #include <script/script.h>
 #include <script/standard.h>
@@ -17,7 +16,6 @@
 
 #include <math.h>
 #include <stdlib.h>
-
 
 #define LN2SQUARED 0.4804530139182014246671025263266649717305529515945455
 #define LN2 0.6931471805599453094172321214581765680755001343602552
@@ -34,22 +32,9 @@ CBloomFilter::CBloomFilter(const unsigned int nElements, const double nFPRate, c
      * Again, we ignore filter parameters which will create a bloom filter with more hash functions than the protocol limits
      * See https://en.wikipedia.org/wiki/Bloom_filter for an explanation of these formulas
      */
-    isFull(false),
-    isEmpty(true),
     nHashFuncs(std::min((unsigned int)(vData.size() * 8 / nElements * LN2), MAX_HASH_FUNCS)),
     nTweak(nTweakIn),
     nFlags(nFlagsIn)
-{
-}
-
-// Private constructor used by CRollingBloomFilter
-CBloomFilter::CBloomFilter(const unsigned int nElements, const double nFPRate, const unsigned int nTweakIn) :
-    vData((unsigned int)(-1  / LN2SQUARED * nElements * log(nFPRate)) / 8),
-    isFull(false),
-    isEmpty(true),
-    nHashFuncs((unsigned int)(vData.size() * 8 / nElements * LN2)),
-    nTweak(nTweakIn),
-    nFlags(BLOOM_UPDATE_NONE)
 {
 }
 
@@ -61,7 +46,7 @@ inline unsigned int CBloomFilter::Hash(unsigned int nHashNum, const std::vector<
 
 void CBloomFilter::insert(const std::vector<unsigned char>& vKey)
 {
-    if (isFull)
+    if (vData.empty()) // Avoid divide-by-zero (CVE-2013-5700)
         return;
     for (unsigned int i = 0; i < nHashFuncs; i++)
     {
@@ -69,7 +54,6 @@ void CBloomFilter::insert(const std::vector<unsigned char>& vKey)
         // Sets bit nIndex of vData
         vData[nIndex >> 3] |= (1 << (7 & nIndex));
     }
-    isEmpty = false;
 }
 
 void CBloomFilter::insert(const COutPoint& outpoint)
@@ -88,10 +72,8 @@ void CBloomFilter::insert(const uint256& hash)
 
 bool CBloomFilter::contains(const std::vector<unsigned char>& vKey) const
 {
-    if (isFull)
+    if (vData.empty()) // Avoid divide-by-zero (CVE-2013-5700)
         return true;
-    if (isEmpty)
-        return false;
     for (unsigned int i = 0; i < nHashFuncs; i++)
     {
         unsigned int nIndex = Hash(i, vKey);
@@ -120,19 +102,6 @@ bool CBloomFilter::contains(const uint160& hash) const
 {
     std::vector<unsigned char> data(hash.begin(), hash.end());
     return contains(data);
-}
-
-void CBloomFilter::clear()
-{
-    vData.assign(vData.size(),0);
-    isFull = false;
-    isEmpty = true;
-}
-
-void CBloomFilter::reset(const unsigned int nNewTweak)
-{
-    clear();
-    nTweak = nNewTweak;
 }
 
 bool CBloomFilter::IsWithinSizeConstraints() const
@@ -222,7 +191,8 @@ bool CBloomFilter::CheckSpecialTransactionMatchesAndUpdate(const CTransaction &t
     }
     case(TRANSACTION_COINBASE):
     case(TRANSACTION_QUORUM_COMMITMENT):
-        // No aditional checks for this transaction types
+    case(TRANSACTION_MNHF_SIGNAL):
+        // No additional checks for this transaction types
         return false;
     }
 
@@ -235,10 +205,8 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
     bool fFound = false;
     // Match if the filter contains the hash of tx
     //  for finding tx when they appear in a block
-    if (isFull)
+    if (vData.empty()) // zero-size = "match-all" filter
         return true;
-    if (isEmpty)
-        return false;
     const uint256& hash = tx.GetHash();
     if (contains(hash))
         fFound = true;
@@ -259,11 +227,11 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
                 insert(COutPoint(hash, i));
             else if ((nFlags & BLOOM_UPDATE_MASK) == BLOOM_UPDATE_P2PUBKEY_ONLY)
             {
-                txnouttype type;
                 std::vector<std::vector<unsigned char> > vSolutions;
-                if (Solver(txout.scriptPubKey, type, vSolutions) &&
-                        (type == TX_PUBKEY || type == TX_MULTISIG))
+                TxoutType type = Solver(txout.scriptPubKey, vSolutions);
+                if (type == TxoutType::PUBKEY || type == TxoutType::MULTISIG) {
                     insert(COutPoint(hash, i));
+                }
             }
         }
     }
@@ -283,19 +251,6 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
     }
 
     return false;
-}
-
-void CBloomFilter::UpdateEmptyFull()
-{
-    bool full = true;
-    bool empty = true;
-    for (unsigned int i = 0; i < vData.size(); i++)
-    {
-        full &= vData[i] == 0xff;
-        empty &= vData[i] == 0;
-    }
-    isFull = full;
-    isEmpty = empty;
 }
 
 CRollingBloomFilter::CRollingBloomFilter(const unsigned int nElements, const double fpRate)
@@ -400,7 +355,5 @@ void CRollingBloomFilter::reset()
     nTweak = GetRand(std::numeric_limits<unsigned int>::max());
     nEntriesThisGeneration = 0;
     nGeneration = 1;
-    for (std::vector<uint64_t>::iterator it = data.begin(); it != data.end(); it++) {
-        *it = 0;
-    }
+    std::fill(data.begin(), data.end(), 0);
 }

@@ -10,5 +10,5 @@ Terminal=false
 Type=Application
 Icon=blocx128
 MimeType=x-scheme-handler/blocx;
-Categories=Office;Finance;
+Categories=Office;Finance;P2P;Network;Qt;
 StartupWMClass=BLOCX-qt

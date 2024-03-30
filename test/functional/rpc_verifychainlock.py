@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2021 The Dash Core developers
+# Copyright (c) 2021-2022 The Dash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,7 +24,7 @@ class RPCVerifyChainLockTest(BLOCXTestFramework):
         node0 = self.nodes[0]
         node1 = self.nodes[1]
         self.activate_dip8()
-        self.nodes[0].spork("SPORK_17_QUORUM_DKG_ENABLED", 0)
+        self.nodes[0].sporkupdate("SPORK_17_QUORUM_DKG_ENABLED", 0)
         self.wait_for_sporks_same()
         self.mine_quorum()
         self.wait_for_chainlocked_block(node0, node0.generate(1)[0])
@@ -40,6 +40,7 @@ class RPCVerifyChainLockTest(BLOCXTestFramework):
         assert node0.verifychainlock(block_hash, chainlock_signature, height)
         # Invalid "blockHash"
         assert not node0.verifychainlock(node0.getblockhash(0), chainlock_signature, height)
+        self.wait_for_chainlocked_block_all_nodes(block_hash)
         # Isolate node1, mine a block on node0 and wait for its ChainLock
         node1.setnetworkactive(False)
         node0.generate(1)

@@ -7,7 +7,7 @@
 
 #include <qt/walletmodel.h>
 
-#include <memory>
+#include <amount.h>
 
 #include <QObject>
 
@@ -15,7 +15,6 @@ class SendCoinsRecipient;
 
 namespace interfaces {
 class Node;
-class PendingWalletTx;
 }
 
 /** Data model for a walletmodel transaction. */
@@ -26,7 +25,7 @@ public:
 
     QList<SendCoinsRecipient> getRecipients() const;
 
-    std::unique_ptr<interfaces::PendingWalletTx>& getWtx();
+    CTransactionRef& getWtx();
     unsigned int getTransactionSize();
 
     void setTransactionFee(const CAmount& newFee);
@@ -34,11 +33,11 @@ public:
 
     CAmount getTotalTransactionAmount() const;
 
-    void reassignAmounts(); // needed for the subtract-fee-from-amount feature
+    void reassignAmounts(const int nChangePos); // needed for the subtract-fee-from-amount feature
 
 private:
     QList<SendCoinsRecipient> recipients;
-    std::unique_ptr<interfaces::PendingWalletTx> wtx;
+    CTransactionRef wtx;
     CAmount fee;
 };
 

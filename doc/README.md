@@ -5,7 +5,7 @@ This is the official reference wallet for BLOCX digital currency and comprises t
 
 Running
 ---------------------
-The following are some helpful notes on how to run BLOCX on your native platform.
+The following are some helpful notes on how to run BLOCX Core on your native platform.
 
 ### Unix
 
@@ -18,27 +18,27 @@ Unpack the files into a directory and run:
 
 Unpack the files into a directory, and then run blocx-qt.exe.
 
-### OS X
+### macOS
 
-Drag BLOCX-Qt to your applications folder, and then run BLOCX-Qt.
+Drag BLOCX Core to your applications folder, and then run BLOCX Core.
 
 ### Need Help?
 
 * See the [BLOCX documentation](https://docs.blocx.org)
 for help and more information.
-* See the [BLOCX Developer Documentation](https://blocx-docs.github.io/) 
-for technical specifications and implementation details.
-* Ask for help on [BLOCX Nation Discord](http://blocxchat.org)
+* Ask for help on [BLOCX Discord](http://stayblocxy.com)
 * Ask for help on the [BLOCX Forum](https://blocx.org/forum)
 
 Building
 ---------------------
 The following are developer notes on how to build BLOCX Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
-- [OS X Build Notes](build-osx.md)
+- [Dependencies](dependencies.md)
+- [macOS Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
 - [Windows Build Notes](build-windows.md)
 - [OpenBSD Build Notes](build-openbsd.md)
+- [NetBSD Build Notes](build-netbsd.md)
 - [Gitian Building Guide](gitian-building.md)
 
 Development
@@ -46,12 +46,14 @@ Development
 The BLOCX Core repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
+- [Productivity Notes](productivity.md)
 - [Release Notes](release-notes.md)
 - [Release Process](release-process.md)
 - Source Code Documentation ***TODO***
 - [Translation Process](translation_process.md)
 - [Translation Strings Policy](translation_strings_policy.md)
 - [Travis CI](travis-ci.md)
+- [JSON-RPC Interface](JSON-RPC-interface.md)
 - [Unauthenticated REST Interface](REST-interface.md)
 - [Shared Libraries](shared-libraries.md)
 - [BIPS](bips.md)
@@ -59,20 +61,24 @@ The BLOCX Core repo's [root README](/README.md) contains relevant information on
 - [Benchmarking](benchmarking.md)
 
 ### Resources
+* See the [BLOCX Developer Documentation](https://blocxcore.readme.io/)
+  for technical specifications and implementation details.
 * Discuss on the [BLOCX Forum](https://blocx.org/forum), in the Development & Technical Discussion board.
-* Discuss on [BLOCX Nation Discord](http://blocxchat.org)
+* Discuss on [BLOCX Discord](http://stayblocxy.com)
+* Discuss on [BLOCX Developers Discord](http://chat.blocxdevs.org/)
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)
+- [blocx.conf Configuration File](blocx-conf.md)
 - [Files](files.md)
 - [Fuzz-testing](fuzzing.md)
+- [Reduce Memory](reduce-memory.md)
 - [Reduce Traffic](reduce-traffic.md)
 - [Tor Support](tor.md)
 - [Init Scripts (systemd/upstart/openrc)](init.md)
 - [ZMQ](zmq.md)
+- [PSBT support](psbt.md)
 
 License
 ---------------------
 Distributed under the [MIT software license](/COPYING).
-This product includes software developed by the OpenSSL Project for use in the [OpenSSL Toolkit](https://www.openssl.org/). This product includes
-cryptographic software written by Eric Young ([eay@cryptsoft.com](mailto:eay@cryptsoft.com)), and UPnP software written by Thomas Bernard.

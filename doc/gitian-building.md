@@ -314,7 +314,7 @@ Clone the git repositories for BLOCX Core and Gitian.
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/blocxpay/blocx
+git clone https://github.com/BLOCXTECH/BLOCX/
 git clone https://github.com/blocxpay/gitian.sigs.git
 ```
 
@@ -360,7 +360,7 @@ offline.
 Building BLOCX Core
 ----------------
 
-To build BLOCX Core (for Linux, OS X and Windows) just follow the steps under 'perform
+To build BLOCX Core (for Linux, macOS and Windows) just follow the steps under 'perform
 Gitian builds' in [doc/release-process.md](release-process.md#setup-and-perform-gitian-builds) in the BLOCX Core repository.
 
 This may take some time as it will build all the dependencies needed for each descriptor.
@@ -381,7 +381,7 @@ Output from `gbuild` will look something like
     remote: Total 57959 (delta 0), reused 0 (delta 0), pack-reused 57958
     Receiving objects: 100% (57959/57959), 53.76 MiB | 484.00 KiB/s, done.
     Resolving deltas: 100% (41590/41590), done.
-    From https://github.com/blocxpay/blocx
+    From https://github.com/BLOCXTECH/BLOCX
     ... (new tags, new branch etc)
     --- Building for bionic amd64 ---
     Stopping target if it is up

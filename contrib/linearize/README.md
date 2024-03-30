@@ -1,6 +1,5 @@
 # Linearize
-Construct a linear, no-fork, best version of the BLOCX blockchain. The scripts
-run using Python 3 but are compatible with Python 2.
+Construct a linear, no-fork, best version of the BLOCX blockchain.
 
 ## Step 0: Install blocx_hash
 
@@ -16,7 +15,7 @@ Required configuration file settings for linearize-hashes:
 
 Optional config file setting for linearize-hashes:
 * RPC: `host`  (Default: `127.0.0.1`)
-* RPC: `port`  (Default: `12971`)
+* RPC: `port`  (Default: `9998`)
 * Blockchain: `min_height`, `max_height`
 * `rev_hash_bytes`: If true, the written block hash list will be
 byte-reversed. (In other words, the hash returned by getblockhash will have its

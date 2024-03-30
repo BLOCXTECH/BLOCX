@@ -26,23 +26,23 @@ struct mntype_struct
 {
     const int32_t voting_weight;
     const CAmount collat_amount;
-    // const std::string_view description;
+    const std::string_view description;
 };
 
 constexpr auto Standard_Masternode = mntype_struct{
     .voting_weight = 10,
     .collat_amount = 100000 * COIN,
-    // .description = "Standard_Masternode",
+    .description = "Standard_Masternode",
 };
 constexpr auto Lite = mntype_struct{
     .voting_weight = 1,
     .collat_amount = 10000 * COIN,
-    // .description = "Lite",
+    .description = "Lite",
 };
 constexpr auto Invalid = mntype_struct{
     .voting_weight = 0,
     .collat_amount = MAX_MONEY,
-    // .description = "Invalid",
+    .description = "Invalid",
 };
 
 [[nodiscard]] static constexpr bool IsCollateralAmount(CAmount amount)

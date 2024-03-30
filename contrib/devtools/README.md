@@ -7,6 +7,9 @@ clang-format-diff.py
 
 A script to format unified git diffs according to [.clang-format](../../src/.clang-format).
 
+Requires `clang-format`, installed e.g. via `brew install clang-format` on macOS,
+or `sudo apt install clang-format` on Debian/Ubuntu.
+
 For instance, to format the last commit with 0 lines of context,
 the script should be called from the git root folder as follows.
 
@@ -17,7 +20,7 @@ git diff -U0 HEAD~1.. | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 copyright\_header.py
 ====================
 
-Provides utilities for managing copyright headers of `The Dash Core
+Provides utilities for managing copyright headers of `The BLOCX Core
 developers` in repository source files. It has three subcommands:
 
 ```
@@ -97,7 +100,7 @@ For example:
   ./github-merge.py 3077
 
 (in any git repository) will help you merge pull request #3077 for the
-blocxpay/blocx repository.
+BLOCXTECH/BLOCX repository.
 
 What it does:
 * Fetch master and the pull request.
@@ -115,11 +118,37 @@ couldn't mess with the sources.
 
 Setup
 ---------
-Configuring the github-merge tool for the bitcoin repository is done in the following way:
+Configuring the github-merge tool for the BLOCX Core repository is done in the following way:
 
-    git config githubmerge.repository blocxpay/blocx
+    git config githubmerge.repository BLOCXTECH/BLOCX
     git config githubmerge.testcmd "make -j4 check" (adapt to whatever you want to use for testing)
-    git config --global user.signingkey mykeyid (if you want to GPG sign)
+    git config --global user.signingkey mykeyid
+
+Authentication (optional)
+--------------------------
+
+The API request limit for unauthenticated requests is quite low, but the
+limit for authenticated requests is much higher. If you start running
+into rate limiting errors it can be useful to set an authentication token
+so that the script can authenticate requests.
+
+- First, go to [Personal access tokens](https://github.com/settings/tokens).
+- Click 'Generate new token'.
+- Fill in an arbitrary token description. No further privileges are needed.
+- Click the `Generate token` button at the bottom of the form.
+- Copy the generated token (should be a hexadecimal string)
+
+Then do:
+
+    git config --global user.ghtoken "pasted token"
+
+Create and verify timestamps of merge commits
+---------------------------------------------
+To create or verify timestamps on the merge commits, install the OpenTimestamps
+client via `pip3 install opentimestamps-client`. Then, download the gpg wrapper
+`ots-git-gpg-wrapper.sh` and set it as git's `gpg.program`. See
+[the ots git integration documentation](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md#usage)
+for further details.
 
 optimize-pngs.py
 ================
@@ -130,22 +159,26 @@ repository (requires pngcrush).
 security-check.py and test-security-check.py
 ============================================
 
-Perform basic ELF security checks on a series of executables.
+Perform basic security checks on a series of executables.
 
 symbol-check.py
 ===============
 
-A script to check that the (Linux) executables produced by Gitian only contain
-allowed gcc, glibc and libstdc++ version symbols. This makes sure they are
-still compatible with the minimum supported Linux distribution versions.
+A script to check that the executables produced by Gitian only contain
+certain symbols and are only linked against allowed libraries.
+
+For Linux this means checking for allowed gcc, glibc and libstdc++ version symbols.
+This makes sure they are still compatible with the minimum supported distribution versions.
+
+For macOS we check that the executables are only linked against libraries we allow.
 
 Example usage after a Gitian build:
 
-    find ../gitian-builder/build -type f -executable | xargs python contrib/devtools/symbol-check.py 
+    find ../gitian-builder/build -type f -executable | xargs python3 contrib/devtools/symbol-check.py
 
-If only supported symbols are used the return value will be 0 and the output will be empty.
+If no errors occur the return value will be 0 and the output will be empty.
 
-If there are 'unsupported' symbols, the return value will be 1 a list like this will be printed:
+If there are any errors the return value will be 1 and output like this will be printed:
 
     .../64/test_blocx: symbol memcpy from unsupported version GLIBC_2.14
     .../64/test_blocx: symbol __fdelt_chk from unsupported version GLIBC_2.15
