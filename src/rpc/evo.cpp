@@ -902,8 +902,7 @@ static UniValue protx_update_service_common_wrapper(const JSONRPCRequest& reques
 
     EnsureWalletIsUnlocked(wallet.get());
 
-    bool isV19active = llmq::utils::IsV19Active(WITH_LOCK(cs_main, return ::ChainActive().Tip();));
-    if (isLITErequested && !isV19active) {
+    if (!IsLiteMNSporkENABLED() && isLITErequested) {
         throw JSONRPCError(RPC_INVALID_REQUEST, "LITE aren't allowed yet");
     }
 

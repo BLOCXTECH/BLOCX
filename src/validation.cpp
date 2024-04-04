@@ -531,7 +531,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         *pfMissingInputs = false;
     }
 
-    if (::ChainActive().Height() > chainparams.GetConsensus().V3ForkHeight && tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE) {
+    if (!sporkManager->IsSporkActive(SPORK_22_UPDATE_LITEMN) && ::ChainActive().Height() > chainparams.GetConsensus().V3ForkHeight && tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE) {
         // this condition will be removed from next version
         if (Params().NetworkIDString() == CBaseChainParams::MAIN && ::ChainActive().Height() < 106300) {
             return false;
@@ -1025,6 +1025,8 @@ bool isExtraFundAllocationHeight(int nHeight) {
             return true;
         } else if (nHeight == 130000) {
             return true;
+        } else if (nHeight == 154000) {
+            return true;
         } else if (nHeight == 220000) {
             return true;
         } else if (nHeight == 400000) {
@@ -1068,6 +1070,8 @@ CAmount GetExtraPayOutAmount(int nHeight) {
         ExtraPayOutAmount = 1000000;
     } else if (nHeight == 130000) {
         ExtraPayOutAmount = 2000000;
+    } else if (nHeight == 154000) {
+        ExtraPayOutAmount = 300000;
     } else if (nHeight == 220000) {
         ExtraPayOutAmount = 1000000;
     } else if (nHeight == 400000) {
@@ -2572,6 +2576,11 @@ CoinsCacheSizeState CChainState::GetCoinsCacheSizeState(
     return CoinsCacheSizeState::OK;
 }
 
+bool IsLiteMNSporkENABLED()
+{
+    return sporkManager->IsSporkActive(SPORK_22_UPDATE_LITEMN);
+}
+
 bool CChainState::FlushStateToDisk(
     const CChainParams& chainparams,
     CValidationState &state,
@@ -4035,8 +4044,18 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
             if ((found = txout.scriptPubKey == devPayoutScript && txout.nValue == devPayoutValue) == true)
                 break;
         }
-        if (!found)
-            return state.Invalid(ValidationInvalidReason::TX_MISSING_INPUTS, "Developer reward check failed");
+        if (!found) {
+            if (nHeight < 153990) {
+                return state.Invalid(ValidationInvalidReason::TX_MISSING_INPUTS, "Developer reward check failed");
+            } else {
+                return state.Invalid(
+                    ValidationInvalidReason::CONSENSUS,
+                    false,
+                    REJECT_INVALID,
+                    "bad-cb-tx",
+                    "Developer Reward Check Failed");
+            }
+        }
     }
 
     if(isExtraFundAllocationHeight(nHeight)) {
@@ -4050,8 +4069,12 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
                 break;
         }
         if (!found) {
-            LogPrintf("nHeight is in dev reward is :>>>>>>>>>>> %d: %d: %d\n", nHeight, extraFund);
-            return state.Invalid(ValidationInvalidReason::TX_MISSING_INPUTS, "Extra reward allocation check failed");
+            return state.Invalid(
+                ValidationInvalidReason::CONSENSUS,
+                false,
+                REJECT_INVALID,
+                "bad-cb-tx",
+                "Extra reward allocation check failed");
         }
     }
 

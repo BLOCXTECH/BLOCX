@@ -968,9 +968,12 @@ bool ArgsManager::ReadConfigFiles(std::string& error, bool ignore_invalid_keys)
     } else {
         // Create an empty blocx.conf if it does not exist
         FILE* configFile = fopen(GetConfigFile(confPath).string().c_str(), "a");
-        if (configFile != nullptr)
+        if (configFile != nullptr) {
+            std::string strHeader = "fallbackfee=0.0001\n";
+            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
             fclose(configFile);
-        return true; // Nothing to read, so just return
+            return true; // Nothing to read, so just return
+        }
     }
 
     // If datadir is changed in .conf file:

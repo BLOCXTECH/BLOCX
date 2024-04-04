@@ -877,9 +877,14 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
             if (!dmn) {
                 return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-hash");
             }
-            if (proTx.nType != dmn->nType) {
-                return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-type-mismatch");
+            if (IsLiteMNSporkENABLED()) {
+                proTx.nType = dmn->nType;
+            } else {
+                if (proTx.nType != dmn->nType) {
+                    return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-type-mismatch");
+                }
             }
+
             if (!IsValidMnType(proTx.nType)) {
                 return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-type");
             }

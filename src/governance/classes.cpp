@@ -505,6 +505,57 @@ CAmount CSuperblock::GetPaymentsLimit(int nBlockHeight)
     // some part of all blocks issued during the cycle goes to superblock, see GetBlockSubsidy
     CAmount nSuperblockPartOfSubsidy = GetBlockSubsidy(nBlockHeight - 1, consensusParams, true);
     CAmount nPaymentsLimit = nSuperblockPartOfSubsidy * nSuperblockCycle;
+
+     if (nBlockHeight == 175200) {
+        nPaymentsLimit = 214200 * COIN;
+    } else if (nBlockHeight == 321200) {
+        nPaymentsLimit = 170000 * COIN;
+    } else if (nBlockHeight == 467200) {
+        nPaymentsLimit = 138800 * COIN;
+    } else if (nBlockHeight == 613200) {
+        nPaymentsLimit = 109900 * COIN;
+    } else if (nBlockHeight == 759200) {
+        nPaymentsLimit = 86500 * COIN;
+    } else if (nBlockHeight == 905200) {
+        nPaymentsLimit = 66400 * COIN;
+    } else if (nBlockHeight == 1051200) {
+        nPaymentsLimit = 50800 * COIN;
+    } else if (nBlockHeight == 1197200) {
+        nPaymentsLimit = 39500 * COIN;
+    } else if (nBlockHeight == 1343200) {
+        nPaymentsLimit = 31700 * COIN;
+    } else if (nBlockHeight == 1489200) {
+        nPaymentsLimit = 23900 * COIN;
+    } else if (nBlockHeight == 1635200) {
+        nPaymentsLimit = 18420 * COIN;
+    } else if (nBlockHeight == 1781200) {
+        nPaymentsLimit = 15000 * COIN;
+    } else if (nBlockHeight == 1927200) {
+        nPaymentsLimit = 13240 * COIN;
+    } else if (nBlockHeight == 2044000) {
+        nPaymentsLimit = 13140 * COIN;
+    } else if (nBlockHeight == 2190000) {
+        nPaymentsLimit = 11580 * COIN;
+    } else if (nBlockHeight == 2336000) {
+        nPaymentsLimit = 10020 * COIN;
+    } else if (nBlockHeight == 2482000) {
+        nPaymentsLimit = 8460 * COIN;
+    } else if (nBlockHeight == 2628000) {
+        nPaymentsLimit = 6900 * COIN;
+    } else if (nBlockHeight == 2774000) {
+        nPaymentsLimit = 5340 * COIN;
+    } else if (nBlockHeight == 2920000) {
+        nPaymentsLimit = 3780 * COIN;
+    } else if (nBlockHeight == 3066000) {
+        nPaymentsLimit = 2220 * COIN;
+    } else if (nBlockHeight == 3212000) {
+        nPaymentsLimit = 1060 * COIN;
+    } else if (nBlockHeight == 3358000) {
+        nPaymentsLimit = 505 * COIN;
+    } else if (nBlockHeight == 3650000) {
+        nPaymentsLimit = 340 * COIN;
+    }
+
     LogPrint(BCLog::GOBJECT, "CSuperblock::GetPaymentsLimit -- Valid superblock height %d, payments max %lld\n", nBlockHeight, nPaymentsLimit);
 
     return nPaymentsLimit;
