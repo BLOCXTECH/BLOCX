@@ -6,9 +6,16 @@
 #include <pow.h>
 
 #include <arith_uint256.h>
+#include <autolykos/src/AutolykosPowScheme.h>
+#include <autolykos/src/ChainSettings.h>
+#include <autolykos/src/DifficultyAdjustment.h>
+#include <autolykos/src/Header.h>
 #include <chain.h>
+#include <primitives/block.cpp>
 #include <primitives/block.h>
+#include <rpc/mining.cpp>
 #include <uint256.h>
+#include <validation.h>
 
 #include <math.h>
 
@@ -82,6 +89,10 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const Consens
     /* current difficulty formula, blocx - DarkGravity v3, written by Evan Duffield - evan@blocx.org */
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     int64_t nPastBlocks = 24;
+
+    if (pindexLast->nHeight == params.AutolykosForkHeight) {
+        return 0x1d093ab9;
+    }
 
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
@@ -236,21 +247,69 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     return bnNew.GetCompact();
 }
 
-bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
+bool CheckProofOfWork(const CBlockHeader& b_h, uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
-    bool fNegative;
-    bool fOverflow;
-    arith_uint256 bnTarget;
+    // currently just returning HashX11 here
+    if (b_h.nVersion != params.AutolykosForkSwitchVersion) {
+        bool fNegative;
+        bool fOverflow;
+        arith_uint256 bnTarget;
 
-    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+        bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
-    // Check range
-    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
-        return false;
+        // Check range
+        if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
+            return false;
 
-    // Check proof of work matches claimed amount
-    if (UintToArith256(hash) > bnTarget)
-        return false;
+        // Check proof of work matches claimed amount
+        if (UintToArith256(hash) > bnTarget)
+            return false;
 
-    return true;
+        return true;
+    }
+
+    int k = 32;
+    int n = 26;
+    AutolykosPowScheme powScheme(k, n);
+
+    int height = b_h.aHeight;
+
+    Version version = params.AutolykosForkSwitchVersion;
+
+    std::string prevHash = b_h.hashPrevBlock.ToString();
+    std::string merkleRoot = b_h.hashMerkleRoot.ToString();
+
+    Timestamp timestamp = b_h.nTime;
+    std::vector<uint8_t> nonce = powScheme.uint64ToBytes(b_h.nNewNonce);
+    ModifierId parentId = powScheme.hexToBytesModifierId(prevHash);
+    Digest32 transactionsRoot = powScheme.hexToArrayDigest32(merkleRoot);
+
+    Digest32 ADProofsRoot = {};
+    ADDigest stateRoot = {};
+    Digest32 extensionRoot = {};
+
+    AutolykosSolution powSolution = {
+        groupElemFromBytes({0x02, 0xf5, 0x92, 0x4b, 0x14, 0x32, 0x5a, 0x1f, 0xfa, 0x8f, 0x95, 0xf8, 0xc0, 0x00, 0x06, 0x11, 0x87, 0x28, 0xce, 0x37, 0x85, 0xa6, 0x48, 0xe8, 0xb2, 0x69, 0x82, 0x0a, 0x3d, 0x3b, 0xdf, 0xd4, 0x0d}),
+        groupElemFromBytes({0x02, 0xf5, 0x92, 0x4b, 0x14, 0x32, 0x5a, 0x1f, 0xfa, 0x8f, 0x95, 0xf8, 0xc0, 0x00, 0x06, 0x11, 0x87, 0x28, 0xce, 0x37, 0x85, 0xa6, 0x48, 0xe8, 0xb2, 0x69, 0x82, 0x0a, 0x3d, 0x3b, 0xdf, 0xd4, 0x0d}),
+        nonce,
+        boost::multiprecision::cpp_int("0")};
+
+    std::array<uint8_t, 3> votes = {0x00, 0x00, 0x00};
+
+    Header h(
+        version,
+        parentId,
+        ADProofsRoot,
+        stateRoot,
+        transactionsRoot,
+        timestamp,
+        nBits,
+        height,
+        extensionRoot,
+        powSolution,
+        votes
+    );
+
+    bool valid = powScheme.validate(h);
+    return valid;
 }

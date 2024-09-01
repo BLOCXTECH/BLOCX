@@ -5,27 +5,98 @@
 
 #include <primitives/block.h>
 
+#include <autolykos/src/AutolykosPowScheme.h>
+#include <autolykos/src/HeaderWithoutPow.h>
+#include <autolykos/src/mining.h>
 #include <hash.h>
 #include <streams.h>
 #include <tinyformat.h>
+#include <vector>
 
 uint256 CBlockHeader::GetHash() const
 {
     std::vector<unsigned char> vch(80);
     CVectorWriter ss(SER_GETHASH, PROTOCOL_VERSION, vch, 0);
     ss << *this;
-    return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
+    // currently just returning HashX11 here
+    if (nVersion != 0x05) {
+        return HashX11((const char*)vch.data(), (const char*)vch.data() + vch.size());
+    } else {
+        return AutolykosHash();
+    }
+}
+
+std::string vectorsToHex(const std::vector<uint8_t>& data) {
+    std::stringstream ss;
+    ss << std::hex << std::setfill('0');
+    for (const auto& byte : data) {
+        ss << std::setw(2) << static_cast<int>(byte);
+    }
+    return ss.str();
+}
+
+uint256 CBlockHeader::AutolykosHash() const
+{
+    Version version = 0x05;
+
+
+    int k = 32;
+    int n = 26;
+    AutolykosPowScheme powScheme(k, n);
+
+    std::string prevHash = hashPrevBlock.ToString();
+    std::string merkleRoot = hashMerkleRoot.ToString();
+
+    Timestamp timestamp = nTime;
+    uint32_t nBitss = nBits;
+    int a_Height = aHeight;
+
+    std::vector<uint8_t> nonce = powScheme.uint64ToBytes(nNewNonce);
+    ModifierId parentId = powScheme.hexToBytesModifierId(prevHash);
+    Digest32 transactionsRoot = powScheme.hexToArrayDigest32(merkleRoot);
+
+    Digest32 ADProofsRoot = {};
+    ADDigest stateRoot = {};
+    Digest32 extensionRoot = {};
+
+    AutolykosSolution powSolution = {
+        groupElemFromBytes({0x02, 0xf5, 0x92, 0x4b, 0x14, 0x32, 0x5a, 0x1f, 0xfa, 0x8f, 0x95, 0xf8, 0xc0, 0x00, 0x06, 0x11, 0x87, 0x28, 0xce, 0x37, 0x85, 0xa6, 0x48, 0xe8, 0xb2, 0x69, 0x82, 0x0a, 0x3d, 0x3b, 0xdf, 0xd4, 0x0d}),
+        groupElemFromBytes({0x02, 0xf5, 0x92, 0x4b, 0x14, 0x32, 0x5a, 0x1f, 0xfa, 0x8f, 0x95, 0xf8, 0xc0, 0x00, 0x06, 0x11, 0x87, 0x28, 0xce, 0x37, 0x85, 0xa6, 0x48, 0xe8, 0xb2, 0x69, 0x82, 0x0a, 0x3d, 0x3b, 0xdf, 0xd4, 0x0d}),
+        nonce,
+        boost::multiprecision::cpp_int("0")};
+
+    std::array<uint8_t, 3> votes = {0x00, 0x00, 0x00};
+
+    Header h(
+        version,
+        parentId,
+        ADProofsRoot,
+        stateRoot,
+        transactionsRoot,
+        timestamp,
+        nBitss,
+        a_Height,
+        extensionRoot,
+        powSolution,
+        votes);
+
+
+
+    std::stringstream ss;
+    ss << std::hex << powScheme.hitForVersion2(h);
+    std::string hexStr = ss.str();
+    return uint256S(hexStr);
 }
 
 std::string CBlock::ToString() const
 {
     std::stringstream s;
-    s << strprintf("CBlock(hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u)\n",
+    s << strprintf("CBlock(hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, nNewNonce=%d, aHeight=%d, vtx=%u)\n",
         GetHash().ToString(),
         nVersion,
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
-        nTime, nBits, nNonce,
+        nTime, nBits, nNonce, nNewNonce, aHeight,
         vtx.size());
     for (const auto& tx : vtx) {
         s << "  " << tx->ToString() << "\n";

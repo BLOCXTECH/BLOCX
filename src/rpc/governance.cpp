@@ -1172,8 +1172,10 @@ static UniValue getgovernanceinfo(const JSONRPCRequest& request)
     int nSuperblockCycle;
     if (nBlockHeight < Params().GetConsensus().nNewSuperBlockStartHeight) {
         nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
-    } else {
+    } else if (nBlockHeight < Params().GetConsensus().nAutolykosSuperBlockStartHeight) {
         nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nAutolykosSuperBlockCycle;
     }
 
     CSuperblock::GetNearestSuperblocksHeights(nBlockHeight, nLastSuperblock, nNextSuperblock);

@@ -150,6 +150,8 @@ public:
         consensus.nSuperblockCycle = 14600; // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
         consensus.nNewSuperBlockCycle = 29200;
         consensus.nNewSuperBlockStartHeight = 87601;
+        consensus.nAutolykosSuperBlockCycle = 43200;
+        consensus.nAutolykosSuperBlockStartHeight = 292001;
         consensus.nSuperblockMaturityWindow = 1662; // ~(60*24*3)/2.6, ~3 days before actual Superblock is emitted
         consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
@@ -164,12 +166,15 @@ public:
         consensus.DIP0003EnforcementHash = uint256S("0x");
         consensus.DIP0008Height = 2;
         consensus.BRRHeight = 12096;
+        consensus.AutolykosForkHeight = 283000;
+        consensus.AutolykosForkSwitchVersion = 0x05;
         consensus.MinBIP9WarningHeight = 99999999; // V19 activation height + miner confirmation window
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 9 * 60; // BLOCX: 1 day
         consensus.nPowTargetSpacing = 3 * 60; // BLOCX: 3 minutes
         consensus.nNewPowTargetSpacing = 90; // BLOCX: 1.5 minutes
         consensus.nNewPowTargetSpacingForkHeight = 87600;
+        consensus.nAutolykosPowTargetSpacing = 60; // BLOCX: 1 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nPowKGWHeight = 1;

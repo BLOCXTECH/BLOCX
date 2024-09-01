@@ -902,10 +902,6 @@ static UniValue protx_update_service_common_wrapper(const JSONRPCRequest& reques
 
     EnsureWalletIsUnlocked(wallet.get());
 
-    if (!IsLiteMNSporkENABLED() && isLITErequested) {
-        throw JSONRPCError(RPC_INVALID_REQUEST, "LITE aren't allowed yet");
-    }
-
     CProUpServTx ptx;
     ptx.nType = mnType;
     ptx.proTxHash = ParseHashV(request.params[0], "proTxHash");

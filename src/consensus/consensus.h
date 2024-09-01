@@ -22,6 +22,16 @@ inline unsigned int MaxBlockSigOps(bool fDIP0001Active = true)
 static const unsigned int MAX_TX_EXTRA_PAYLOAD = 10000;
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 4;
+static const int NEW_COINBASE_MATURITY = 15;
+
+static const int GetCurrentCoinBaseMaturity(const int& nHeight)
+{
+    if (nHeight <= 283000) {
+        return COINBASE_MATURITY;
+    } else {
+        return NEW_COINBASE_MATURITY;
+    }
+}
 
 /** Flags for nSequence and nLockTime locks */
 /** Interpret sequence numbers as relative lock-time constraints. */

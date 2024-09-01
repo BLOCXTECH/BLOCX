@@ -67,6 +67,8 @@ struct Params {
     int nSuperblockCycle; // in blocks
     int nNewSuperBlockCycle;
     int nNewSuperBlockStartHeight;
+    int nAutolykosSuperBlockCycle;
+    int nAutolykosSuperBlockStartHeight;
     int nSuperblockMaturityWindow; // in blocks
     int nGovernanceMinQuorum; // Min absolute vote count to trigger an action
     int nGovernanceFilterElements;
@@ -92,6 +94,8 @@ struct Params {
     /** Don't warn about unknown BIP 9 activations below this height.
      * This prevents us from warning about the CSV and DIP activations. */
     int MinBIP9WarningHeight;
+    int AutolykosForkHeight;
+    int AutolykosForkSwitchVersion;
     /**
      * Minimum blocks including miner confirmation of the total of nMinerConfirmationWindow blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
@@ -110,6 +114,7 @@ struct Params {
     int64_t nPowTargetTimespan;
     int64_t nNewPowTargetSpacing;
     int64_t nNewPowTargetSpacingForkHeight;
+    int64_t nAutolykosPowTargetSpacing;
     int nPowKGWHeight;
     int nPowDGWHeight;
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
@@ -126,7 +131,9 @@ struct Params {
 
     int64_t GetCurrentPowTargetSpacing(const int& nHeight) const
     {
-        if (nHeight > nNewPowTargetSpacingForkHeight)
+        if (nHeight > AutolykosForkHeight)
+            return nAutolykosPowTargetSpacing;
+        else if (nHeight > nNewPowTargetSpacingForkHeight && nHeight <= AutolykosForkHeight)
             return nNewPowTargetSpacing;
         else
             return nPowTargetSpacing;

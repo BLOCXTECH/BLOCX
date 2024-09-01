@@ -177,6 +177,8 @@ public:
     uint32_t nTime{0};
     uint32_t nBits{0};
     uint32_t nNonce{0};
+    uint64_t nNewNonce{0};
+    uint32_t aHeight{0};
 
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
     int32_t nSequenceId{0};
@@ -195,6 +197,10 @@ public:
           nBits{block.nBits},
           nNonce{block.nNonce}
     {
+          if(block.nVersion == 0x05) {
+              nNewNonce = block.nNewNonce;
+              aHeight = block.aHeight;
+          }
     }
 
     FlatFilePos GetBlockPos() const {
@@ -225,6 +231,10 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
+        if(block.nVersion == 0x05) {
+            block.nNewNonce = nNewNonce;
+            block.aHeight = aHeight;
+        }
         return block;
     }
 
@@ -352,6 +362,10 @@ public:
         READWRITE(obj.nTime);
         READWRITE(obj.nBits);
         READWRITE(obj.nNonce);
+        if(obj.nVersion == 0x05) {
+            READWRITE(obj.nNewNonce);
+            READWRITE(obj.aHeight);
+        }
     }
 
     uint256 GetBlockHash() const
@@ -365,6 +379,10 @@ public:
         block.nTime           = nTime;
         block.nBits           = nBits;
         block.nNonce          = nNonce;
+        if(block.nVersion == 0x05) {
+            block.nNewNonce = nNewNonce;
+            block.aHeight = aHeight;
+        }
         return block.GetHash();
     }
 

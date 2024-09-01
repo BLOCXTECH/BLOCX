@@ -877,13 +877,7 @@ bool CDeterministicMNManager::BuildNewListFromBlock(const CBlock& block, const C
             if (!dmn) {
                 return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-hash");
             }
-            if (IsLiteMNSporkENABLED()) {
-                proTx.nType = dmn->nType;
-            } else {
-                if (proTx.nType != dmn->nType) {
-                    return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-type-mismatch");
-                }
-            }
+            proTx.nType = dmn->nType;
 
             if (!IsValidMnType(proTx.nType)) {
                 return _state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-protx-type");
@@ -1443,7 +1437,7 @@ static bool CheckService(const ProTx& proTx, CValidationState& state)
         return state.Invalid(ValidationInvalidReason::TX_BAD_SPECIAL, false, REJECT_INVALID, "bad-protx-ipaddr-port");
     }
 
-    if (!proTx.addr.IsIPv4()) {
+    if (!proTx.addr.IsIPv4() && !proTx.addr.IsIPv6()) {
         return state.Invalid(ValidationInvalidReason::TX_BAD_SPECIAL, false, REJECT_INVALID, "bad-protx-ipaddr");
     }
 

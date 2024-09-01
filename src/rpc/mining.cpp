@@ -5,6 +5,10 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <amount.h>
+#include <autolykos/src/AutolykosPowScheme.h>
+#include <autolykos/src/DifficultySerializer.h>
+#include <autolykos/src/HeaderWithoutPow.h>
+#include <autolykos/src/mining.h>
 #include <chain.h>
 #include <chainparams.h>
 #include <consensus/consensus.h>
@@ -16,7 +20,6 @@
 #include <llmq/context.h>
 #include <llmq/chainlocks.h>
 #include <llmq/instantsend.h>
-#include <evo/evodb.h>
 #include <miner.h>
 #include <net.h>
 #include <node/context.h>
@@ -113,6 +116,50 @@ static UniValue getnetworkhashps(const JSONRPCRequest& request)
     return GetNetworkHashPS(!request.params[0].isNull() ? request.params[0].get_int() : 120, !request.params[1].isNull() ? request.params[1].get_int() : -1);
 }
 
+uint32_t vectorToUint32(const Header& header) {
+    if (header.powSolution.n.size() < 8) {
+        throw std::invalid_argument("Vector size must be at least 8 bytes to convert to uint32_t.");
+    }
+
+    uint32_t result = 0;
+    for (size_t i = 0; i < 4; ++i) {
+        result |= static_cast<uint32_t>(header.powSolution.n[7 - i]) << (8 * i);
+    }
+    return result;
+}
+
+HeaderWithoutPow ConvertBlockToHeader(CBlock* block) {
+    LOCK(cs_main);
+
+    Version version = Params().GetConsensus().AutolykosForkSwitchVersion;
+
+    std::string prevHash = block->hashPrevBlock.ToString();
+    std::string merkleRoot = block->hashMerkleRoot.ToString();
+
+    Timestamp timestamp = block->nTime;
+    uint32_t nBits = block->nBits;
+    uint32_t a_Height = block->aHeight;
+
+    int k = 32;
+    int n = 26;
+    AutolykosPowScheme powScheme(k, n);
+
+    ModifierId parentId = powScheme.hexToBytesModifierId(prevHash);
+    Digest32 transactionsRoot = powScheme.hexToArrayDigest32(merkleRoot);
+
+    Digest32 ADProofsRoot = {};
+    ADDigest stateRoot = {};
+    Digest32 extensionRoot = {};
+
+
+    std::array<uint8_t, 3> votes = {0x00, 0x00, 0x00};
+
+    HeaderWithoutPow h(version, parentId, ADProofsRoot, stateRoot, transactionsRoot, timestamp,
+                       nBits, a_Height, extensionRoot, votes);
+
+    return h;
+}
+
 #if ENABLE_MINER
 static bool GenerateBlock(ChainstateManager& chainman, CBlock& block, uint64_t& max_tries, unsigned int& extra_nonce, uint256& block_hash)
 {
@@ -125,7 +172,81 @@ static bool GenerateBlock(ChainstateManager& chainman, CBlock& block, uint64_t& 
 
     CChainParams chainparams(Params());
 
-    while (max_tries > 0 && block.nNonce < std::numeric_limits<uint32_t>::max() && !CheckProofOfWork(block.GetHash(), block.nBits, chainparams.GetConsensus()) && !ShutdownRequested()) {
+    const CBlockHeader& b_h = block.GetBlockHeader();
+    int height = b_h.aHeight;
+
+    if (height >= chainparams.GetConsensus().AutolykosForkHeight) {
+        int k = 32;
+        int n = 26;
+        AutolykosPowScheme powScheme(k, n);
+
+        Version b_version = Params().GetConsensus().AutolykosForkSwitchVersion;
+
+        std::array<uint8_t, 3> votes = {0x00, 0x00, 0x00};
+
+
+        Digest32 ADProofsRoot = {};
+        ADDigest stateRoot = {};
+        Digest32 extensionRoot = {};
+
+        std::string prevHash = block.hashPrevBlock.ToString();
+        std::string merkleRoot = block.hashMerkleRoot.ToString();
+
+        ModifierId parentId = powScheme.hexToBytesModifierId(prevHash);
+        Digest32 transactionsRoot = powScheme.hexToArrayDigest32(merkleRoot);
+
+        std::optional<Header> noHeader;
+        max_tries = max_tries > 100 ? 5 : max_tries;
+        long minNonce = 0;
+        long maxNonce = 10;
+
+        HeaderWithoutPow h = ConvertBlockToHeader(&block);
+
+        while (max_tries > 0  && !ShutdownRequested()) {
+            auto head = powScheme.prove(
+                noHeader,
+                parentId,
+                height,
+                b_version,
+                block.nBits,
+                stateRoot,
+                ADProofsRoot,
+                transactionsRoot,
+                block.nTime,
+                extensionRoot,
+                votes,
+                0x0,
+                minNonce, maxNonce);
+
+            std::cout << "calculated  : " << GetNextWorkRequired(::ChainActive().Tip(), &block, Params().GetConsensus()) << std::endl;
+            std::cout << "block nbits : " << decodeCompactBits(block.nBits) << std::endl;
+            if (head) {
+                bool isValidHeader = powScheme.validate(*head);
+
+                if (isValidHeader) {
+                    ErgoNodeViewModifier HeaderToBytes;
+
+                    block.nNewNonce = vectorToUint32(*head);
+                    std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(block);
+                    if (!chainman.ProcessNewBlock(chainparams, shared_pblock, true, nullptr)) {
+                        throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
+                    }
+
+                    block_hash = block.GetHash();
+                    return true;
+                }
+            } 
+            minNonce = maxNonce;
+            maxNonce += 100000;
+            --max_tries;
+            if (ShutdownRequested()) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    while (max_tries > 0 && block.nNonce < std::numeric_limits<uint32_t>::max() && !CheckProofOfWork(b_h, block.GetHash(), block.nBits, chainparams.GetConsensus()) && !ShutdownRequested()) {
         ++block.nNonce;
         --max_tries;
     }
@@ -793,6 +914,7 @@ static UniValue getblocktemplate(const JSONRPCRequest& request)
     // Update nTime
     UpdateTime(pblock, consensusParams, pindexPrev);
     pblock->nNonce = 0;
+    pblock->nNewNonce = 0;
 
     UniValue aCaps(UniValue::VARR); aCaps.push_back("proposal");
 

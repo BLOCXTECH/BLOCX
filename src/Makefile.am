@@ -577,6 +577,7 @@ crypto_libbitcoin_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
 # x11
 crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/blake.c \
+  crypto/blake2b.cpp \
   crypto/bmw.c \
   crypto/cubehash.c \
   crypto/echo.c \
@@ -588,6 +589,7 @@ crypto_libbitcoin_crypto_base_a_SOURCES += \
   crypto/simd.c \
   crypto/skein.c \
   crypto/sph_blake.h \
+  crypto/blake2b.h \
   crypto/sph_bmw.h \
   crypto/sph_cubehash.h \
   crypto/sph_echo.h \
@@ -651,7 +653,36 @@ libbitcoin_consensus_a_SOURCES = \
   util/strencodings.cpp \
   util/strencodings.h \
   util/string.cpp \
-  version.h
+  version.h \
+  autolykos/src/includes.h \
+  autolykos/src/AutolykosPowScheme.cpp \
+  autolykos/src/AutolykosPowScheme.h \
+  autolykos/src/AutolykosSolution.cpp \
+  autolykos/src/AutolykosSolution.h \
+  autolykos/src/ChainSettings.cpp \
+  autolykos/src/ChainSettings.h \
+  autolykos/src/core.cpp \
+  autolykos/src/core.h \
+  autolykos/src/CryptoFacade.cpp \
+  autolykos/src/CryptoFacade.h \
+  autolykos/src/DifficultySerializer.cpp \
+  autolykos/src/DifficultySerializer.h \
+  autolykos/src/DifficultyAdjustment.cpp \
+  autolykos/src/DifficultyAdjustment.h \
+  autolykos/src/ErgoNodeViewModifier.cpp \
+  autolykos/src/ErgoNodeViewModifier.h \
+  autolykos/src/Header.h \
+  autolykos/src/Header.cpp \
+  autolykos/src/HeaderSerializer.cpp \
+  autolykos/src/HeaderSerializer.h \
+  autolykos/src/HeaderWithoutPow.h \
+  autolykos/src/HSerializer.h \
+  autolykos/src/mining.cpp \
+  autolykos/src/mining.h \
+  autolykos/src/NumericHash.cpp \
+  autolykos/src/NumericHash.h \
+  autolykos/src/Writer.cpp \
+  autolykos/src/Writer.h
 
 # common: shared between blocxd, and blocx-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)

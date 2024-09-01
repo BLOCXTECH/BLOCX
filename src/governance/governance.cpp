@@ -391,8 +391,10 @@ void CGovernanceManager::UpdateCachesAndClean()
                 int nSuperblockCycle;
                 if (::ChainActive().Height() < Params().GetConsensus().nNewSuperBlockStartHeight) {
                     nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
-                } else {
+                } else if (::ChainActive().Height() < Params().GetConsensus().nAutolykosSuperBlockStartHeight) {
                     nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+                } else {
+                    nSuperblockCycle = Params().GetConsensus().nAutolykosSuperBlockCycle;
                 }
                 int64_t nSuperblockCycleSeconds = nSuperblockCycle * blockTime;
 
@@ -736,8 +738,10 @@ bool CGovernanceManager::MasternodeRateCheck(const CGovernanceObject& govobj, bo
     int nSuperblockCycle;
     if (::ChainActive().Height() < Params().GetConsensus().nNewSuperBlockStartHeight) {
         nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
-    } else {
+    } else if (::ChainActive().Height() < Params().GetConsensus().nAutolykosSuperBlockStartHeight) {
         nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nAutolykosSuperBlockCycle;
     }
     int64_t nSuperblockCycleSeconds = nSuperblockCycle * blockTime;
 
@@ -882,8 +886,10 @@ void CGovernanceManager::CheckPostponedObjects(CConnman& connman)
     int nSuperblockCycle;
     if (::ChainActive().Height() < Params().GetConsensus().nNewSuperBlockStartHeight) {
         nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
-    } else {
+    } else if (::ChainActive().Height() < Params().GetConsensus().nAutolykosSuperBlockStartHeight) {
         nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
+    } else {
+        nSuperblockCycle = Params().GetConsensus().nAutolykosSuperBlockCycle;
     }
     int64_t nSuperblockCycleSeconds = nSuperblockCycle * blockTime;
 

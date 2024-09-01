@@ -4,6 +4,7 @@ todo.txt
 reset-files.bash
 
 *.tar.gz
+*.pc.in
 
 *.exe
 src/blocx
