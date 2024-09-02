@@ -283,11 +283,11 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("dnsseed.blocx.space");
-        vSeeds.emplace_back("node1.blocx.space");
-        vSeeds.emplace_back("node2.blocx.space");
-        vSeeds.emplace_back("node3.blocx.space");
-        vSeeds.emplace_back("node4.blocx.space");
+        vSeeds.emplace_back("dnsseed.blocx.live");
+        vSeeds.emplace_back("node1.blocx.live");
+        vSeeds.emplace_back("node2.blocx.live");
+        vSeeds.emplace_back("node3.blocx.live");
+        vSeeds.emplace_back("node4.blocx.live");
 
 
         // BLOCX addresses start with 'X'

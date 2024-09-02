@@ -531,15 +531,10 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         *pfMissingInputs = false;
     }
 
-    if (::ChainActive().Height() > chainparams.GetConsensus().V3ForkHeight && tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE) {
-        // this condition will be removed from next version
-        if (Params().NetworkIDString() == CBaseChainParams::MAIN && ::ChainActive().Height() < 106300) {
-            return false;
-        }
+    if (::ChainActive().Height() <= chainparams.GetConsensus().AutolykosForkHeight && (tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE || tx.nType == TRANSACTION_PROVIDER_REGISTER)) {
         CProUpServTx proTx;
         if (GetTxPayload(tx, proTx)) {
-            auto dmn = deterministicMNManager->GetListAtChainTip().GetMN(proTx.proTxHash);
-            if (dmn->nType == MnType::Lite) {
+            if (proTx.addr.IsIPv6()) {
                 return false;
             }
         }
