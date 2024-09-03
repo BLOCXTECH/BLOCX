@@ -1,3 +1,6 @@
+// Copyright (c) 2017-2024 The ERGO developers
+// Copyright (c) 2023-2024 The BLOCX developers
+
 #include "includes.h"
 #include "HSerializer.h"
 
@@ -31,7 +34,7 @@ std::vector<uint8_t> HeaderSerializer::bytesWithoutPow(const HeaderWithoutPow& h
 }
 
 void HeaderSerializer::Serialize(const Header& h, Writer& w) {
-    HeaderWithoutPow header(h.version, h.parentId, h.ADProofsRoot, h.stateRoot, h.transactionsRoot, h.timestamp, h.nBits, h.height, h.extensionRoot, h.votes);
+    HeaderWithoutPow header(h.version, h.parentId, h.transactionsRoot, h.timestamp, h.nBits, h.height);
     AutolykosSolutionSerializer SolutionSerializer;
 
     serializeWithoutPow(header, w);

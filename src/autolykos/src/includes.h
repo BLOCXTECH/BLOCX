@@ -1,3 +1,6 @@
+// Copyright (c) 2017-2024 The ERGO developers
+// Copyright (c) 2023-2024 The BLOCX developers
+
 #ifndef INCLUDES_H
 #define INCLUDES_H
 
@@ -27,20 +30,13 @@
 
 #include "arith_uint256.h"
 #include "blake2/blake2b.h"
-#include "NumericHash.h"
 #include "mining.h"
 #include "Writer.h"
 #include "AutolykosSolution.h"
-#include "DifficultySerializer.h"
 #include "Header.h"
 #include "HeaderWithoutPow.h"
-#include "CryptoFacade.h"
-#include "core.h"
 #include "HeaderSerializer.h"
-#include "ErgoNodeViewModifier.h"
 #include "AutolykosPowScheme.h"
-#include "ChainSettings.h"
-#include "DifficultyAdjustment.h"
 #include "uint256.h"
 
 #endif // INCLUDES_H

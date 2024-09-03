@@ -1,3 +1,5 @@
+// Copyright (c) 2017-2024 The ERGO developers
+// Copyright (c) 2023-2024 The BLOCX developers
 
 #ifndef HSERIALIZER_H
 #define HSERIALIZER_H

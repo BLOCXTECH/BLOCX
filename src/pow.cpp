@@ -7,8 +7,6 @@
 
 #include <arith_uint256.h>
 #include <autolykos/src/AutolykosPowScheme.h>
-#include <autolykos/src/ChainSettings.h>
-#include <autolykos/src/DifficultyAdjustment.h>
 #include <autolykos/src/Header.h>
 #include <chain.h>
 #include <primitives/block.cpp>
@@ -18,72 +16,6 @@
 #include <validation.h>
 
 #include <math.h>
-
-unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const Consensus::Params& params) {
-    const CBlockIndex *BlockLastSolved = pindexLast;
-    const CBlockIndex *BlockReading = pindexLast;
-    uint64_t PastBlocksMass = 0;
-    int64_t PastRateActualSeconds = 0;
-    int64_t PastRateTargetSeconds = 0;
-    double PastRateAdjustmentRatio = double(1);
-    arith_uint256 PastDifficultyAverage;
-    arith_uint256 PastDifficultyAveragePrev;
-    double EventHorizonDeviation;
-    double EventHorizonDeviationFast;
-    double EventHorizonDeviationSlow;
-
-    uint64_t pastSecondsMin = params.nPowTargetTimespan * 0.025;
-    uint64_t pastSecondsMax = params.nPowTargetTimespan * 7;
-    uint64_t PastBlocksMin = pastSecondsMin / params.nPowTargetSpacing;
-    uint64_t PastBlocksMax = pastSecondsMax / params.nPowTargetSpacing;
-
-    if (BlockLastSolved == nullptr || BlockLastSolved->nHeight == 0 || (uint64_t)BlockLastSolved->nHeight < PastBlocksMin) { return UintToArith256(params.powLimit).GetCompact(); }
-
-    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
-        if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
-        PastBlocksMass++;
-
-        PastDifficultyAverage.SetCompact(BlockReading->nBits);
-        if (i > 1) {
-            // handle negative arith_uint256
-            if(PastDifficultyAverage >= PastDifficultyAveragePrev)
-                PastDifficultyAverage = ((PastDifficultyAverage - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev;
-            else
-                PastDifficultyAverage = PastDifficultyAveragePrev - ((PastDifficultyAveragePrev - PastDifficultyAverage) / i);
-        }
-        PastDifficultyAveragePrev = PastDifficultyAverage;
-
-        PastRateActualSeconds = BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
-        PastRateTargetSeconds = params.nPowTargetSpacing * PastBlocksMass;
-        PastRateAdjustmentRatio = double(1);
-        if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
-        if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-            PastRateAdjustmentRatio = double(PastRateTargetSeconds) / double(PastRateActualSeconds);
-        }
-        EventHorizonDeviation = 1 + (0.7084 * pow((double(PastBlocksMass)/double(28.2)), -1.228));
-        EventHorizonDeviationFast = EventHorizonDeviation;
-        EventHorizonDeviationSlow = 1 / EventHorizonDeviation;
-
-        if (PastBlocksMass >= PastBlocksMin) {
-                if ((PastRateAdjustmentRatio <= EventHorizonDeviationSlow) || (PastRateAdjustmentRatio >= EventHorizonDeviationFast))
-                { assert(BlockReading); break; }
-        }
-        if (BlockReading->pprev == nullptr) { assert(BlockReading); break; }
-        BlockReading = BlockReading->pprev;
-    }
-
-    arith_uint256 bnNew(PastDifficultyAverage);
-    if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-        bnNew *= PastRateActualSeconds;
-        bnNew /= PastRateTargetSeconds;
-    }
-
-    if (bnNew > UintToArith256(params.powLimit)) {
-        bnNew = UintToArith256(params.powLimit);
-    }
-
-    return bnNew.GetCompact();
-}
 
 unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const Consensus::Params& params) {
     /* current difficulty formula, blocx - DarkGravity v3, written by Evan Duffield - evan@blocx.org */
@@ -214,10 +146,6 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         }
     }
 
-    if (pindexLast->nHeight + 1 < params.nPowDGWHeight) {
-        return KimotoGravityWell(pindexLast, params);
-    }
-
     return DarkGravityWave(pindexLast, params);
 }
 
@@ -268,46 +196,24 @@ bool CheckProofOfWork(const CBlockHeader& b_h, uint256 hash, unsigned int nBits,
         return true;
     }
 
-    int k = 32;
-    int n = 26;
-    AutolykosPowScheme powScheme(k, n);
-
-    int height = b_h.aHeight;
+    AutolykosPowScheme powScheme;
 
     Version version = params.AutolykosForkSwitchVersion;
 
-    std::string prevHash = b_h.hashPrevBlock.ToString();
-    std::string merkleRoot = b_h.hashMerkleRoot.ToString();
-
-    Timestamp timestamp = b_h.nTime;
     std::vector<uint8_t> nonce = powScheme.uint64ToBytes(b_h.nNewNonce);
-    ModifierId parentId = powScheme.hexToBytesModifierId(prevHash);
-    Digest32 transactionsRoot = powScheme.hexToArrayDigest32(merkleRoot);
+    ModifierId parentId = powScheme.hexToBytesModifierId(b_h.hashPrevBlock.ToString());
+    Digest32 transactionsRoot = powScheme.hexToArrayDigest32(b_h.hashMerkleRoot.ToString());
 
-    Digest32 ADProofsRoot = {};
-    ADDigest stateRoot = {};
-    Digest32 extensionRoot = {};
-
-    AutolykosSolution powSolution = {
-        groupElemFromBytes({0x02, 0xf5, 0x92, 0x4b, 0x14, 0x32, 0x5a, 0x1f, 0xfa, 0x8f, 0x95, 0xf8, 0xc0, 0x00, 0x06, 0x11, 0x87, 0x28, 0xce, 0x37, 0x85, 0xa6, 0x48, 0xe8, 0xb2, 0x69, 0x82, 0x0a, 0x3d, 0x3b, 0xdf, 0xd4, 0x0d}),
-        groupElemFromBytes({0x02, 0xf5, 0x92, 0x4b, 0x14, 0x32, 0x5a, 0x1f, 0xfa, 0x8f, 0x95, 0xf8, 0xc0, 0x00, 0x06, 0x11, 0x87, 0x28, 0xce, 0x37, 0x85, 0xa6, 0x48, 0xe8, 0xb2, 0x69, 0x82, 0x0a, 0x3d, 0x3b, 0xdf, 0xd4, 0x0d}),
-        nonce,
-        boost::multiprecision::cpp_int("0")};
-
-    std::array<uint8_t, 3> votes = {0x00, 0x00, 0x00};
+    AutolykosSolution powSolution = {nonce};
 
     Header h(
-        version,
+        params.AutolykosForkSwitchVersion,
         parentId,
-        ADProofsRoot,
-        stateRoot,
         transactionsRoot,
-        timestamp,
+        b_h.nTime,
         nBits,
-        height,
-        extensionRoot,
-        powSolution,
-        votes
+        b_h.aHeight,
+        powSolution
     );
 
     bool valid = powScheme.validate(h);

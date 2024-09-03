@@ -1,25 +1,17 @@
+// Copyright (c) 2017-2024 The ERGO developers
+// Copyright (c) 2023-2024 The BLOCX developers
+
 #ifndef AUTOLYKOS_SOLUTION_H
 #define AUTOLYKOS_SOLUTION_H
 
 #include "includes.h"
 
 struct AutolykosSolution {
-    secp256k1_pubkey pk;
-    secp256k1_pubkey w;
     std::vector<uint8_t> n;
-    boost::multiprecision::cpp_int d;
 
-    AutolykosSolution(const secp256k1_pubkey& pk, const secp256k1_pubkey& w, const std::vector<uint8_t>& n, const boost::multiprecision::cpp_int& d)
-        : pk(pk), w(w), n(n), d(d) {}
+    AutolykosSolution(const std::vector<uint8_t>& n)
+        :  n(n) {}
 
-    std::vector<uint8_t> encodedPk() const {
-        return groupElemToBytes(pk);
-    }
-};
-
-class AutolykosV1SolutionSerializer {
-public:
-    void serialize(const AutolykosSolution& obj, Writer& w);
 };
 
 class AutolykosV2SolutionSerializer {
