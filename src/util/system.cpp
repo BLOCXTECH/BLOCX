@@ -868,10 +868,14 @@ bool ArgsManager::ReadConfigStream(std::istream& stream, const std::string& file
     if (!GetConfigOptions(stream, filepath, error, options, m_config_sections)) {
         return false;
     }
+    bool fallbackfee_found = false;
     for (const std::pair<std::string, std::string>& option : options) {
         std::string section;
         std::string key = option.first;
         util::SettingsValue value = InterpretOption(section, key, option.second);
+        if (key == "fallbackfee") {
+            fallbackfee_found = true;
+        }
         std::optional<unsigned int> flags = GetArgFlags('-' + key);
         if (flags) {
             if (!CheckValid(key, value, *flags, error)) {
@@ -886,6 +890,14 @@ bool ArgsManager::ReadConfigStream(std::istream& stream, const std::string& file
                 return false;
             }
         }
+    }
+    if (!fallbackfee_found) {
+        FILE* configFile = fopen(GetConfigFile(filepath).string().c_str(), "a");
+        if (configFile != nullptr) {
+            std::string strHeader = "fallbackfee=0.0001\n";
+            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
+        }
+        fclose(configFile);
     }
     return true;
 }

@@ -457,6 +457,8 @@ bool CSuperblock::IsValidBlockHeight(int nBlockHeight)
         nSuperblockCycle = Params().GetConsensus().nNewSuperBlockCycle;
     } else {
         nSuperblockCycle = Params().GetConsensus().nAutolykosSuperBlockCycle;
+        int offset = nBlockHeight - Params().GetConsensus().nAutolykosSuperBlockStartHeight;
+        return (((offset % nSuperblockCycle) / nSuperblockCycle) == 0);
     }
     // SUPERBLOCKS CAN HAPPEN ONLY after hardfork and only ONCE PER CYCLE
     return nBlockHeight >= Params().GetConsensus().nSuperblockStartBlock &&
@@ -472,19 +474,17 @@ void CSuperblock::GetNearestSuperblocksHeights(int nBlockHeight, int& nLastSuper
         nSuperblockCycle = consensusParams.nSuperblockCycle;
     } else if (nBlockHeight < consensusParams.nAutolykosSuperBlockStartHeight) {
         nSuperblockCycle = consensusParams.nNewSuperBlockCycle;
+        nSuperblockStartBlock = consensusParams.nNewSuperBlockStartHeight;
     } else {
         nSuperblockCycle = consensusParams.nAutolykosSuperBlockCycle;
+        nSuperblockStartBlock = consensusParams.nAutolykosSuperBlockStartHeight;
     }
 
-    // Get first superblock
-    int nFirstSuperblockOffset = (nSuperblockCycle - nSuperblockStartBlock % nSuperblockCycle) % nSuperblockCycle;
-    int nFirstSuperblock = nSuperblockStartBlock + nFirstSuperblockOffset;
-
-    if (nBlockHeight < nFirstSuperblock) {
+    if (nBlockHeight < nSuperblockStartBlock) {
         nLastSuperblockRet = 0;
-        nNextSuperblockRet = nFirstSuperblock;
+        nNextSuperblockRet = nSuperblockStartBlock;
     } else {
-        nLastSuperblockRet = nBlockHeight - nBlockHeight % nSuperblockCycle;
+        nLastSuperblockRet = ((nBlockHeight - (nBlockHeight - nSuperblockStartBlock) % nSuperblockCycle) - 1);
         nNextSuperblockRet = nLastSuperblockRet + nSuperblockCycle;
     }
 }

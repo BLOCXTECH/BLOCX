@@ -531,15 +531,6 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         *pfMissingInputs = false;
     }
 
-    if (::ChainActive().Height() <= chainparams.GetConsensus().AutolykosForkHeight && (tx.nType == TRANSACTION_PROVIDER_UPDATE_SERVICE || tx.nType == TRANSACTION_PROVIDER_REGISTER)) {
-        CProUpServTx proTx;
-        if (GetTxPayload(tx, proTx)) {
-            if (proTx.addr.IsIPv6()) {
-                return false;
-            }
-        }
-    }
-
     if (!CheckTransaction(tx, state))
         return false; // state filled in by CheckTransaction
 

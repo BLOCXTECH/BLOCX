@@ -2758,6 +2758,22 @@ void PeerLogicValidation::ProcessMessage(
                   pfrom.nStartingHeight, addrMe.ToString(), pfrom.GetId(),
                   remoteAddr);
 
+        size_t startPos = cleanSubVer.find(":") + 1;
+        size_t endPos = cleanSubVer.find_last_of("/");
+        std::string version_1 = cleanSubVer.substr(startPos, endPos - startPos);
+
+        int c_major, c_minor, c_build;
+        char dot;
+        std::istringstream(version_1) >> c_major >> dot >> c_minor >> dot >> c_build;
+        int c_major_only = c_major * 10000;
+
+        if (c_major_only < 40000) {
+            // disconnect from peers older than this proto version
+            LogPrint(BCLog::NET, "peer=%d using obsolete version %i; disconnecting\n", pfrom.GetId(), pfrom.nVersion);
+            pfrom.fDisconnect = true;
+            return;
+        }
+        
         int64_t nTimeOffset = nTime - GetTime();
         pfrom.nTimeOffset = nTimeOffset;
         AddTimeData(pfrom.addr, nTimeOffset);
