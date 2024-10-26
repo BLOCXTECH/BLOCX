@@ -2575,6 +2575,11 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     return true;
 }
 
+bool IsQuorumAdjustmentSporkENABLED()
+{
+    return sporkManager->IsSporkActive(SPORK_24_QUORUM_ADJUSTMENT);
+}
+
 CoinsCacheSizeState CChainState::GetCoinsCacheSizeState(const CTxMemPool* tx_pool)
 {
     return this->GetCoinsCacheSizeState(
